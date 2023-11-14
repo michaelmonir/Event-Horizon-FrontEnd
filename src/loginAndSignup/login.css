@@ -7,6 +7,9 @@
     justify-content: center;
     flex-direction: column;
     height: 100vh;
+    background-image:url("https://upload.wikimedia.org/wikipedia/commons/9/9c/Black_hole_representation.gif");
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .Container {
@@ -171,7 +174,9 @@
 }
 
 .overlay {
-    background: #1e0064;
+    background-image: url("public/ultra-detailed-nebula-abstract-wallpaper-4.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
     height: 100%;
     color: #fff;
     position: relative;

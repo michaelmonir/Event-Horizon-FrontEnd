@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4fa0d62e-70eb-4943-a749-0ef5a161ece5" name="Changes" comment="" />
+    <list default="true" id="4fa0d62e-70eb-4943-a749-0ef5a161ece5" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/loginAndSignup/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/loginAndSignup/login.css" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -41,7 +44,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "LJ1-33-login-sign-up-Frontend-interface",
-    "last_opened_file_path": "C:/Users/20100/Documents/GitHub/Event-Horizon-FrontEnd",
+    "last_opened_file_path": "C:/Users/20100/Documents/GitHub/Event-Horizon-FrontEnd/public",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -79,7 +82,7 @@
       <workItem from="1699908874393" duration="442000" />
       <workItem from="1699909356083" duration="394000" />
       <workItem from="1699909766476" duration="333000" />
-      <workItem from="1699954315992" duration="11407000" />
+      <workItem from="1699954315992" duration="12067000" />
     </task>
     <servers />
   </component>
