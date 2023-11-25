@@ -7,11 +7,7 @@
     <list default="true" id="4fa0d62e-70eb-4943-a749-0ef5a161ece5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dashboard/dashboard.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/dashboard/dashboard.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dashboard/dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/dashboard/dashboard.js" afterDir="false" />                                             
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dashboard/dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/dashboard/dashboard.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,9 +44,8 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-
-    "git-widget-placeholder": "LJ1-33-login-sign-up-Frontend-interface",
-    "last_opened_file_path": "C:/Users/20100/Documents/GitHub/Event-Horizon-FrontEnd/public",
+    "git-widget-placeholder": "LJ1-30-Create-DashBoard-component-in-frontend",
+    "last_opened_file_path": "C:/Users/20100/Documents",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -58,6 +53,7 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_interpreter_path": "node",
     "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "C:\\Users\\20100\\AppData\\Local\\Programs\\WebStorm\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -92,7 +88,6 @@
       <workItem from="1699904398878" duration="2742000" />
       <workItem from="1699908874393" duration="442000" />
       <workItem from="1699909356083" duration="394000" />
-
       <workItem from="1700521295858" duration="11964000" />
       <workItem from="1700580561194" duration="22767000" />
       <workItem from="1700858685960" duration="8325000" />
