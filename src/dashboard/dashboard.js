@@ -4,7 +4,8 @@ import {FaUnlock, FaLock, FaSearch} from "react-icons/fa";
 import {FiMenu} from "react-icons/fi";
 import {GiRamProfile} from "react-icons/gi";
 import {FaShuttleSpace} from "react-icons/fa6";
-
+import TablePagination from '@mui/material/TablePagination';
+import MultiActionAreaCard from "./eventCard";
 
 function Dashboard() {
 
@@ -23,13 +24,23 @@ function Dashboard() {
 
     function toggleLockButton() {
         setSidebarLocked(!sidebarLocked)
-        if(!sidebarLocked){
+        if (!sidebarLocked) {
             setSidebarClass("sidebar locked");
-        }
-        else{
+        } else {
             setSidebarClass("sidebar hover closed");
         }
     }
+
+    const [page, setPage] = React.useState(2);
+    const [rowsPerPage, setRowsPerPage] = React.useState(10);
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage);
+    };
+
+    const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(parseInt(event.target.value, 10));
+        setPage(0);
+    };
 
 
     return <div className="dashboard">
@@ -95,6 +106,7 @@ function Dashboard() {
                         </a>
                     </li>
                     <li className="sidebar-menu-item">
+
                         <a href="#" className="sidebar-menu-link flex active">
                             <i className="sidebar-menu-icon">X</i>
                             <span className="sidebar-menu-text">Menu</span>
@@ -112,17 +124,46 @@ function Dashboard() {
                 </div>
             </div>
         </nav>
-        <nav className="navbar flex">
-            <div className="left">
-                <button className="sidebar-open" onClick={toggleLockButton}><FiMenu/></button>
+        <div className="main">
+            <nav className="navbar">
+                <div className="left">
+                </div>
+                <div className="middle">
+                    <button className="sidebar-open" onClick={toggleLockButton}><FiMenu/></button>
+                    <button><FaSearch/></button>
+                    <input type="text" placeholder="Search"/>
+                    <i><FaShuttleSpace/></i>
+                </div>
+                <div className="right">
+                </div>
+            </nav>
+            <div className="content-container">
+
+                <div className="content-header">
+                    <h1>Dashboard</h1>
+                    <div className="content-header-breadcrumb">
+                        <TablePagination
+                            component="div"
+                            count={100}
+                            page={page}
+                            onPageChange={handleChangePage}
+                            rowsPerPage={rowsPerPage}
+                            onRowsPerPageChange={handleChangeRowsPerPage}
+                        />
+                    </div>
+                </div>
+                <div className="content-body">
+
+                    {Array(50).fill(0).map((_, i) => <div className="card-container">
+                            <MultiActionAreaCard key={i}/>
+                        </div>)
+                    }
+
+                </div>
             </div>
-            <div className="middle">
-                <button><FaSearch/></button>
-                <input type="text" placeholder="Search"/>
-                <i><FaShuttleSpace/></i>
-            </div>
-            <div></div>
-        </nav>
+        </div>
+
+
     </div>
 }
 
