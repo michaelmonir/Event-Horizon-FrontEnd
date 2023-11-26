@@ -55,66 +55,30 @@ function Dashboard() {
                 </i>
 
             </div>
-            <div className="sidebar-body">
-                <ul className="sidebar-menu">
-                    <div className="sidebar-menu-title flex">
-                        <span className="sidebar-menu-text">Menu</span>
-                        <span className="underline"></span>
-                    </div>
-                    <li className="sidebar-menu-item">
-                        <a href="#" className="sidebar-menu-link flex">
-                            <i className="sidebar-menu-icon center">X</i>
-                            <span className="sidebar-menu-text">Dashboard</span>
-                        </a>
-                    </li>
-                    <li className="sidebar-menu-item">
-                        <a href="#" className="sidebar-menu-link flex">
-                            <i className="sidebar-menu-icon center">X</i>
-                            <span className="sidebar-menu-text">Dashboard</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div className="sidebar-body">
-                <ul className="sidebar-menu">
-                    <div className="sidebar-menu-title flex">
-                        <span className="sidebar-menu-text">Menu</span>
-                        <span className="underline"></span>
-                    </div>
-                    <li className="sidebar-menu-item">
-                        <a href="#" className="sidebar-menu-link flex">
-                            <i className="sidebar-menu-icon center">X</i>
-                            <span className="sidebar-menu-text">Dashboard</span>
-                        </a>
-                    </li>
-                    <li className="sidebar-menu-item">
-                        <a href="#" className="sidebar-menu-link flex">
-                            <i className="sidebar-menu-icon center">X</i>
-                            <span className="sidebar-menu-text">Dashboard</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div className="sidebar-body">
-                <ul className="sidebar-menu">
-                    <div className="sidebar-menu-title flex">
-                        <span className="sidebar-menu-text">Menu</span>
-                        <span className="underline"></span>
-                    </div>
-                    <li className="sidebar-menu-item">
-                        <a href="#" className="sidebar-menu-link flex ">
-                            <i className="sidebar-menu-icon center">X</i>
-                            <span className="sidebar-menu-text">Dashboard</span>
-                        </a>
-                    </li>
-                    <li className="sidebar-menu-item">
-                        <a href="#" className="sidebar-menu-link flex ">
-                            <i className="sidebar-menu-icon center">X</i>
-                            <span className="sidebar-menu-text">Dashboard</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+            {/* eslint-disable-next-line array-callback-return */}
+            {Array(3).fill(0).map(() => {
+                return <div className="sidebar-body">
+                    <ul className="sidebar-menu">
+                        <div className="sidebar-menu-title flex">
+                            <span className="sidebar-menu-text">Menu</span>
+                            <span className="underline"></span>
+                        </div>
+                        <li className="sidebar-menu-item">
+                            <a href="#" className="sidebar-menu-link flex ">
+                                <i className="sidebar-menu-icon center">X</i>
+                                <span className="sidebar-menu-text">Dashboard</span>
+                            </a>
+                        </li>
+                        <li className="sidebar-menu-item">
+                            <a href="#" className="sidebar-menu-link flex ">
+                                <i className="sidebar-menu-icon center">X</i>
+                                <span className="sidebar-menu-text">Dashboard</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            })}
+
             <div className="sidebar-profile-container flex">
                 <div className="sidebar-profile flex">
                     <a className="flex"><GiRamProfile/></a>
@@ -158,7 +122,7 @@ function Dashboard() {
                 </div>
             </div>
         </div>
-       <BasicModal/>
+        <BasicModal/>
 
     </div>
 }
