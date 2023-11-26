@@ -6,6 +6,8 @@ import {GiRamProfile} from "react-icons/gi";
 import {FaShuttleSpace} from "react-icons/fa6";
 import TablePagination from '@mui/material/TablePagination';
 import MultiActionAreaCard from "./eventCard";
+import BasicModal from "./event-modal";
+
 
 function Dashboard() {
 
@@ -45,7 +47,7 @@ function Dashboard() {
 
     return <div className="dashboard">
         <nav className={sidebarClass} onMouseEnter={SidebarOpen} onMouseLeave={SidebarClose}>
-            <div className="sidebar-header flex">
+            <div className="sidebar-header flex ">
                 <div className="sidebar-logo"></div>
                 <span className="sidebar-title">EventHorizon</span>
                 <i className="sidebar-open" title="Lock the sidebar" onClick={toggleLockButton}>
@@ -60,14 +62,14 @@ function Dashboard() {
                         <span className="underline"></span>
                     </div>
                     <li className="sidebar-menu-item">
-                        <a href="#" className="sidebar-menu-link flex active">
-                            <i>X</i>
-                            <span>Dashboard</span>
+                        <a href="#" className="sidebar-menu-link flex">
+                            <i className="sidebar-menu-icon center">X</i>
+                            <span className="sidebar-menu-text">Dashboard</span>
                         </a>
                     </li>
                     <li className="sidebar-menu-item">
-                        <a href="#" className="sidebar-menu-link flex active">
-                            <i className="sidebar-menu-icon">X</i>
+                        <a href="#" className="sidebar-menu-link flex">
+                            <i className="sidebar-menu-icon center">X</i>
                             <span className="sidebar-menu-text">Dashboard</span>
                         </a>
                     </li>
@@ -80,14 +82,14 @@ function Dashboard() {
                         <span className="underline"></span>
                     </div>
                     <li className="sidebar-menu-item">
-                        <a href="#" className="sidebar-menu-link flex active">
-                            <i>X</i>
-                            <span>Dashboard</span>
+                        <a href="#" className="sidebar-menu-link flex">
+                            <i className="sidebar-menu-icon center">X</i>
+                            <span className="sidebar-menu-text">Dashboard</span>
                         </a>
                     </li>
                     <li className="sidebar-menu-item">
-                        <a href="#" className="sidebar-menu-link flex active">
-                            <i className="sidebar-menu-icon">X</i>
+                        <a href="#" className="sidebar-menu-link flex">
+                            <i className="sidebar-menu-icon center">X</i>
                             <span className="sidebar-menu-text">Dashboard</span>
                         </a>
                     </li>
@@ -100,23 +102,22 @@ function Dashboard() {
                         <span className="underline"></span>
                     </div>
                     <li className="sidebar-menu-item">
-                        <a href="#" className="sidebar-menu-link flex active">
-                            <i>X</i>
-                            <span>Dashboard</span>
+                        <a href="#" className="sidebar-menu-link flex ">
+                            <i className="sidebar-menu-icon center">X</i>
+                            <span className="sidebar-menu-text">Dashboard</span>
                         </a>
                     </li>
                     <li className="sidebar-menu-item">
-
-                        <a href="#" className="sidebar-menu-link flex active">
-                            <i className="sidebar-menu-icon">X</i>
-                            <span className="sidebar-menu-text">Menu</span>
+                        <a href="#" className="sidebar-menu-link flex ">
+                            <i className="sidebar-menu-icon center">X</i>
+                            <span className="sidebar-menu-text">Dashboard</span>
                         </a>
                     </li>
                 </ul>
             </div>
-            <div className="sidebar-profile-container">
+            <div className="sidebar-profile-container flex">
                 <div className="sidebar-profile flex">
-                    <a><GiRamProfile/></a>
+                    <a className="flex"><GiRamProfile/></a>
                     <div className="sidebar-profile-info">
                         <span className="sidebar-profile-name">Youssef</span>
                         <sub className="sidebar-profile-position">Admin</sub>
@@ -124,23 +125,18 @@ function Dashboard() {
                 </div>
             </div>
         </nav>
-        <div className="main">
-            <nav className="navbar">
-                <div className="left">
+
+        <div className="main center">
+            <nav className="navbar flex">
+                <div className="left flex">
                 </div>
-                <div className="middle">
+                <div className="middle flex">
                     <button className="sidebar-open" onClick={toggleLockButton}><FiMenu/></button>
                     <button><FaSearch/></button>
                     <input type="text" placeholder="Search"/>
                     <i><FaShuttleSpace/></i>
                 </div>
-                <div className="right">
-                </div>
-            </nav>
-            <div className="content-container">
-
-                <div className="content-header">
-                    <h1>Dashboard</h1>
+                <div className="right flex">
                     <div className="content-header-breadcrumb">
                         <TablePagination
                             component="div"
@@ -152,17 +148,17 @@ function Dashboard() {
                         />
                     </div>
                 </div>
-                <div className="content-body">
-
-                    {Array(50).fill(0).map((_, i) => <div className="card-container">
-                            <MultiActionAreaCard key={i}/>
-                        </div>)
+            </nav>
+            <div className="content-container center">
+                <div className="content-body flex">
+                    {Array(50).fill(0).map((_, i) => <div className="card-container center">
+                        <MultiActionAreaCard key={i}/>
+                    </div>)
                     }
-
                 </div>
             </div>
         </div>
-
+       <BasicModal/>
 
     </div>
 }
