@@ -10,7 +10,7 @@
 
 .profile-sidebar {
     width: 20%;
-    height: 100%;
+    height: 90%;
     float: left;
     background-color: #1e0064;
     display: flex;
@@ -141,9 +141,7 @@
     border-bottom: 1px solid #000000;
     transition: all 0.3s ease-in-out;
 }
-.profile-info-container:hover {
-    background-color: #cccccc;
-}
+
 
 
 .profile-info-item {
