@@ -6,6 +6,11 @@ import Modal from '@mui/material/Modal';
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import {City, Country, State} from "country-state-city";
+import MenuItem from '@mui/material/MenuItem';
+import FormHelperText from '@mui/material/FormHelperText';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import {InputLabel} from "@mui/material";
 
 let eventCategoriesMap = new Map([
     ["Social Events", ["Weddings", "Parties", "Reunions", "Celebrations"]],
@@ -29,7 +34,7 @@ const style = {
     border: '2px solid #000',
     boxShadow: 24,
     p: 4,
-    borderRadius: "10px",
+    borderRadius: "24px",
 };
 
 export default function BasicModal() {
@@ -49,7 +54,8 @@ export default function BasicModal() {
     const [state, setState] = React.useState("");
     const [city, setCity] = React.useState("");
     const [statesInCountry, setStatesInCountry] = React.useState([]);
-    const [citiesInState, setCitiesInState] = React.useState([] );
+    const [citiesInState, setCitiesInState] = React.useState([]);
+    const [adsPlan, setAdsPlan] = React.useState("");
 
 
     return (
@@ -72,7 +78,7 @@ export default function BasicModal() {
                     <Typography id="modal-modal-title" variant="h6" component="h2">
                         create an event
                     </Typography>
-                    <Typography id="modal-modal-description" sx={{mt: 2}}>
+                    <Typography id="modal-modal-description" sx={{mt: 1}}>
                         <form className="modal-form" action="#">
                             <TextField id="outlined-basic" label="Event Name" variant="outlined" required={true}
                                        helperText="please enter the Event Name"/>
@@ -81,11 +87,11 @@ export default function BasicModal() {
                                     disablePortal
                                     value={country}
                                     id="combo-box-demo"
-                                    options= {countryNames}
+                                    options={countryNames}
                                     sx={{width: 289}}
                                     renderInput={(params) => <TextField {...params} label="Country"/>}
                                     onChange={(event, value) => {
-                                        if(!value){
+                                        if (!value) {
                                             setCountry(null);
                                             setState(null);
                                             setCity(null);
@@ -108,7 +114,7 @@ export default function BasicModal() {
                                     sx={{width: 300}}
                                     renderInput={(params) => <TextField {...params} label="State"/>}
                                     onChange={(event, value) => {
-                                        if(!value){
+                                        if (!value) {
                                             setState(null);
                                             setCity(null);
                                             setCitiesInState([]);
@@ -130,7 +136,7 @@ export default function BasicModal() {
                                     sx={{width: 300}}
                                     renderInput={(params) => <TextField {...params} label="City"/>}
                                     onChange={(event, value) => {
-                                        if(!value){
+                                        if (!value) {
                                             setCity(null);
                                             return;
                                         }
@@ -177,6 +183,31 @@ export default function BasicModal() {
                                 sx={{width: 600}}
                                 helperText="please enter the Event Description"
                             />
+                            <FormControl sx={{minWidth: 600}}>
+                                <InputLabel id="demo-simple-select-helper-label">The Ads plan</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-helper-label"
+                                    id="demo-simple-select-helper"
+                                    label="ads Plans"
+                                    required={true}
+                                    value={adsPlan}
+                                    onChange={(event, value) => {
+                                        setAdsPlan(value);
+                                    }
+                                    }
+                                >
+                                    <MenuItem value="free">Free Plan</MenuItem>
+                                    <MenuItem value="regular">
+                                        Regular Plan
+                                    </MenuItem>
+                                    <MenuItem value="premium">
+                                        Premium Plan
+                                    </MenuItem>
+                                </Select>
+                                <FormHelperText>
+                                    Choose your Suitable Ads plan
+                                </FormHelperText>
+                            </FormControl>
                             <TextField
                                 id="datetime-local"
                                 label="Event Date"
@@ -188,6 +219,8 @@ export default function BasicModal() {
                                 required={true}
                                 helperText="please enter the Event Date"
                             />
+
+
                             <Button type="submit" value="Submit" variant="contained">
                                 Submit
                             </Button>

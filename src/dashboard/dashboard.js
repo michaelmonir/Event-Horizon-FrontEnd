@@ -64,12 +64,14 @@ function Dashboard() {
                             <span className="underline"></span>
                         </div>
                         <li className="sidebar-menu-item">
+                            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                             <a href="#" className="sidebar-menu-link flex ">
                                 <i className="sidebar-menu-icon center">X</i>
                                 <span className="sidebar-menu-text">Dashboard</span>
                             </a>
                         </li>
                         <li className="sidebar-menu-item">
+                            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                             <a href="#" className="sidebar-menu-link flex ">
                                 <i className="sidebar-menu-icon center">X</i>
                                 <span className="sidebar-menu-text">Dashboard</span>
@@ -81,6 +83,7 @@ function Dashboard() {
 
             <div className="sidebar-profile-container flex">
                 <div className="sidebar-profile flex">
+                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                     <a className="flex"><GiRamProfile/></a>
                     <div className="sidebar-profile-info">
                         <span className="sidebar-profile-name">Youssef</span>
@@ -93,12 +96,12 @@ function Dashboard() {
         <div className="main center">
             <nav className="navbar flex">
                 <div className="left flex">
+                    <button className="sidebar-open " onClick={toggleLockButton}><FiMenu/></button>
                 </div>
                 <div className="middle flex">
-                    <button className="sidebar-open" onClick={toggleLockButton}><FiMenu/></button>
-                    <button><FaSearch/></button>
+                    <button className="search-button"><FaSearch/></button>
                     <input type="text" placeholder="Search"/>
-                    <i><FaShuttleSpace/></i>
+                    <i className="space-icon"><FaShuttleSpace/></i>
                 </div>
                 <div className="right flex">
                     <div className="content-header-breadcrumb">
@@ -123,7 +126,6 @@ function Dashboard() {
             </div>
         </div>
         <BasicModal/>
-
     </div>
 }
 
