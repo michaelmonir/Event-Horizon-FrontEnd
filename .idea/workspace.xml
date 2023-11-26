@@ -5,14 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4fa0d62e-70eb-4943-a749-0ef5a161ece5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dashboard/dashboard.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/dashboard/dashboard.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dashboard/dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/dashboard/dashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dashboard/eventCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/dashboard/eventCard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dashboard/event-modal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/dashboard/event-modal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dashboard/location.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/dashboard/location.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,6 +26,9 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="showPreview" value="true" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
@@ -97,7 +94,7 @@
       <workItem from="1700580561194" duration="22767000" />
       <workItem from="1700858685960" duration="8325000" />
       <workItem from="1700941687739" duration="3530000" />
-      <workItem from="1700990991146" duration="16971000" />
+      <workItem from="1700990991146" duration="17290000" />
     </task>
     <servers />
   </component>
