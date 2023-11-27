@@ -2,10 +2,12 @@ import React from 'react';
 import './profie.css';
 import {IoHome} from "react-icons/io5";
 import {FaPen} from "react-icons/fa6";
+import { FaTrashAlt } from "react-icons/fa";
 
 import {GiMailbox} from "react-icons/gi";
 import {FaBookmark} from "react-icons/fa";
 import {RiLogoutBoxLine} from "react-icons/ri";
+import BasicModal from "./profile-update-modal";
 
 
 function Profile() {
@@ -44,91 +46,103 @@ function Profile() {
                 </div>
             </div>
             <div className="profile-main-content">
-                <div className="profile-info-container "
-                     style={{
-                         borderTopLeftRadius: "35px",
-                         borderTopRightRadius: "35px",
-                     }}
-                >
-                    <div className="profile-info-item ">
-                        <div className="profile-info-item-title">UserName:</div>
-                        <div className="profile-info-item-value">mohamedryad</div>
+                <div className="profile-main-content-header">
+                    <div className="header-title">
+                        Profile
                     </div>
-
-
-                    <button className="edit-button">
-                        <FaPen/>
-                    </button>
-
-                </div>
-                <div className="profile-info-container">
-                    <div className="profile-info-item">
-                        <div className="profile-info-item-title">first name:</div>
-                        <div className="profile-info-item-value">Mohamed</div>
+                    <div className="header-btns">
+                       <BasicModal email="sofhabeb@gmail.com" firstName={"Mohamed"} gender={"Male"} lastName={"Ryad"} paypalAccount={"paypal.me/ryad"}/>
                     </div>
-                    <button className="edit-button">
-                        <FaPen/>
-                    </button>
                 </div>
-
-
-                <div className="profile-info-container">
-                    <div className="profile-info-item">
-                        <div className="profile-info-item-title">last name:</div>
-                        <div className="profile-info-item-value">Ryad</div>
-                    </div>
-                    <button className="edit-button">
-                        <FaPen/>
-                    </button>
-                </div>
-                <div className="profile-info-container">
-                    <div className="profile-info-item">
-                        <div className="profile-info-item-title">Role:</div>
-                        <div className="profile-info-item-value">Admin</div>
-                    </div>
-                    <button className="edit-button">
-                        <FaPen/>
-                    </button>
-                </div>
-                <div className="profile-info-container">
-                    <div className="profile-info-item">
-                        <div className="profile-info-item-title">Email:</div>
-                        <div className="profile-info-item-value">
-                            <a href="mailto:sofahabeb@gmail.com ">
-                                You can contact me by email
-                            </a>
+                <div className="profile-main-content-body">
+                    <div className="profile-info-container"
+                            style={{
+                                borderTopLeftRadius: "35px",
+                                borderTopRightRadius: "35px",
+                            }}
+                    >
+                        <div className="profile-info-item">
+                            <div className="profile-info-item-title">UserName:</div>
+                            <div className="profile-info-item-value">mohamedryad</div>
                         </div>
+                        <button className="edit-button">
+                            <FaPen/>
+                        </button>
                     </div>
-                    <button className="edit-button">
-                        <FaPen/>
-                    </button>
-                </div>
-                <div className="profile-info-container">
-                    <div className="profile-info-item">
-                        <div className="profile-info-item-title">gender:</div>
-                        <div className="profile-info-item-value">Male</div>
+                    <div className="profile-info-container">
+                        <div className="profile-info-item">
+                            <div className="profile-info-item-title">first name:</div>
+                            <div className="profile-info-item-value">Mohamed</div>
+                        </div>
+                        <button className="edit-button">
+                            <FaPen/>
+                        </button>
                     </div>
-                    <button className="edit-button">
-                        <FaPen/>
-                    </button>
-                </div>
-                <div className="profile-info-container"
-                        style={{
-                            borderBottomLeftRadius: "35px",
-                            borderBottomRightRadius: "35px",
-                        }}
-                >
-                    <div className="profile-info-item">
-                        <div className="profile-info-item-title">paypal account:</div>
-                        <div className="profile-info-item-value"> paypal.me/ryad</div>
+                    <div className="profile-info-container">
+                        <div className="profile-info-item">
+                            <div className="profile-info-item-title">last name:</div>
+                            <div className="profile-info-item-value">Ryad</div>
+                        </div>
+                        <button className="edit-button">
+                            <FaPen/>
+                        </button>
                     </div>
-                    <button className="edit-button">
-                        <FaPen/>
-                    </button>
+                    <div className="profile-info-container">
+                        <div className="profile-info-item">
+                            <div className="profile-info-item-title">Role:</div>
+                            <div className="profile-info-item-value">Admin</div>
+                        </div>
+                        <button className="edit-button">
+                            <FaPen/>
+                        </button>
+                    </div>
+                    <div className="profile-info-container">
+                        <div className="profile-info-item">
+                            <div className="profile-info-item-title">Email:</div>
+                            <div className="profile-info-item-value">
+                                <a href="mailto:sofahabeb@gmail.com ">
+                                    You can contact me by email
+                                </a>
+                            </div>
+                        </div>
+                        <button className="edit-button">
+                            <FaPen/>
+                        </button>
+                    </div>
+                    <div className="profile-info-container">
+                        <div className="profile-info-item">
+                            <div className="profile-info-item-title">gender:</div>
+                            <div className="profile-info-item-value">Male</div>
+                        </div>
+                        <button className="edit-button">
+                            <FaPen/>
+                        </button>
+                    </div>
+                    <div className="profile-info-container"
+                         style={{
+                             borderBottomLeftRadius: "35px",
+                             borderBottomRightRadius: "35px",
+                         }}
+                    >
+                        <div className="profile-info-item">
+                            <div className="profile-info-item-title">paypal account:</div>
+                            <div className="profile-info-item-value"> paypal.me/ryad</div>
+                        </div>
+                        <button className="edit-button">
+                            <FaPen/>
+                        </button>
+                    </div>
+
+
                 </div>
+
+
             </div>
+
+
         </div>
     );
 }
+
 
 export default Profile;
