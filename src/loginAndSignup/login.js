@@ -2,7 +2,8 @@
 import {useState} from 'react';
 import './login.css';
 import Button from '@mui/material/Button';
-import {FaGithub, FaFacebook, FaLinkedin} from "react-icons/fa";
+import {FaGoogle} from "react-icons/fa";
+
 import classNames from "classnames";
 import {loginValidation} from "./validations/loginValidation";
 import {signupValidation} from "./validations/signupValidation";
@@ -26,6 +27,7 @@ function Login() {
             actions.resetForm();
         }
     });
+
     const signupFormik = useFormik({
         initialValues: {
             firstName: "",
@@ -40,7 +42,7 @@ function Login() {
             console.log(actions);
         },
     });
-    console.log(signupFormik.errors);
+
 
 
     return (
@@ -50,9 +52,7 @@ function Login() {
                     <form onSubmit={signupFormik.handleSubmit}>
                         <h2>Create Account</h2>
                         <div className="social-container">
-                            <a href="#" className="social"><FaFacebook className="social-icon"/></a>
-                            <a href="#" className="social"><FaGithub className="social-icon"/></a>
-                            <a href="#" className="social"><FaLinkedin className="social-icon"/></a>
+                            <a href="#" className="social"><FaGoogle className="social-icon"/></a>
                         </div>
                         <span>or use your Gmail to register</span>
 
@@ -103,9 +103,7 @@ function Login() {
                     <form onSubmit={loginFormik.handleSubmit}>
                         <h2>Sign in</h2>
                         <div className="social-container">
-                            <a href="#" className="social"><FaFacebook className="social-icon"/></a>
-                            <a href="#" className="social"><FaGithub className="social-icon"/></a>
-                            <a href="#" className="social"><FaLinkedin className="social-icon"/></a>
+                            <a href="#" className="social"><FaGoogle className="social-icon"/></a>
                         </div>
                         <span>use your account</span>
                         <input
@@ -152,4 +150,4 @@ function Login() {
     );
 }
 
-export default login;
+export default Login;
