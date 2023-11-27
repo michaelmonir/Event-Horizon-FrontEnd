@@ -129,14 +129,49 @@
     justify-content: center;
     background-color: #1e0064;
 }
+.profile-main-content-header{
+    width: 100%;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    margin-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 40px;
+    border-radius: 100px;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
+}
+.profile-main-content-header .header-title{
+    font-size: 24px;
+    font-weight: 700;
+    color: #1e0064;
+}
+.profile-main-content-header .header-btns{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 50px;
+}
+
+.profile-main-content-body{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
 
 .profile-info-container {
     width: 100%;
-    height: calc(100% / 8);
+    height: calc(100% / 7.8);
     background-color: #fff;
     display: flex;
     flex-direction: row;
-    padding: 10px;
+    padding: 6px;
     align-items: center;
     border-bottom: 1px solid #000000;
     transition: all 0.3s ease-in-out;
@@ -166,7 +201,7 @@
     color: #1e0064;
 }
 
-.edit-button {
+.edit-button,.delete-button{
     width: 40px;
     height: 40px;
     display: flex;
@@ -186,11 +221,15 @@
     cursor: pointer;
     transition: all 0.3s ease-in-out;
 }
-.edit-button:hover {
+.edit-button:hover ,.delete-button:hover{
     background-color: #150044;
     color: #fff;
 }
-
-
-
-
+.profile-update-modal-form{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap:20px;
+}
