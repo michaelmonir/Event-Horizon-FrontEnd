@@ -7,7 +7,7 @@ import Profile from "./porfile/profile";
 function App() {
   return (
     <div className="App" >
-      <Profile/>
+ 
     </div>
 
 
