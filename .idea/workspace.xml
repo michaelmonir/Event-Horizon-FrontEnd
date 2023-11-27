@@ -4,6 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="4fa0d62e-70eb-4943-a749-0ef5a161ece5" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/src/EventAndUserClasses/UserDtos/InformationDto.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/EventAndUserClasses/UserDtos/OrganizerHeader.js" afterDir="false" />
@@ -17,6 +18,9 @@
       <change beforePath="$PROJECT_DIR$/src/EventAndUserClasses/EventHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/EventAndUserClasses/EventHeader.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/EventAndUserClasses/ViewEvent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/EventAndUserClasses/ViewEvent.js" afterDir="false" />
     </list>
+=======
+    <list default="true" id="4fa0d62e-70eb-4943-a749-0ef5a161ece5" name="Changes" comment="" />
+>>>>>>> main
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -25,8 +29,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="CSS File" />
         <option value="JavaScript File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -35,6 +39,10 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="proportion" value="0.7125172" />
+    <option name="showPreview" value="true" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
@@ -52,8 +60,13 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+<<<<<<< HEAD
     &quot;git-widget-placeholder&quot;: &quot;LJ1-33-login-sign-up-Frontend-interface&quot;,
     &quot;last_opened_file_path&quot;: &quot;D:/Projects/Event Horizon/FrontEnd/Event-Horizon-FrontEnd/src/EventAndUserClasses/UserDtos&quot;,
+=======
+    &quot;git-widget-placeholder&quot;: &quot;LJ1-30-Create-DashBoard-component-in-frontend&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/20100/Documents&quot;,
+>>>>>>> main
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -61,13 +74,19 @@
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+<<<<<<< HEAD
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+=======
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\20100\\AppData\\Local\\Programs\\WebStorm\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+
+>>>>>>> main
   }
 }</component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\20100\Documents\GitHub\Event-Horizon-FrontEnd\public" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\20100\Documents\GitHub\Event-Horizon-FrontEnd\src\dashboard" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Projects\Event Horizon\FrontEnd\Event-Horizon-FrontEnd\src\EventAndUserClasses\UserDtos" />
@@ -99,6 +118,7 @@
       <workItem from="1699904398878" duration="2742000" />
       <workItem from="1699908874393" duration="442000" />
       <workItem from="1699909356083" duration="394000" />
+<<<<<<< HEAD
       <workItem from="1699909766476" duration="333000" />
       <workItem from="1699954315992" duration="14296000" />
       <workItem from="1699985135244" duration="600000" />
@@ -107,6 +127,13 @@
       <workItem from="1700091453985" duration="542000" />
       <workItem from="1701020166453" duration="5607000" />
       <workItem from="1701118310699" duration="722000" />
+=======
+      <workItem from="1700521295858" duration="11964000" />
+      <workItem from="1700580561194" duration="22767000" />
+      <workItem from="1700858685960" duration="8325000" />
+      <workItem from="1700941687739" duration="3530000" />
+      <workItem from="1700990991146" duration="22476000" />
+>>>>>>> main
     </task>
     <servers />
   </component>
