@@ -1,0 +1,4 @@
+class AdsOption{
+ id;
+ name;   
+}
