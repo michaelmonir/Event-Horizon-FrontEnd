@@ -23,7 +23,7 @@ function ValidationPage(props) {
     return (
         <div className="container">
             <h2>Verify Account</h2>
-            <div class="code">
+            <div className="code">
                 <input type="number" className="codeInput" placeholder="0" min="0" max="9" required/>
                 <input type="number" className="codeInput" placeholder="0" min="0" max="9" required/>
                 <input type="number" className="codeInput" placeholder="0" min="0" max="9" required/>

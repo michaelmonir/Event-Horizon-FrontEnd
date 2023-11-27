@@ -40,17 +40,7 @@ body{
     text-align: center;
     font-weight: 300;
 }
-@media (max-width: 600px) {
-    .code{
-        flex-direction: warp;
-    }
-    .codeInput{
-        font-size: 24px;
-        height: 50px;
-        max-width: 50px;
-        font-size: Bold;
-    }
-}
+
 .codeInput::-webkit-outer-spin-button,
 .codeInput::-webkit-inner-spin-button {
     -webkit-appearance: none;
