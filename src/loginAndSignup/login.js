@@ -1,4 +1,3 @@
-
 import {useState} from 'react';
 import './login.css';
 import Button from '@mui/material/Button';
@@ -44,7 +43,6 @@ function Login() {
     });
 
 
-
     return (
         <div className="Body">
             <div className={classNames({"Container": true, "active": isLoginActive})} id="container">
@@ -63,7 +61,8 @@ function Login() {
                                    signupFormik.touched.firstName && signupFormik.errors.firstName ? "Input error" : "Input"
                                }
                                type="text" placeholder="First Name "/>
-                        {signupFormik.touched.firstName && signupFormik.errors.firstName ? ( <div className=" text-error">{signupFormik.errors.firstName}</div>) : null}
+                        {signupFormik.touched.firstName && signupFormik.errors.firstName ? (
+                            <div className=" text-error">{signupFormik.errors.firstName}</div>) : null}
                         <input name={"lastName"}
                                onChange={signupFormik.handleChange}
                                onBlur={signupFormik.handleBlur}
@@ -71,7 +70,8 @@ function Login() {
                                    signupFormik.touched.lastName && signupFormik.errors.lastName ? "Input error" : "Input"
                                }
                                type="text" placeholder="Last Name"/>
-                        {signupFormik.touched.lastName && signupFormik.errors.lastName ? ( <div className=" text-error">{signupFormik.errors.lastName}</div>) : null}
+                        {signupFormik.touched.lastName && signupFormik.errors.lastName ? (
+                            <div className=" text-error">{signupFormik.errors.lastName}</div>) : null}
                         <input
                             name={"email"}
                             onChange={signupFormik.handleChange}
@@ -80,7 +80,8 @@ function Login() {
                                 signupFormik.touched.email && signupFormik.errors.email ? "Input error" : "Input"
                             }
                             type="email" placeholder="Email"/>
-                        {signupFormik.touched.email && signupFormik.errors.email ? ( <div className=" text-error">{signupFormik.errors.email}</div>) : null}
+                        {signupFormik.touched.email && signupFormik.errors.email ? (
+                            <div className=" text-error">{signupFormik.errors.email}</div>) : null}
                         <input name={"password"}
                                onChange={signupFormik.handleChange}
                                onBlur={signupFormik.handleBlur}
@@ -88,14 +89,16 @@ function Login() {
                                    signupFormik.touched.password && signupFormik.errors.password ? "Input error" : "Input"
                                }
                                type="password" placeholder="Password"/>
-                        {signupFormik.touched.password && signupFormik.errors.password ? ( <div className=" text-error">{signupFormik.errors.password}</div>) : null}
+                        {signupFormik.touched.password && signupFormik.errors.password ? (
+                            <div className=" text-error">{signupFormik.errors.password}</div>) : null}
 
                         <input name={"confirmPassword"} onChange={signupFormik.handleChange}
                                onBlur={signupFormik.handleBlur}
                                className={
                                    signupFormik.touched.confirmPassword && signupFormik.errors.confirmPassword ? "Input error" : "Input"
                                } type="password" placeholder="Confirm Password"/>
-                        {signupFormik.touched.confirmPassword && signupFormik.errors.confirmPassword ? ( <div className=" text-error">{signupFormik.errors.confirmPassword}</div>) : null}
+                        {signupFormik.touched.confirmPassword && signupFormik.errors.confirmPassword ? (
+                            <div className=" text-error">{signupFormik.errors.confirmPassword}</div>) : null}
                         <Button variant="contained" type="submit">Sign up</Button>
                     </form>
                 </div>
