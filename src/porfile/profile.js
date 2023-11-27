@@ -65,36 +65,28 @@ function Profile() {
                             <div className="profile-info-item-title">UserName:</div>
                             <div className="profile-info-item-value">mohamedryad</div>
                         </div>
-                        <button className="edit-button">
-                            <FaPen/>
-                        </button>
+
                     </div>
                     <div className="profile-info-container">
                         <div className="profile-info-item">
                             <div className="profile-info-item-title">first name:</div>
                             <div className="profile-info-item-value">Mohamed</div>
                         </div>
-                        <button className="edit-button">
-                            <FaPen/>
-                        </button>
+
                     </div>
                     <div className="profile-info-container">
                         <div className="profile-info-item">
                             <div className="profile-info-item-title">last name:</div>
                             <div className="profile-info-item-value">Ryad</div>
                         </div>
-                        <button className="edit-button">
-                            <FaPen/>
-                        </button>
+
                     </div>
                     <div className="profile-info-container">
                         <div className="profile-info-item">
                             <div className="profile-info-item-title">Role:</div>
                             <div className="profile-info-item-value">Admin</div>
                         </div>
-                        <button className="edit-button">
-                            <FaPen/>
-                        </button>
+
                     </div>
                     <div className="profile-info-container">
                         <div className="profile-info-item">
@@ -105,18 +97,12 @@ function Profile() {
                                 </a>
                             </div>
                         </div>
-                        <button className="edit-button">
-                            <FaPen/>
-                        </button>
                     </div>
                     <div className="profile-info-container">
                         <div className="profile-info-item">
                             <div className="profile-info-item-title">gender:</div>
                             <div className="profile-info-item-value">Male</div>
                         </div>
-                        <button className="edit-button">
-                            <FaPen/>
-                        </button>
                     </div>
                     <div className="profile-info-container"
                          style={{
@@ -128,9 +114,6 @@ function Profile() {
                             <div className="profile-info-item-title">paypal account:</div>
                             <div className="profile-info-item-value"> paypal.me/ryad</div>
                         </div>
-                        <button className="edit-button">
-                            <FaPen/>
-                        </button>
                     </div>
 
 

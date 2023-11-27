@@ -1,10 +1,18 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
+
 import {FaPen} from "react-icons/fa6";
-import {FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField} from "@mui/material";
+import {
+    FormControl,
+    FormHelperText,
+    InputLabel,
+    MenuItem,
+    Select,
+    TextField,
+    Box,
+    Button,
+    Typography,
+    Modal
+} from "@mui/material";
 
 const style = {
     position: 'absolute',
@@ -18,7 +26,6 @@ const style = {
     borderRadius: "24px",
     width: "50%",
 };
-
 export default function BasicModal({firstName, lastName, gender, email, paypalAccount}) {
     const [open, setOpen] = React.useState(false);
 
@@ -47,7 +54,7 @@ export default function BasicModal({firstName, lastName, gender, email, paypalAc
                             <TextField variant={"outlined"} label={"Last Name"} defaultValue={lastName}/>
                             <TextField variant={"outlined"} label={"email"} defaultValue={email}/>
                             <TextField variant={"outlined"} label={"Paypal Account"} defaultValue={paypalAccount}/>
-                            <FormControl sx={{maxWidth:200}}>
+                            <FormControl sx={{maxWidth: 200}}>
                                 <InputLabel id="demo-simple-select-helper-label">gender</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-helper-label"
@@ -65,11 +72,11 @@ export default function BasicModal({firstName, lastName, gender, email, paypalAc
                                         value={gender === "Male" ? "Female" : "Male"}>{gender === "Male" ? "Female" : "Male"} </MenuItem>
                                 </Select>
                                 <FormHelperText>
-                                      select Gender of your choice
+                                    select Gender of your choice
                                 </FormHelperText>
                             </FormControl>
                             <Button type="submit" value="Submit" variant="contained" style={{
-                              width:"150px"
+                                width: "150px", color: "##150044",
                             }}>
                                 Submit
                             </Button>
