@@ -4,4 +4,5 @@ class EventHeader{
     eventCategory;
     eventDate;
     eventLocation;
+    organizerHeader;
 }
