@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
 import Login from './loginAndSignup/login.js';
-// eslint-disable-next-line no-unused-vars
 import ValidationPage from "./validation/validationPage";
+import Dashboard from './dashboard/dashboard.js';
 function App() {
   return (
-    <div >
-        <Login/>
+    <div className="App">
+
     </div>
 
   );
