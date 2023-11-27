@@ -40,7 +40,18 @@ const style = {
 export default function BasicModal() {
     const [open, setOpen] = React.useState(false);
 
-    const handleOpen = () => setOpen(true);
+    const handleOpen = () => {
+        setOpen(true);
+        setEventSubCategory(null);
+        setEventCategory(null);
+        setCountry(null);
+        setState(null);
+        setCity(null);
+        setStatesInCountry([]);
+        setCitiesInState([]);
+        setAdsPlan("");
+
+    }
     const handleClose = () => setOpen(false);
     const [eventCategory, setEventCategory] = React.useState("");
     const [eventSubCategory, setEventSubCategory] = React.useState("");
@@ -164,6 +175,7 @@ export default function BasicModal() {
                                 id="combo-box-demo"
                                 options={eventCategory ? eventCategoriesMap.get(eventCategory) : []}
                                 sx={{width: 600}}
+
                                 renderInput={(params) => <TextField {...params} label="Event sub-category"/>}
                                 onChange={(event, value) => {
                                     if (!value) {
@@ -191,8 +203,8 @@ export default function BasicModal() {
                                     label="ads Plans"
                                     required={true}
                                     value={adsPlan}
-                                    onChange={(event, value) => {
-                                        setAdsPlan(value);
+                                    onChange={(event) => {
+                                        setAdsPlan(event.target.value);
                                     }
                                     }
                                 >
@@ -219,8 +231,6 @@ export default function BasicModal() {
                                 required={true}
                                 helperText="please enter the Event Date"
                             />
-
-
                             <Button type="submit" value="Submit" variant="contained">
                                 Submit
                             </Button>
