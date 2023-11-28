@@ -5,9 +5,9 @@ import Profile from "./porfile/profile";
 import Dashboard from './dashboard/dashboard.js';
 import BasicModal from "./dashboard/event-modal";
 import ValidationPage from "./validation/validationPage";
+import Event from "./event/event";
+
 function App() {
-
-
     const profileAttributes = {
         firstName: "jooooooon",
         lastName: "Doe",
