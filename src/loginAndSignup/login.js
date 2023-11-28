@@ -22,17 +22,6 @@ function Login() {
     const LOCAL_STORAGE_KEY = "token";
     const LOCAL_STORAGE_KEY_ID = "id";
 
-    const [token, setToken] = useState(JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) ?? []);
-    const [id, setId] = useState(JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_ID)) ?? []);
-
-
-    useEffect(() => {
-        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(token));
-    }, [token]);
-    useEffect(() => {
-        localStorage.setItem(LOCAL_STORAGE_KEY_ID, JSON.stringify(id))
-    }, [id]);
-
 
     const [isLoginActive, setIsLoginActive] = useState(false);
     const loginFormik = useFormik({
@@ -49,13 +38,10 @@ function Login() {
                 "password": values.password
             }
             try {
-                const response = await ProxyApi.post("basicSignIn", authenticationRequest);
-                setToken(response.data.token);
-                setId(response.data.id);
-                console.log(response)
+                const response = await ProxyApi.post("basicSignIn", authenticationRequest)
+                localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(response.data.token))
+                localStorage.setItem(LOCAL_STORAGE_KEY_ID, JSON.stringify(response.data.id))
                 navigate("/dashboard");
-                alert("okk")
-
             } catch (error) {
                 actions.resetForm();
                 alert(error.response?.data?.message);
@@ -87,14 +73,11 @@ function Login() {
                 "payPalAccount": "",
                 "signInWithEmail": 0
             }
-            console.log(informationDto);
             try {
-                const response = await ProxyApi.post("basicSignUp", informationDto);
-                setToken(response.data.token);
-                setId(response.data.id);
-                console.log(response)
-                navigate("/validation");
-                alert("okk")
+                const response =await ProxyApi.post("basicSignUp", informationDto)
+                localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(response.data.token));
+                localStorage.setItem(LOCAL_STORAGE_KEY_ID, JSON.stringify(response.data.id))
+                navigate("/validation")
             } catch (error) {
                 actions.resetForm();
                 alert(error.response?.data?.message);

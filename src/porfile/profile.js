@@ -23,7 +23,7 @@ function Profile(props) {
     useEffect(() => {
         localStorage.setItem(LOCAL_STORAGE_KEY_ID, JSON.stringify(id))
     }, [id]);
-    const [profileAtributes, setProfileAtributes] = React.useState(null);
+    const [profileAttributtes, setProfileAttributtes] = React.useState([]);
     useEffect(() => {
         try {
             alert("enter try ")
@@ -33,6 +33,7 @@ function Profile(props) {
                 },
             });
             alert(response)
+            setProfileAttributtes(response.data)
             console.log(response)
             alert("okk")
         } catch (error) {
@@ -88,8 +89,8 @@ function Profile(props) {
                         Profile
                     </div>
                     <div className="header-btns">
-                        <BasicModal defaultFirstName={firstName} defaultGender={gender} defaultLastName={lastName}
-                                    defaultPaypalAccount={paypalAccount}/>
+                        <BasicModal defaultFirstName={profileAttributtes.firstName} defaultGender={profileAttributtes.gender} defaultLastName={profileAttributtes.lastName}
+                                    defaultPaypalAccount={profileAttributtes.paypalAccount}/>
                     </div>
                 </div>
                 <div className="profile-main-content-body">
@@ -101,28 +102,28 @@ function Profile(props) {
                     >
                         <div className="profile-info-item">
                             <div className="profile-info-item-title">UserName:</div>
-                            <div className="profile-info-item-value">{userName}</div>
+                            <div className="profile-info-item-value">{profileAttributtes.userName}</div>
                         </div>
 
                     </div>
                     <div className="profile-info-container">
                         <div className="profile-info-item">
                             <div className="profile-info-item-title">first name:</div>
-                            <div className="profile-info-item-value">{firstName}</div>
+                            <div className="profile-info-item-value">{profileAttributtes.firstName}</div>
                         </div>
 
                     </div>
                     <div className="profile-info-container">
                         <div className="profile-info-item">
                             <div className="profile-info-item-title">last name:</div>
-                            <div className="profile-info-item-value">{lastName}</div>
+                            <div className="profile-info-item-value">{profileAttributtes.lastName}</div>
                         </div>
 
                     </div>
                     <div className="profile-info-container">
                         <div className="profile-info-item">
                             <div className="profile-info-item-title">Role:</div>
-                            <div className="profile-info-item-value">{role}</div>
+                            <div className="profile-info-item-value">{profileAttributtes.role}</div>
                         </div>
 
                     </div>
@@ -130,14 +131,14 @@ function Profile(props) {
                         <div className="profile-info-item">
                             <div className="profile-info-item-title">Email:</div>
                             <div className="profile-info-item-value">
-                                {email}
+                                {profileAttributtes.email}
                             </div>
                         </div>
                     </div>
                     <div className="profile-info-container">
                         <div className="profile-info-item">
                             <div className="profile-info-item-title">gender:</div>
-                            <div className="profile-info-item-value">{gender}</div>
+                            <div className="profile-info-item-value">{profileAttributtes.gender}</div>
                         </div>
                     </div>
                     <div className="profile-info-container"
@@ -148,7 +149,7 @@ function Profile(props) {
                     >
                         <div className="profile-info-item">
                             <div className="profile-info-item-title">paypal account:</div>
-                            <div className="profile-info-item-value"> {paypalAccount}</div>
+                            <div className="profile-info-item-value"> {profileAttributtes.paypalAccount}</div>
                         </div>
                     </div>
                 </div>
