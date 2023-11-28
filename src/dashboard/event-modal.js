@@ -5,12 +5,15 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
-import {City, Country, State} from "country-state-city";
+import {Country, State} from "country-state-city";
 import MenuItem from '@mui/material/MenuItem';
 import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import {InputLabel} from "@mui/material";
+import EventApis from "../Apis/EventApis/EventApis";
+import axios from 'axios'
+// import moment
 
 let eventCategoriesMap = new Map([
     ["Social Events", ["Weddings", "Parties", "Reunions", "Celebrations"]],
@@ -40,22 +43,71 @@ const style = {
 export default function BasicModal() {
     const [open, setOpen] = React.useState(false);
 
-    const handleOpen = () => setOpen(true);
+    const handleOpen = () => {
+        setOpen(true);
+        setEventSubCategory(null);
+        setEventCategory(null);
+        setCountry(null);
+        setState(null);
+        setStatesInCountry([]);
+        setAdsPlan("");
+    }
+    const adsPlansOptions = [
+        {
+            "id":1,
+            "name":"Free Plan"
+        },
+        {
+            "id":2,
+            "name":"Regular Plan"
+        },
+        {
+            "id":3,
+            "name":"Premium Plan"
+        },
+    ]
+
     const handleClose = () => setOpen(false);
     const [eventCategory, setEventCategory] = React.useState("");
-    const [eventSubCategory, setEventSubCategory] = React.useState("");
     let countries = Country.getAllCountries();
-    let states = State.getAllStates();
-    let cities = City.getAllCities();
     let countryNames = countries.map((country) => country.name);
     let countryAndID = countries.map((country) => ({name: country.name, isoCode: country.isoCode}));
-
+    const [name, setName] = React.useState("");
+    const [description, setDescription] = React.useState("");
+    const [eventSubCategory, setEventSubCategory] = React.useState("");
     const [country, setCountry] = React.useState("");
     const [state, setState] = React.useState("");
-    const [city, setCity] = React.useState("");
+    const [street, setStreet] = React.useState("");
     const [statesInCountry, setStatesInCountry] = React.useState([]);
-    const [citiesInState, setCitiesInState] = React.useState([]);
     const [adsPlan, setAdsPlan] = React.useState("");
+    const [date, setDate] = React.useState("");
+
+    const handleEventCreation = async() => {
+        const event = {
+            "name": name,
+            "description": description,
+            "eventCategory": eventCategory + "-" + eventSubCategory,
+            "eventDate": date,
+            "eventAds": adsPlan,
+            "eventLocation": {
+                "country": country,
+                "city": state,
+                "street": street
+            }
+        }
+        const organizerid = 1
+
+        try {
+            const response = await EventApis.post("/createEvent/1", event);
+            alert(response)
+            alert("okk")
+        }
+        catch(error)
+        {
+            alert("not okk")
+        }
+
+    }
 
 
     return (
@@ -66,7 +118,6 @@ export default function BasicModal() {
                     bottom: "40px",
                     right: "40px",
                 }
-
             }>create event</Button>
             <Modal
                 open={open}
@@ -79,9 +130,14 @@ export default function BasicModal() {
                         create an event
                     </Typography>
                     <Typography id="modal-modal-description" sx={{mt: 1}}>
-                        <form className="modal-form" action="#">
+                        <form className="modal-form" onSubmit={handleEventCreation}>
                             <TextField id="outlined-basic" label="Event Name" variant="outlined" required={true}
-                                       helperText="please enter the Event Name"/>
+                                       helperText="please enter the Event Name"
+                                       value={name}
+                                       onChange={(event) => {
+                                           setName(event.target.value);
+                                       }}
+                            />
                             <div className="flex location">
                                 <Autocomplete
                                     disablePortal
@@ -94,9 +150,8 @@ export default function BasicModal() {
                                         if (!value) {
                                             setCountry(null);
                                             setState(null);
-                                            setCity(null);
+                                            setStreet("");
                                             setStatesInCountry([]);
-                                            setCitiesInState([]);
                                             return;
                                         }
                                         setCountry(value);
@@ -116,32 +171,25 @@ export default function BasicModal() {
                                     onChange={(event, value) => {
                                         if (!value) {
                                             setState(null);
-                                            setCity(null);
-                                            setCitiesInState([]);
+                                            setStreet("");
                                             return;
                                         }
-                                        setState(value);
-                                        let stateID = states.find((state) => state.name === value).id;
-                                        let citiesInState = City.getCitiesOfState(stateID);
-                                        let cityNames = citiesInState.map((city) => city.name);
-                                        setCitiesInState(cityNames);
+                                        setState(value)
                                     }}
-
                                 />
-                                <Autocomplete
-                                    disablePortal
-                                    id="combo-box-demo"
-                                    value={city}
-                                    options={citiesInState}
-                                    sx={{width: 300}}
-                                    renderInput={(params) => <TextField {...params} label="City"/>}
-                                    onChange={(event, value) => {
-                                        if (!value) {
-                                            setCity(null);
-                                            return;
-                                        }
-                                        setCity(value);
-                                    }}
+                                <TextField
+                                    type={"text"}
+                                    label={"Street"}
+                                    value={street}
+                                    placeholder="Enter the Street"
+                                    helperText={"please the street of the event"} onChange={(event, value) => {
+                                    if (!value) {
+                                        setStreet("");
+                                        return
+                                    }
+                                    setStreet(value);
+                                }}
+
                                 />
                             </div>
                             <Autocomplete
@@ -164,6 +212,7 @@ export default function BasicModal() {
                                 id="combo-box-demo"
                                 options={eventCategory ? eventCategoriesMap.get(eventCategory) : []}
                                 sx={{width: 600}}
+                                value={eventSubCategory}
                                 renderInput={(params) => <TextField {...params} label="Event sub-category"/>}
                                 onChange={(event, value) => {
                                     if (!value) {
@@ -182,6 +231,10 @@ export default function BasicModal() {
                                 required={true}
                                 sx={{width: 600}}
                                 helperText="please enter the Event Description"
+                                value={description}
+                                onChange={(event) => {
+                                    setDescription(event.target.value)
+                                }}
                             />
                             <FormControl sx={{minWidth: 600}}>
                                 <InputLabel id="demo-simple-select-helper-label">The Ads plan</InputLabel>
@@ -191,18 +244,17 @@ export default function BasicModal() {
                                     label="ads Plans"
                                     required={true}
                                     value={adsPlan}
-                                    onChange={(event, value) => {
-                                        setAdsPlan(value);
+                                    onChange={(event) => {
+                                            setAdsPlan(event.target.value);
                                     }
+
                                     }
                                 >
-                                    <MenuItem value="free">Free Plan</MenuItem>
-                                    <MenuItem value="regular">
-                                        Regular Plan
-                                    </MenuItem>
-                                    <MenuItem value="premium">
-                                        Premium Plan
-                                    </MenuItem>
+                                    {adsPlansOptions.map((option) => (
+                                        <MenuItem key={option.id} value={option}>
+                                            {option.name}
+                                        </MenuItem>
+                                    ))}
                                 </Select>
                                 <FormHelperText>
                                     Choose your Suitable Ads plan
@@ -211,6 +263,11 @@ export default function BasicModal() {
                             <TextField
                                 id="datetime-local"
                                 label="Event Date"
+                                value={date}
+
+                                onChange={(event) => {
+                                    setDate(event.target.value)
+                                }}
                                 defaultValue={new Date().toISOString().slice(0, 16)}
                                 type="datetime-local"
                                 InputLabelProps={{
@@ -219,8 +276,6 @@ export default function BasicModal() {
                                 required={true}
                                 helperText="please enter the Event Date"
                             />
-
-
                             <Button type="submit" value="Submit" variant="contained">
                                 Submit
                             </Button>

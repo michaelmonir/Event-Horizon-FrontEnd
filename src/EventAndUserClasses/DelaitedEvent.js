@@ -1,10 +1,10 @@
 class DetailedEvent {
-      id;
-      name;
-      description;
-      eventCategory;
-      eventDate;
-      eventAds;
-      eventLocation;
-      organizerHeader;
+      id
+      name
+      description
+      eventCategory
+      eventDate
+      eventAds
+      eventLocation
+      organizerHeader
 }
