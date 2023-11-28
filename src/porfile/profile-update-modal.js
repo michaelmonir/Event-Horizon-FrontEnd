@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import informationApis from "../Apis/UserApis/InformationApis";
-import axios from 'axios'
 import {FaPen} from "react-icons/fa6";
 import {
     FormControl,
@@ -15,8 +14,7 @@ import {
     Typography,
     Modal
 } from "@mui/material";
-import EventApis from "../Apis/EventApis/EventApis";
-import {useState} from "react";
+
 
 const style = {
     position: 'absolute',
@@ -30,11 +28,6 @@ const style = {
     borderRadius: "24px",
     width: "50%",
 };
-
-
-
-
-
 
 
 export default function BasicModal({defaultFirstName, defaultLastName, defaultGender, defaultPaypalAccount}) {
@@ -54,7 +47,6 @@ export default function BasicModal({defaultFirstName, defaultLastName, defaultGe
     const handleClose = () => setOpen(false);
 
 
-
     const handleInformationChange = async (event) => {
         event.preventDefault(); //////  to  handle page refresh
         const newInformation = {
@@ -63,7 +55,6 @@ export default function BasicModal({defaultFirstName, defaultLastName, defaultGe
             "gender": gender,
             "payPalAccount": paypalAccount,
         }
-        const id = 1;
         try {
             alert("enter try ")
             const response = await informationApis.put("updateInformation", newInformation);
@@ -71,7 +62,6 @@ export default function BasicModal({defaultFirstName, defaultLastName, defaultGe
             console.log(response);
             alert("okk")
         } catch (error) {
-
             alert("not Found")
         }
     }
@@ -94,16 +84,16 @@ export default function BasicModal({defaultFirstName, defaultLastName, defaultGe
                         <form className="profile-update-modal-form" onSubmit={handleInformationChange}>
                             <TextField variant={"outlined"} label={"First Name"} defaultValue={defaultFirstName}
 
-                                   value={firstName}
-                                   onChange={(event)=> {
-                                       setFirstName(event.target.value)
-                                   }}
+                                       value={firstName}
+                                       onChange={(event) => {
+                                           setFirstName(event.target.value)
+                                       }}
 
                             />
                             <TextField variant={"outlined"} label={"Last Name"} defaultValue={defaultLastName}
 
                                        value={lastName}
-                                       onChange={(event)=> {
+                                       onChange={(event) => {
                                            setLastName(event.target.value)
                                        }}
 
@@ -111,7 +101,7 @@ export default function BasicModal({defaultFirstName, defaultLastName, defaultGe
                             <TextField variant={"outlined"} label={"Paypal Account"} defaultValue={defaultPaypalAccount}
 
                                        value={paypalAccount}
-                                       onChange={(event)=> {
+                                       onChange={(event) => {
                                            setPaypalAccount(event.target.value)
                                        }}
 

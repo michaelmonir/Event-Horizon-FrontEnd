@@ -1,19 +1,44 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import {useNavigate} from "react-router-dom";
 import './profie.css';
 import {IoHome} from "react-icons/io5";
-import {FaPen} from "react-icons/fa6";
-import { FaTrashAlt } from "react-icons/fa";
 
 import {GiMailbox} from "react-icons/gi";
 import {FaBookmark} from "react-icons/fa";
 import {RiLogoutBoxLine} from "react-icons/ri";
 import BasicModal from "./profile-update-modal";
+import informationApis from "../Apis/UserApis/InformationApis";
 
 
 function Profile(props) {
+    const navigate = useNavigate();
+    const LOCAL_STORAGE_KEY = "token";
+    const LOCAL_STORAGE_KEY_ID = "id";
 
-    const { firstName, lastName, email, gender, paypalAccount, userName, role } = props.profileAttributes;
-
+    const [token, setToken] = useState(JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) ?? []);
+    const [id, setId] = useState(JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_ID)) ?? []);
+    useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(token));
+    }, [token]);
+    useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY_ID, JSON.stringify(id))
+    }, [id]);
+    const [profileAtributes, setProfileAtributes] = React.useState(null);
+    useEffect(() => {
+        try {
+            alert("enter try ")
+            const response = informationApis.get("getInformationViewDto", {
+                params: {
+                    "id": id
+                },
+            });
+            alert(response)
+            console.log(response)
+            alert("okk")
+        } catch (error) {
+            alert("not Found")
+        }
+    });
     return (
         <div className="profile-container">
             <div className="profile-sidebar">
@@ -24,7 +49,10 @@ function Profile(props) {
                 </div>
                 <div className="profile-menu">
                     < div className="website-nav">
-                        <div className="menu-item">
+                        <div className="menu-item" onClick={() => {
+                            navigate("/dashboard")
+                        }
+                        }>
                             <i><IoHome/></i>
                             <span>Home</span>
                         </div>
@@ -42,7 +70,13 @@ function Profile(props) {
                         </div>
                     </div>
 
-                    <div className="menu-item">
+                    <div className="menu-item" onClick={
+                        () => {
+                            localStorage.removeItem("token");
+                            localStorage.removeItem("id");
+                            navigate("/")
+                        }
+                    }>
                         <RiLogoutBoxLine/>
                         <span>Log out</span>
                     </div>
@@ -54,15 +88,16 @@ function Profile(props) {
                         Profile
                     </div>
                     <div className="header-btns">
-                       <BasicModal defaultFirstName={firstName} defaultGender={gender} defaultLastName={lastName} defaultPaypalAccount={paypalAccount}/>
+                        <BasicModal defaultFirstName={firstName} defaultGender={gender} defaultLastName={lastName}
+                                    defaultPaypalAccount={paypalAccount}/>
                     </div>
                 </div>
                 <div className="profile-main-content-body">
                     <div className="profile-info-container"
-                            style={{
-                                borderTopLeftRadius: "35px",
-                                borderTopRightRadius: "35px",
-                            }}
+                         style={{
+                             borderTopLeftRadius: "35px",
+                             borderTopRightRadius: "35px",
+                         }}
                     >
                         <div className="profile-info-item">
                             <div className="profile-info-item-title">UserName:</div>
@@ -118,8 +153,6 @@ function Profile(props) {
                     </div>
                 </div>
             </div>
-
-
         </div>
     );
 }

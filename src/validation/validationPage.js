@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import {useNavigate} from "react-router-dom";
 import validationPage from './validationPage.css';
 import ProxyApi from "../Apis/ProxyApis/ProxyApis";
 function ValidationPage(props) {
@@ -33,6 +34,8 @@ function ValidationPage(props) {
     const [fourth,setFourth] = useState(0);
     const [fifth,setFifth] = useState(0);
     const [sixth,setSixth] = useState(0);
+    const navigate = useNavigate();
+
     const onSubmitHandler =  async () => {
 
         const  verifyRequest={
@@ -44,6 +47,7 @@ function ValidationPage(props) {
             console.log(verifyRequest)
             const response = await ProxyApi.post("verifyMail", verifyRequest)
             console.log(response)
+            navigate("/dashboard")
             alert("okk")
         } catch (error) {
             alert("not okk")

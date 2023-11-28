@@ -1,4 +1,4 @@
-import {useState,useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import './login.css';
 import Button from '@mui/material/Button';
 import {FaGoogle} from "react-icons/fa";
@@ -13,15 +13,26 @@ import MenuItem from '@mui/material/MenuItem';
 import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import {useNavigate} from "react-router-dom";
+
 
 function Login() {
+    const navigate = useNavigate();
+
     const LOCAL_STORAGE_KEY = "token";
+    const LOCAL_STORAGE_KEY_ID = "id";
 
     const [token, setToken] = useState(JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) ?? []);
+    const [id, setId] = useState(JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_ID)) ?? []);
+
 
     useEffect(() => {
         localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(token));
     }, [token]);
+    useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY_ID, JSON.stringify(id))
+    }, [id]);
+
 
     const [isLoginActive, setIsLoginActive] = useState(false);
     const loginFormik = useFormik({
@@ -40,11 +51,14 @@ function Login() {
             try {
                 const response = await ProxyApi.post("basicSignIn", authenticationRequest);
                 setToken(response.data.token);
+                setId(response.data.id);
                 console.log(response)
+                navigate("/dashboard");
                 alert("okk")
+
             } catch (error) {
                 actions.resetForm();
-                alert("not okk")
+                alert(error.response?.data?.message);
             }
         }
     });
@@ -77,10 +91,13 @@ function Login() {
             try {
                 const response = await ProxyApi.post("basicSignUp", informationDto);
                 setToken(response.data.token);
+                setId(response.data.id);
                 console.log(response)
+                navigate("/validation");
                 alert("okk")
             } catch (error) {
-                alert("not okk")
+                actions.resetForm();
+                alert(error.response?.data?.message);
             }
         },
     });
@@ -96,7 +113,7 @@ function Login() {
                             <a href="#" className="social"><FaGoogle className="social-icon"/></a>
                         </div>
                         <span>or use your Gmail to register</span>
-                        <FormControl  sx={{minWidth: 300}}>
+                        <FormControl sx={{minWidth: 300}}>
                             <InputLabel id="demo-simple-select-helper-label">Role</InputLabel>
                             <Select
                                 required={true}
@@ -106,17 +123,17 @@ function Login() {
                                 name={"role"}
                                 label="Role"
                             >
-                                <MenuItem value= "ROLE_CLIENT">
+                                <MenuItem value="ROLE_CLIENT">
                                     CLIENT
                                 </MenuItem>
-                                <MenuItem value= "ROLE_ORGANIZER">
+                                <MenuItem value="ROLE_ORGANIZER">
                                     ORGANIZER
                                 </MenuItem>
-                                <MenuItem value= "ROLE_SPONSOR">
+                                <MenuItem value="ROLE_SPONSOR">
                                     SPONSOR
                                 </MenuItem>
                             </Select>
-                            </FormControl>
+                        </FormControl>
                         <input name={"userName"}
                                onChange={signupFormik.handleChange}
                                onBlur={signupFormik.handleBlur}
@@ -202,7 +219,8 @@ function Login() {
                         {loginFormik.touched.password && loginFormik.errors.password ? (
                             <div className=" text-error">{loginFormik.errors.password}</div>) : null}
                         <a href="#">Forgot your password?</a>
-                        <Button variant="contained" type="submit">Sign In</Button>
+                        <Button variant="contained" type="submit">
+                            >Sign In</Button>
                     </form>
                 </div>
                 <div className="overlay-container">
