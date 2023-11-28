@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import informationApis from "../Apis/UserApis/InformationApis";
+import axios from 'axios'
 import {FaPen} from "react-icons/fa6";
 import {
     FormControl,
@@ -13,6 +15,8 @@ import {
     Typography,
     Modal
 } from "@mui/material";
+import EventApis from "../Apis/EventApis/EventApis";
+import {useState} from "react";
 
 const style = {
     position: 'absolute',
@@ -26,7 +30,21 @@ const style = {
     borderRadius: "24px",
     width: "50%",
 };
-export default function BasicModal({firstName, lastName, gender, email, paypalAccount}) {
+
+
+
+
+
+
+
+export default function BasicModal({defaultFirstName, defaultLastName, defaultGender, defaultPaypalAccount}) {
+
+    const [firstName, setFirstName] = React.useState(defaultFirstName);
+    const [lastName, setLastName] = React.useState(defaultLastName);
+    const [gender, setGender] = React.useState(defaultGender);
+    const [paypalAccount, setPaypalAccount] = React.useState(defaultPaypalAccount);
+
+
     const [open, setOpen] = React.useState(false);
 
     const handleOpen = () => {
@@ -34,6 +52,30 @@ export default function BasicModal({firstName, lastName, gender, email, paypalAc
     }
 
     const handleClose = () => setOpen(false);
+
+
+
+    const handleInformationChange = async (event) => {
+        event.preventDefault(); //////  to  handle page refresh
+        const newInformation = {
+            "firstName": firstName,
+            "lastName": lastName,
+            "gender": gender,
+            "payPalAccount": paypalAccount,
+        }
+        const id = 1;
+        try {
+            alert("enter try ")
+            const response = await informationApis.put("updateInformation", newInformation);
+            alert(response)
+            console.log(response);
+            alert("okk")
+        } catch (error) {
+
+            alert("not Found")
+        }
+    }
+
 
     return (
         <div>
@@ -49,27 +91,48 @@ export default function BasicModal({firstName, lastName, gender, email, paypalAc
                         Update Profile Info
                     </Typography>
                     <Typography id="modal-modal-description" sx={{mt: 1}}>
-                        <form className="profile-update-modal-form" action="#">
-                            <TextField variant={"outlined"} label={"First Name"} defaultValue={firstName}/>
-                            <TextField variant={"outlined"} label={"Last Name"} defaultValue={lastName}/>
-                            <TextField variant={"outlined"} label={"email"} defaultValue={email}/>
-                            <TextField variant={"outlined"} label={"Paypal Account"} defaultValue={paypalAccount}/>
+                        <form className="profile-update-modal-form" onSubmit={handleInformationChange}>
+                            <TextField variant={"outlined"} label={"First Name"} defaultValue={defaultFirstName}
+
+                                   value={firstName}
+                                   onChange={(event)=> {
+                                       setFirstName(event.target.value)
+                                   }}
+
+                            />
+                            <TextField variant={"outlined"} label={"Last Name"} defaultValue={defaultLastName}
+
+                                       value={lastName}
+                                       onChange={(event)=> {
+                                           setLastName(event.target.value)
+                                       }}
+
+                            />
+                            <TextField variant={"outlined"} label={"Paypal Account"} defaultValue={defaultPaypalAccount}
+
+                                       value={paypalAccount}
+                                       onChange={(event)=> {
+                                           setPaypalAccount(event.target.value)
+                                       }}
+
+
+                            />
                             <FormControl sx={{maxWidth: 200}}>
                                 <InputLabel id="demo-simple-select-helper-label">gender</InputLabel>
                                 <Select
                                     labelId="demo-simple-select-helper-label"
                                     id="demo-simple-select-helper"
                                     label="gender"
-                                    value={gender}
+                                    value={defaultGender}
                                     onChange={(event) => {
-                                        gender = event.target.value
-                                        console.log(gender)
+                                        defaultGender = event.target.value
+                                        console.log(defaultGender)
                                     }
                                     }
                                 >
-                                    <MenuItem value={gender}>{gender}</MenuItem>
+                                    <MenuItem value={defaultGender}>{defaultGender}</MenuItem>
                                     <MenuItem
-                                        value={gender === "Male" ? "Female" : "Male"}>{gender === "Male" ? "Female" : "Male"} </MenuItem>
+                                        value={defaultGender === "Male" ? "Female" : "Male"}>{defaultGender === "Male" ? "Female" : "Male"} </MenuItem>
                                 </Select>
                                 <FormHelperText>
                                     select Gender of your choice

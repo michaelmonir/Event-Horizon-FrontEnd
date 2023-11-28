@@ -98,6 +98,7 @@ export default function BasicModal() {
         const organizerid = 1
 
         try {
+            alert("enter try")
             const response = await EventApis.post("/createEvent/1", event);
             alert(response)
             alert("okk")

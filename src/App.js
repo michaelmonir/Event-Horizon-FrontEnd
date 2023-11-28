@@ -6,9 +6,22 @@ import Dashboard from './dashboard/dashboard.js';
 import BasicModal from "./dashboard/event-modal";
 
 function App() {
+
+
+    const profileAttributes = {
+        firstName: "jooooooon",
+        lastName: "Doe",
+        email: "Doe@gmail.com",
+        gender: "male",
+        paypalAccount: "paypal@gmail.com",
+        userName : "said",
+        role : "Client"
+    };
+
+
     return (
         <div className="App">
-            <BasicModal />
+            <Profile profileAttributes={profileAttributes} />
             {/*<Dashboard />*/}
             {/*<Login/>*/}
         </div>
