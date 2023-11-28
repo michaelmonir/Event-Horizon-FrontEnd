@@ -6,6 +6,20 @@ import Dashboard from './dashboard/dashboard.js';
 import BasicModal from "./dashboard/event-modal";
 import ValidationPage from "./validation/validationPage";
 function App() {
+
+
+    const profileAttributes = {
+        firstName: "jooooooon",
+        lastName: "Doe",
+        email: "Doe@gmail.com",
+        gender: "male",
+        paypalAccount: "paypal@gmail.com",
+        userName : "said",
+        role : "Client"
+    };
+
+
+
     const LOCAL_STORAGE_KEY = "token";
 
     const [token, setToken] = useState(JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) ?? []);
@@ -19,6 +33,7 @@ function App() {
             {/*<BasicModal />*/}
             {/*<Dashboard />*/}
             <Login/>
+            
         </div>
     );
 }
