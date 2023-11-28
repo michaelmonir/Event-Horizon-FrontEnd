@@ -1,44 +1,87 @@
-import {useState} from 'react';
+import {useState,useEffect} from 'react';
 import './login.css';
 import Button from '@mui/material/Button';
 import {FaGoogle} from "react-icons/fa";
-
 import classNames from "classnames";
 import {loginValidation} from "./validations/loginValidation";
 import {signupValidation} from "./validations/signupValidation";
 import {useFormik} from "formik";
-
+import ProxyApi from "../Apis/ProxyApis/ProxyApis";
+import {InputLabel} from "@mui/material";
+import * as React from "react";
+import MenuItem from '@mui/material/MenuItem';
+import FormHelperText from '@mui/material/FormHelperText';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 function Login() {
+    const LOCAL_STORAGE_KEY = "token";
+
+    const [token, setToken] = useState(JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) ?? []);
+
+    useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(token));
+    }, [token]);
 
     const [isLoginActive, setIsLoginActive] = useState(false);
-
     const loginFormik = useFormik({
         initialValues: {
             email: "",
             password: ""
         },
         validationSchema: loginValidation,
-        onSubmit: (values, actions) => {
-            console.log("loginFormik submit");
+        onSubmit: async (values, actions) => {
             console.log(values);
             console.log(actions);
-            actions.resetForm();
+            const authenticationRequest = {
+                "email": values.email,
+                "password": values.password
+            }
+            try {
+                const response = await ProxyApi.post("basicSignIn", authenticationRequest);
+                setToken(response.data.token);
+                console.log(response)
+                alert("okk")
+            } catch (error) {
+                actions.resetForm();
+                alert("not okk")
+            }
         }
     });
 
     const signupFormik = useFormik({
         initialValues: {
+            userName: "",
             firstName: "",
             lastName: "",
             email: "",
             password: "",
-            confirmPassword: ""
+            confirmPassword: "",
+            role: "ROLE_CLIENT"
         },
         validationSchema: signupValidation,
-        onSubmit: (values, actions) => {
-            console.log(values);
-            console.log(actions);
+        onSubmit: async (values, actions) => {
+            const informationDto = {
+                "id": 0,
+                "userName": values.userName,
+                "firstName": values.firstName,
+                "lastName": values.lastName,
+                "email": values.email,
+                "password": values.password,
+                "role": values.role,
+                "gender": "MALE",
+                "payPalAccount": "",
+                "signInWithEmail": 0
+            }
+            console.log(informationDto);
+            try {
+                const response = await ProxyApi.post("basicSignUp", informationDto);
+                setToken(response.data.token);
+                console.log(response)
+                alert("okk")
+            } catch (error) {
+                alert("not okk")
+            }
         },
     });
 
@@ -53,7 +96,36 @@ function Login() {
                             <a href="#" className="social"><FaGoogle className="social-icon"/></a>
                         </div>
                         <span>or use your Gmail to register</span>
-
+                        <FormControl  sx={{minWidth: 300}}>
+                            <InputLabel id="demo-simple-select-helper-label">Role</InputLabel>
+                            <Select
+                                required={true}
+                                value={signupFormik.values.role}
+                                onChange={signupFormik.handleChange}
+                                onBlur={signupFormik.handleBlur}
+                                name={"role"}
+                                label="Role"
+                            >
+                                <MenuItem value= "ROLE_CLIENT">
+                                    CLIENT
+                                </MenuItem>
+                                <MenuItem value= "ROLE_ORGANIZER">
+                                    ORGANIZER
+                                </MenuItem>
+                                <MenuItem value= "ROLE_SPONSOR">
+                                    SPONSOR
+                                </MenuItem>
+                            </Select>
+                            </FormControl>
+                        <input name={"userName"}
+                               onChange={signupFormik.handleChange}
+                               onBlur={signupFormik.handleBlur}
+                               className={
+                                   signupFormik.touched.userName && signupFormik.errors.userName ? "Input error" : "Input"
+                               }
+                               type="text" placeholder="User Name "/>
+                        {signupFormik.touched.userName && signupFormik.errors.userName ? (
+                            <div className=" text-error">{signupFormik.errors.userName}</div>) : null}
                         <input name={"firstName"}
                                onChange={signupFormik.handleChange}
                                onBlur={signupFormik.handleBlur}
@@ -97,6 +169,7 @@ function Login() {
                                className={
                                    signupFormik.touched.confirmPassword && signupFormik.errors.confirmPassword ? "Input error" : "Input"
                                } type="password" placeholder="Confirm Password"/>
+
                         {signupFormik.touched.confirmPassword && signupFormik.errors.confirmPassword ? (
                             <div className=" text-error">{signupFormik.errors.confirmPassword}</div>) : null}
                         <Button variant="contained" type="submit">Sign up</Button>
