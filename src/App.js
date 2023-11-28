@@ -1,16 +1,24 @@
-import React from 'react';
+import React ,{useState,useEffect} from 'react';
 import './App.css';
 import Login from './loginAndSignup/login.js';
 import Profile from "./porfile/profile";
 import Dashboard from './dashboard/dashboard.js';
 import BasicModal from "./dashboard/event-modal";
-
+import ValidationPage from "./validation/validationPage";
 function App() {
+    const LOCAL_STORAGE_KEY = "token";
+
+    const [token, setToken] = useState(JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) ?? []);
+
+    useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(token));
+    }, [token]);
+
     return (
         <div className="App">
-            <BasicModal />
+            {/*<BasicModal />*/}
             {/*<Dashboard />*/}
-            {/*<Login/>*/}
+            <Login/>
         </div>
     );
 }
