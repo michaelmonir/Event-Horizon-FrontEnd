@@ -10,7 +10,10 @@ import {RiLogoutBoxLine} from "react-icons/ri";
 import BasicModal from "./profile-update-modal";
 
 
-function Profile() {
+function Profile(props) {
+
+    const { firstName, lastName, email, gender, paypalAccount, userName, role } = props.profileAttributes;
+
     return (
         <div className="profile-container">
             <div className="profile-sidebar">
@@ -51,7 +54,7 @@ function Profile() {
                         Profile
                     </div>
                     <div className="header-btns">
-                       <BasicModal email="sofhabeb@gmail.com" firstName={"Mohamed"} gender={"Male"} lastName={"Ryad"} paypalAccount={"paypal.me/ryad"}/>
+                       <BasicModal defaultFirstName={firstName} defaultGender={gender} defaultLastName={lastName} defaultPaypalAccount={paypalAccount}/>
                     </div>
                 </div>
                 <div className="profile-main-content-body">
@@ -63,28 +66,28 @@ function Profile() {
                     >
                         <div className="profile-info-item">
                             <div className="profile-info-item-title">UserName:</div>
-                            <div className="profile-info-item-value">mohamedryad</div>
+                            <div className="profile-info-item-value">{userName}</div>
                         </div>
 
                     </div>
                     <div className="profile-info-container">
                         <div className="profile-info-item">
                             <div className="profile-info-item-title">first name:</div>
-                            <div className="profile-info-item-value">Mohamed</div>
+                            <div className="profile-info-item-value">{firstName}</div>
                         </div>
 
                     </div>
                     <div className="profile-info-container">
                         <div className="profile-info-item">
                             <div className="profile-info-item-title">last name:</div>
-                            <div className="profile-info-item-value">Ryad</div>
+                            <div className="profile-info-item-value">{lastName}</div>
                         </div>
 
                     </div>
                     <div className="profile-info-container">
                         <div className="profile-info-item">
                             <div className="profile-info-item-title">Role:</div>
-                            <div className="profile-info-item-value">Admin</div>
+                            <div className="profile-info-item-value">{role}</div>
                         </div>
 
                     </div>
@@ -92,16 +95,14 @@ function Profile() {
                         <div className="profile-info-item">
                             <div className="profile-info-item-title">Email:</div>
                             <div className="profile-info-item-value">
-                                <a href="mailto:sofahabeb@gmail.com ">
-                                    You can contact me by email
-                                </a>
+                                {email}
                             </div>
                         </div>
                     </div>
                     <div className="profile-info-container">
                         <div className="profile-info-item">
                             <div className="profile-info-item-title">gender:</div>
-                            <div className="profile-info-item-value">Male</div>
+                            <div className="profile-info-item-value">{gender}</div>
                         </div>
                     </div>
                     <div className="profile-info-container"
@@ -112,14 +113,10 @@ function Profile() {
                     >
                         <div className="profile-info-item">
                             <div className="profile-info-item-title">paypal account:</div>
-                            <div className="profile-info-item-value"> paypal.me/ryad</div>
+                            <div className="profile-info-item-value"> {paypalAccount}</div>
                         </div>
                     </div>
-
-
                 </div>
-
-
             </div>
 
 

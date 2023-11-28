@@ -1,0 +1,4 @@
+class OrganizerHeader{
+    id;
+    name;
+}

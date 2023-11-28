@@ -1,0 +1,4 @@
+class AuthenticationRequest{
+    email;
+    password;
+}

@@ -1,0 +1,3 @@
+class SponsorDTO {
+    id;
+}
