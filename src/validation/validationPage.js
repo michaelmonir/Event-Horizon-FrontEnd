@@ -53,47 +53,49 @@ function ValidationPage(props) {
             alert("not okk")
         }
     }
-        return (
-        <div className="container">
-            <h2>Verify Account</h2>
-            <div className="code">
-                <input type="number" value={first}
-                        onChange={(event)=>{
-                            setFirst(event.target.value);
-                        }
-                } className="codeInput" placeholder="0" min="0" max="9" required/>
-                <input type="number" value={second}
-                       onChange={(event)=>{
-                           setSecond( event.target.value);
-                       }
-                       } className="codeInput" placeholder="0" min="0" max="9" required/>
-                <input type="number" value={third}
-                       onChange={(event)=>{
-                           setThird( event.target.value);
-                       }
-                       } className="codeInput" placeholder="0" min="0" max="9" required/>
-                <h2>-</h2>
-                <input type="number" value={fourth}
-                       onChange={(event)=>{
-                           setFourth( event.target.value);
-                       }
-                       }className="codeInput" placeholder="0" min="0" max="9" required/>
-                <input type="number" value={fifth}
-                       onChange={(event)=>{
-                           setFifth( event.target.value);
-                       }
-                       } className="codeInput" placeholder="0" min="0" max="9" required/>
-                <input type="number" value={sixth}
-                       onChange={(event)=>{
-                           setSixth( event.target.value);
-                       }
-                       }className="codeInput" placeholder="0" min="0" max="9" required/>
-            </div>
+    return (
+        <div className="Body">
+            <div className="container">
+                <h2>Verify Account</h2>
+                <div className="code">
+                    <input type="number" value={first}
+                           onChange={(event)=>{
+                               setFirst(event.target.value);
+                           }
+                           } className="codeInput" placeholder="0" min="0" max="9" required/>
+                    <input type="number" value={second}
+                           onChange={(event)=>{
+                               setSecond( event.target.value);
+                           }
+                           } className="codeInput" placeholder="0" min="0" max="9" required/>
+                    <input type="number" value={third}
+                           onChange={(event)=>{
+                               setThird( event.target.value);
+                           }
+                           } className="codeInput" placeholder="0" min="0" max="9" required/>
+                    <h2>-</h2>
+                    <input type="number" value={fourth}
+                           onChange={(event)=>{
+                               setFourth( event.target.value);
+                           }
+                           }className="codeInput" placeholder="0" min="0" max="9" required/>
+                    <input type="number" value={fifth}
+                           onChange={(event)=>{
+                               setFifth( event.target.value);
+                           }
+                           } className="codeInput" placeholder="0" min="0" max="9" required/>
+                    <input type="number" value={sixth}
+                           onChange={(event)=>{
+                               setSixth( event.target.value);
+                           }
+                           }className="codeInput" placeholder="0" min="0" max="9" required/>
+                </div>
 
-            <div>
-                <button type="button" className="btn btn-primary" onClick={onSubmitHandler}>
-                    Verify
-                </button>
+                <div>
+                    <button type="button" className="btn btn-primary" onClick={onSubmitHandler}>
+                        Verify
+                    </button>
+                </div>
             </div>
         </div>
     );

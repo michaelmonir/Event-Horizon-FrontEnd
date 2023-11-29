@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import "./dashboard.css";
 import {FaUnlock, FaLock, FaSearch} from "react-icons/fa";
 import {FiMenu} from "react-icons/fi";
@@ -7,6 +7,7 @@ import {FaShuttleSpace} from "react-icons/fa6";
 import TablePagination from '@mui/material/TablePagination';
 import MultiActionAreaCard from "./eventCard";
 import BasicModal from "./event-modal";
+import EventApis from "../Apis/EventApis/EventApis";
 
 
 function Dashboard() {
@@ -33,15 +34,35 @@ function Dashboard() {
         }
     }
 
-    const [page, setPage] = React.useState(2);
+    const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
-    const handleChangePage = (event, newPage) => {
+    const [events, setEvents] = React.useState([]);
+    useEffect(() => {
+        modifyPages();// Access the updated value here
+    }, [page]);
+    useEffect(() => {
+        modifyPages();// Access the updated value here
+    }, [rowsPerPage]);
+    const modifyPages= async ()=>{
+
+        try {
+            const response = await EventApis.get("dashboard/"+page+"/"+rowsPerPage);
+            setEvents(response.data);
+        }
+        catch(error)
+        {
+            alert("not okk")
+        }
+    }
+    const handleChangePage = async(event, newPage) =>  {
         setPage(newPage);
+        modifyPages();
     };
 
     const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(parseInt(event.target.value, 10));
+        setRowsPerPage(parseInt(event.target.value));
         setPage(0);
+        modifyPages();
     };
 
 
@@ -118,8 +139,8 @@ function Dashboard() {
             </nav>
             <div className="content-container center">
                 <div className="content-body flex">
-                    {Array(50).fill(0).map((_, i) => <div className="card-container center">
-                        <MultiActionAreaCard key={i}/>
+                    {events.map((e, i) => <div className="card-container center">
+                        <MultiActionAreaCard key={i} eventHeader={e}/>
                     </div>)
                     }
                 </div>

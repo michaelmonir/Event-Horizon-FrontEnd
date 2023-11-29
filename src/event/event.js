@@ -1,26 +1,51 @@
-import React from "react";
+import React, {useEffect} from "react";
 import "./event.css";
 import Button from "@mui/material/Button";
 import {FaPen} from "react-icons/fa6";
 import "../dashboard/dashboard.css";
 import UpdateModal from "./event-update-modal";
+import informationApis from "../Apis/UserApis/InformationApis";
+import EventApis from "../Apis/EventApis/EventApis";
 
 function Event(props) {
-    const {
-        id,
-        name,
-        description,
-        eventCategory,
-        eventDate,
-        eventAds,
-        eventLocation,
-        organizerHeader
-    } = props.event;
-    const {
-        Country,
-        City,
-        Street,
-    } = eventLocation;
+
+    const [attributes, setAttributes] = React.useState({
+            "name":"",
+            "description":"",
+            "eventCategory":"",
+            "eventDate":"",
+            "eventAds":"",
+            "eventLocation":{
+                "country":"",
+                "city":"",
+                "address":""
+            },
+            "organizerHeader":{
+                "id":0,
+                "name":""
+            }
+        });
+
+    const id = props.event;
+
+    const f = async() => {
+        // try {
+        //     // alert("enter try ")
+        //     const response = await EventApis.get("getInformationViewDto", {
+        //         params: {
+        //             "id": id
+        //         },
+        //     });
+        //     setProfileAttributtes(response.data)
+        // } catch (error) {
+        //     alert("not Found")
+        // }
+    }
+
+    useEffect(() => {
+        f()
+    }, []);
+
     return <div className="event">
         <div className="event-header">
             <div className="event-header-title">
@@ -38,7 +63,7 @@ function Event(props) {
                 <div className="event-location">
                     <span>Location: </span>
                     <span>
-                        {Country}, {City}, {Street}
+                        {country}, {city}, {address}
                     </span>
                 </div>
                 <div className="event-category">

@@ -77,12 +77,13 @@ export default function BasicModal() {
     const [eventSubCategory, setEventSubCategory] = React.useState("");
     const [country, setCountry] = React.useState("");
     const [state, setState] = React.useState("");
-    const [street, setStreet] = React.useState("");
+    const [address, setAddress] = React.useState("");
     const [statesInCountry, setStatesInCountry] = React.useState([]);
     const [adsPlan, setAdsPlan] = React.useState("");
     const [date, setDate] = React.useState("");
 
-    const handleEventCreation = async() => {
+    const handleEventCreation = async(e) => {
+        e.preventDefault();
         const event = {
             "name": name,
             "description": description,
@@ -92,14 +93,31 @@ export default function BasicModal() {
             "eventLocation": {
                 "country": country,
                 "city": state,
-                "street": street
+                "address": address
             }
         }
-        const organizerid = 1
+        const LOCAL_STORAGE_KEY = "token";
+        const LOCAL_STORAGE_KEY_ID = "id";
+        const organizerid = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_ID))
 
         try {
-            alert("enter try")
-            const response = await EventApis.post("/createEvent/1", event);
+            alert(JSON.stringify(event))
+            // const response = await EventApis.post("createEvent/1", event);
+            // console.log(localStorage.getItem(LOCAL_STORAGE_KEY))
+            // console.log(organizerid)
+            const s = "Bearer " + JSON.stringify(localStorage.getItem(LOCAL_STORAGE_KEY));
+            // console.log(s);
+
+            const v = `Bearer eyJhbGciOiJIUzI1NiJ9.eyJ2ZXJpZnlDb2RlIjoiNDU3NTUxIiwic3ViIjoibWljaGFhZWwubW9uaXIxMTlAZ21haWwuY29tIiwiaWF0IjoxNzAxMjIzNzgzLCJleHAiOjEwMDE3MDEyMjM3ODN9.nXT2ONm2cXz1ONYCuJRIpv7UY5PjCBy7Jle1nyqFh6g`
+            console.log(v)
+
+            const response = await EventApis.post("createEvent/"+JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_ID)), event, {
+                headers:{
+                    // "Authorization": `Bearer ${localStorage.getItem(LOCAL_STORAGE_KEY)}`
+                    // "Authorization": `Bearer eyJhbGciOiJIUzI1NiJ9.eyJ2ZXJpZnlDb2RlIjoiNDU3NTUxIiwic3ViIjoibWljaGFhZWwubW9uaXIxMTlAZ21haWwuY29tIiwiaWF0IjoxNzAxMjIzNzgzLCJleHAiOjEwMDE3MDEyMjM3ODN9.nXT2ONm2cXz1ONYCuJRIpv7UY5PjCBy7Jle1nyqFh6g`
+                    "Authorization": v
+                }
+            });
             alert(response)
             alert("okk")
         }
@@ -151,7 +169,7 @@ export default function BasicModal() {
                                         if (!value) {
                                             setCountry(null);
                                             setState(null);
-                                            setStreet("");
+                                            setAddress("");
                                             setStatesInCountry([]);
                                             return;
                                         }
@@ -172,7 +190,7 @@ export default function BasicModal() {
                                     onChange={(event, value) => {
                                         if (!value) {
                                             setState(null);
-                                            setStreet("");
+                                            setAddress("");
                                             return;
                                         }
                                         setState(value)
@@ -180,16 +198,20 @@ export default function BasicModal() {
                                 />
                                 <TextField
                                     type={"text"}
-                                    label={"Street"}
-                                    value={street}
-                                    placeholder="Enter the Street"
-                                    helperText={"please the street of the event"} onChange={(event, value) => {
-                                    if (!value) {
-                                        setStreet("");
-                                        return
-                                    }
-                                    setStreet(value);
-                                }}
+                                    label={"Address"}
+                                    value={address}
+                                    placeholder="Enter the Address"
+                                    helperText={"please the address of the event"}
+
+                                    onChange={(event) => {
+                                        if (!event.target.value) {
+                                            setAddress("");
+                                            return
+                                        }
+                                        setAddress(event.target.value);
+                                        // console.log(event.target.value)
+                                        // console.log(address)
+                                    }}
 
                                 />
                             </div>
@@ -246,7 +268,7 @@ export default function BasicModal() {
                                     required={true}
                                     value={adsPlan}
                                     onChange={(event) => {
-                                            setAdsPlan(event.target.value);
+                                        setAdsPlan(event.target.value);
                                     }
 
                                     }

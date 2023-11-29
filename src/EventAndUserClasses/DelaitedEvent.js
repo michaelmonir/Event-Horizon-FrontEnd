@@ -6,5 +6,5 @@ class DetailedEvent {
       eventDate
       eventAds
       eventLocation
-      organizerHeader
+      eventOrganizer
 }

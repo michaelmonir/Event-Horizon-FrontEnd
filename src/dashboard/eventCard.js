@@ -27,7 +27,7 @@ function MultiActionAreaCard(props) {
                                 event: {eventHeader.eventCategory}
                             </div>
                             <div className="location">
-                                Location:{eventHeader.eventLocation}
+                                Location: {eventHeader.eventLocation.country}, {eventHeader.eventLocation.city}, {eventHeader.eventLocation.address}
                             </div>
                         </div>
                     </Typography>
@@ -39,7 +39,7 @@ function MultiActionAreaCard(props) {
                         see more
                     </Button>
                     <div className="Organizer-name">
-                        made by: {eventHeader.organizerHeader}
+                        made by: {eventHeader.eventOrganizer.name}
                     </div>
                 </div>
             </CardActions>

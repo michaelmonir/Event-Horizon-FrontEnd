@@ -23,23 +23,32 @@ function Profile(props) {
     useEffect(() => {
         localStorage.setItem(LOCAL_STORAGE_KEY_ID, JSON.stringify(id))
     }, [id]);
-    const [profileAttributtes, setProfileAttributtes] = React.useState([]);
-    useEffect(() => {
+    const [profileAttributtes, setProfileAttributtes] = React.useState({
+        "firstName":"",
+        "lastName":"",
+        "paypalAccount":"",
+        "userName":"",
+        "role":"",
+        "gender":""
+    });
+
+    const f = async() => {
         try {
-            alert("enter try ")
-            const response = informationApis.get("getInformationViewDto", {
+            // alert("enter try ")
+            const response = await informationApis.get("getInformationViewDto", {
                 params: {
                     "id": id
                 },
             });
-            alert(response)
             setProfileAttributtes(response.data)
-            console.log(response)
-            alert("okk")
         } catch (error) {
             alert("not Found")
         }
-    });
+    }
+
+    useEffect(() => {
+        f()
+    }, []);
     return (
         <div className="profile-container">
             <div className="profile-sidebar">
