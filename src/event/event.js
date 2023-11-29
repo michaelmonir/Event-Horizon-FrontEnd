@@ -3,9 +3,13 @@ import "./event.css";
 import "../dashboard/dashboard.css";
 import EventApis from "../Apis/EventApis/EventApis";
 import { useLocation } from 'react-router-dom';
+import Dashboard from "../dashboard/dashboard";
+import {useNavigate} from "react-router-dom";
+import Button from "@mui/material/Button";
 
 function Event() {
 
+    const navigate = useNavigate();
     const [attributes, setAttributes] = React.useState({
             "name":"",
             "description":"",
@@ -49,6 +53,15 @@ function Event() {
             {/*<div className="event-header-content">*/}
             {/*    <UpdateModal/>*/}
             {/*</div>*/}
+
+            <div className="event-header-content">
+                <Button variant={"contained"} onClick={() => {
+                        navigate('/dashboard')
+                    }}
+                >
+                    Dashboard
+                </Button>
+            </div>
         </div>
         <div className="event-body">
             <div className="event-body-title">
