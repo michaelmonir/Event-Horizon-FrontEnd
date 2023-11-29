@@ -66,8 +66,8 @@ function Profile(props) {
             <div className="profile-sidebar">
                 <div className="profile-header">
                     <div className="profile-pic"></div>
-                    <div className="profile-name">Mohamed Ryad</div>
-                    <div className="profile-desc">Admin</div>
+                    <div className="profile-name"> {profileAttributtes.firstName + " " + profileAttributtes.lastName} </div>
+                    <div className="profile-desc"> {profileAttributtes.role} </div>
                 </div>
                 <div className="profile-menu">
                     < div className="website-nav">
