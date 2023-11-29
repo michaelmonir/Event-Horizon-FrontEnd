@@ -48,7 +48,7 @@ export default function BasicModal({defaultFirstName, defaultLastName, defaultGe
 
     const LOCAL_STORAGE_KEY_ID = "id";
     const handleInformationChange = async (event) => {
-        event.preventDefault(); //////  to  handle page refresh
+        // event.preventDefault(); //////  to  handle page refresh
         const newInformation = {
             "id":JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_ID)),
             "firstName": firstName,
@@ -57,11 +57,7 @@ export default function BasicModal({defaultFirstName, defaultLastName, defaultGe
             "payPalAccount": paypalAccount,
         }
         try {
-            alert("enter try ")
             const response = await informationApis.put("updateInformation", newInformation);
-            alert(response)
-            console.log(response);
-            alert("okk")
         } catch (error) {
             alert("not Found")
         }

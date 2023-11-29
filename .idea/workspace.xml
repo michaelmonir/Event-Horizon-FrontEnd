@@ -6,9 +6,18 @@
   <component name="ChangeListManager">
     <list default="true" id="4fa0d62e-70eb-4943-a749-0ef5a161ece5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/loginAndSignup/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/loginAndSignup/login.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/porfile/profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/porfile/profile.js" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/src/dashboard/dashboard.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/dashboard/dashboard.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dashboard/event-modal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/dashboard/event-modal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/porfile/profie.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/porfile/profie.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/porfile/profile-update-modal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/porfile/profile-update-modal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/porfile/profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/porfile/profile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/validation/validationPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/validation/validationPage.css" afterDir="false" />
+>>>>>>> b61777ee22a83c9463fad69d85569cb46e308cbc
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,6 +117,7 @@
       <workItem from="1700990991146" duration="22608000" />
       <workItem from="1701253270536" duration="5720000" />
       <workItem from="1701261188596" duration="74000" />
+      <workItem from="1701271055361" duration="3799000" />
     </task>
     <servers />
   </component>

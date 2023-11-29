@@ -81,7 +81,7 @@ export default function BasicModal() {
     const [address, setAddress] = React.useState("");
     const [statesInCountry, setStatesInCountry] = React.useState([]);
     const [adsPlan, setAdsPlan] = React.useState("");
-    const [date, setDate] = React.useState("");
+    const [date, setDate] = React.useState(new Date().toISOString().slice(0, 16));
 
     const handleEventCreation = async(e) => {
         e.preventDefault();
@@ -101,7 +101,7 @@ export default function BasicModal() {
         const LOCAL_STORAGE_KEY_ID = "id";
         const organizerid = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_ID))
         try {
-            alert(JSON.stringify(event))
+
             // const response = await EventApis.post("createEvent/1", event);
             // console.log(localStorage.getItem(LOCAL_STORAGE_KEY))
             // console.log(organizerid)
@@ -168,12 +168,13 @@ export default function BasicModal() {
                             />
                             <div className="flex location">
                                 <Autocomplete
+                                    required={true}
                                     disablePortal
                                     value={country}
                                     id="combo-box-demo"
                                     options={countryNames}
                                     sx={{width: 289}}
-                                    renderInput={(params) => <TextField {...params} label="Country"/>}
+                                    renderInput={(params) => <TextField required={true}{...params} label="Country"/>}
                                     onChange={(event, value) => {
                                         if (!value) {
                                             setCountry(null);
@@ -191,11 +192,12 @@ export default function BasicModal() {
                                 />
                                 <Autocomplete
                                     disablePortal
+                                    required={true}
                                     value={state}
                                     id="combo-box-demo"
                                     options={statesInCountry}
                                     sx={{width: 300}}
-                                    renderInput={(params) => <TextField {...params} label="State"/>}
+                                    renderInput={(params) => <TextField {...params} required={true}label="State"/>}
                                     onChange={(event, value) => {
                                         if (!value) {
                                             setState(null);
@@ -206,11 +208,11 @@ export default function BasicModal() {
                                     }}
                                 />
                                 <TextField
+                                    required={true}
                                     type={"text"}
                                     label={"Address"}
                                     value={address}
                                     placeholder="Enter the Address"
-                                    helperText={"please the address of the event"}
 
                                     onChange={(event) => {
                                         if (!event.target.value) {
@@ -226,10 +228,11 @@ export default function BasicModal() {
                             </div>
                             <Autocomplete
                                 disablePortal
+                                required={true}
                                 id="combo-box-demo"
                                 options={[...eventCategoriesMap.keys()]}
                                 sx={{width: 600}}
-                                renderInput={(params) => <TextField {...params} label="Event category"/>}
+                                renderInput={(params) => <TextField {...params}required={true} label="Event category"/>}
                                 onChange={(event, value) => {
                                     if (!value) {
                                         setEventCategory(null);
@@ -241,11 +244,12 @@ export default function BasicModal() {
                             />
                             <Autocomplete
                                 disablePortal
+                                required={true}
                                 id="combo-box-demo"
                                 options={eventCategory ? eventCategoriesMap.get(eventCategory) : []}
                                 sx={{width: 600}}
                                 value={eventSubCategory}
-                                renderInput={(params) => <TextField {...params} label="Event sub-category"/>}
+                                renderInput={(params) => <TextField {...params}required={true} label="Event sub-category"/>}
                                 onChange={(event, value) => {
                                     if (!value) {
                                         setEventSubCategory(null);
