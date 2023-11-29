@@ -1,6 +1,6 @@
 .profile-container {
     width: 100%;
-    height: 100%;
+    height: 100vh;
 
     display: flex;
     flex-direction: row;
@@ -120,7 +120,7 @@
 
 .profile-main-content {
     width: 80%;
-    height: 100%;
+    height: 90%;
     margin-right: 30px;
     padding-left: 30px;
     display: flex;
@@ -160,6 +160,7 @@
     width: 100%;
     height: 100%;
     display: flex;
+    border-radius: 35px;
     flex-direction: column;
     align-items: center;
     overflow: hidden;
