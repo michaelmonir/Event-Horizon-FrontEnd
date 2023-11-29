@@ -21,6 +21,7 @@ function Login() {
 
     const LOCAL_STORAGE_KEY = "token";
     const LOCAL_STORAGE_KEY_ID = "id";
+    const LOCAL_STORAGE_KEY_Role = "role";
 
 
     const [isLoginActive, setIsLoginActive] = useState(false);
@@ -41,6 +42,7 @@ function Login() {
                 const response = await ProxyApi.post("basicSignIn", authenticationRequest)
                 localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(response.data.token))
                 localStorage.setItem(LOCAL_STORAGE_KEY_ID, JSON.stringify(response.data.id))
+                localStorage.setItem(LOCAL_STORAGE_KEY_Role, JSON.stringify(response.data.role))
                 navigate("/dashboard");
             } catch (error) {
                 actions.resetForm();
@@ -77,6 +79,8 @@ function Login() {
                 const response =await ProxyApi.post("basicSignUp", informationDto)
                 localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(response.data.token));
                 localStorage.setItem(LOCAL_STORAGE_KEY_ID, JSON.stringify(response.data.id))
+                localStorage.setItem(LOCAL_STORAGE_KEY_Role, JSON.stringify(response.data.role))
+
                 navigate("/validation")
             } catch (error) {
                 actions.resetForm();
