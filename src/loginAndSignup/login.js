@@ -23,6 +23,18 @@ function Login() {
     const LOCAL_STORAGE_KEY_ID = "id";
     const LOCAL_STORAGE_KEY_Role = "role";
 
+    const isUserLoggedIn = () => {
+        const otherid = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_ID))
+        return (typeof otherid === "number")
+    }
+
+    useEffect(() => {
+        if (isUserLoggedIn()) {
+            alert("User already logged in")
+            navigate('/dashboard')
+        }
+    }, []);
+
 
     const [isLoginActive, setIsLoginActive] = useState(false);
     const loginFormik = useFormik({
@@ -32,8 +44,6 @@ function Login() {
         },
         validationSchema: loginValidation,
         onSubmit: async (values, actions) => {
-            console.log(values);
-            console.log(actions);
             const authenticationRequest = {
                 "email": values.email,
                 "password": values.password
@@ -96,10 +106,19 @@ function Login() {
                 <div className="form-container sign-up-container">
                     <form onSubmit={signupFormik.handleSubmit}>
                         <h2>Create Account</h2>
-                        <div className="social-container">
-                            <a href="#" className="social"><FaGoogle className="social-icon"/></a>
-                        </div>
-                        <span>or use your Gmail to register</span>
+
+                        {/*will be added in the next phase*/}
+                        {
+                            false ? (
+                                <div>
+                                    <div className="social-container">
+                                    <a href="#" className="social"><FaGoogle className="social-icon"/></a>
+                                    </div>
+                                    <span>or use your Gmail to register</span>
+                                </div>
+                            ) : null
+                        }
+
                         <FormControl sx={{minWidth: 300}}>
                             <InputLabel id="demo-simple-select-helper-label">Role</InputLabel>
                             <Select
@@ -182,10 +201,18 @@ function Login() {
                 <div className="form-container sign-in-container">
                     <form onSubmit={loginFormik.handleSubmit}>
                         <h2>Sign in</h2>
-                        <div className="social-container">
-                            <a href="#" className="social"><FaGoogle className="social-icon"/></a>
-                        </div>
-                        <span>use your account</span>
+
+                        {/*for another phase when we add the google authentication */}
+                        {
+                            false ? (
+                                <div>
+                                    <div className="social-container">
+                                        <a href="#" className="social"><FaGoogle className="social-icon"/></a>
+                                    </div>
+                                    <span>use your account</span>
+                                </div>
+                            ) : null
+                        }
                         <input
                             name={"email"}
                             value={loginFormik.values.email}
@@ -205,7 +232,11 @@ function Login() {
                             type="password" placeholder="Password"/>
                         {loginFormik.touched.password && loginFormik.errors.password ? (
                             <div className=" text-error">{loginFormik.errors.password}</div>) : null}
-                        <a href="#">Forgot your password?</a>
+                        {
+                            false ? (
+                                <a href="#">Forgot your password?</a>
+                            ) : null
+                        }
                         <Button variant="contained" type="submit">
                             >Sign In</Button>
                     </form>

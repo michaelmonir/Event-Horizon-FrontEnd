@@ -16,6 +16,7 @@ function App() {
     const LOCAL_STORAGE_KEY = "token";
     const LOCAL_STORAGE_KEY_ID = "id";
 
+
     const [token, setToken] = useState(JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) ?? []);
     const [id, setId] = useState(JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_ID)) ?? []);
     useEffect(() => {

@@ -43,12 +43,24 @@ function Profile(props) {
             });
             setProfileAttributtes(response.data)
         } catch (error) {
-            alert("not Found")
+            alert("User Not Logged In")
+            navigate('/dashboard')
         }
     }
 
+    const isUserLoggedIn = () => {
+        const otherid = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_ID))
+        return (typeof otherid === "number")
+    }
+
     useEffect(() => {
-        f()
+        if (!isUserLoggedIn()) {
+            alert("User not logged in")
+            navigate('/dashboard')
+        }
+        else {
+            f()
+        }
     }, []);
     return (
         <div className="profile-container">
@@ -83,11 +95,16 @@ function Profile(props) {
 
                     <div className="menu-item" onClick={
                         () => {
-                            localStorage.removeItem("token");
-                            localStorage.removeItem("id");
-                            navigate("/")
-                        }
-                    }>
+                                const LOCAL_STORAGE_KEY = "token";
+                                const LOCAL_STORAGE_KEY_ID = "id";
+                                const LOCAL_STORAGE_KEY_Role = "role";
+
+                                localStorage.removeItem(LOCAL_STORAGE_KEY);
+                                localStorage.removeItem(LOCAL_STORAGE_KEY_ID);
+                                localStorage.removeItem(LOCAL_STORAGE_KEY_Role);
+                                navigate("/")
+                            }
+                        }>
                         <RiLogoutBoxLine/>
                         <span>Log out</span>
                     </div>
