@@ -46,10 +46,11 @@ export default function BasicModal({defaultFirstName, defaultLastName, defaultGe
 
     const handleClose = () => setOpen(false);
 
-
+    const LOCAL_STORAGE_KEY_ID = "id";
     const handleInformationChange = async (event) => {
         event.preventDefault(); //////  to  handle page refresh
         const newInformation = {
+            "id":JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_ID)),
             "firstName": firstName,
             "lastName": lastName,
             "gender": gender,
@@ -113,16 +114,17 @@ export default function BasicModal({defaultFirstName, defaultLastName, defaultGe
                                     labelId="demo-simple-select-helper-label"
                                     id="demo-simple-select-helper"
                                     label="gender"
-                                    value={defaultGender}
+                                    value={gender}
                                     onChange={(event) => {
+                                        setGender(event.target.value)
                                         defaultGender = event.target.value
-                                        console.log(defaultGender)
+                                        console.log(gender)
                                     }
                                     }
                                 >
                                     <MenuItem value={defaultGender}>{defaultGender}</MenuItem>
                                     <MenuItem
-                                        value={defaultGender === "Male" ? "Female" : "Male"}>{defaultGender === "Male" ? "Female" : "Male"} </MenuItem>
+                                        value={defaultGender === "MALE" ? "FEMALE" : "MALE"}>{defaultGender === "MALE" ? "FEMALE" : "MALE"} </MenuItem>
                                 </Select>
                                 <FormHelperText>
                                     select Gender of your choice

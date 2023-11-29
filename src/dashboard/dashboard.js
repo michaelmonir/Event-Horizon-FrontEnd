@@ -8,6 +8,7 @@ import TablePagination from '@mui/material/TablePagination';
 import MultiActionAreaCard from "./eventCard";
 import BasicModal from "./event-modal";
 import EventApis from "../Apis/EventApis/EventApis";
+import {Link} from "react-router-dom";
 
 
 function Dashboard() {
@@ -105,10 +106,10 @@ function Dashboard() {
             <div className="sidebar-profile-container flex">
                 <div className="sidebar-profile flex">
                     {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                    <a className="flex"><GiRamProfile/></a>
+                    <Link to={"/profile"} className="flex"><GiRamProfile/></Link>
                     <div className="sidebar-profile-info">
-                        <span className="sidebar-profile-name">Youssef</span>
-                        <sub className="sidebar-profile-position">Admin</sub>
+                        <span className="sidebar-profile-name">User</span>
+                        {/*<sub className="sidebar-profile-position">Profile</sub>*/}
                     </div>
                 </div>
             </div>

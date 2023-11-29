@@ -30,7 +30,6 @@ function Event() {
     const f = async() => {
         try {
             const response = await EventApis.get("eventForUser/"+id);
-            alert(JSON.stringify(response.data))
             setAttributes(response.data)
         } catch (error) {
             alert("not Found")

@@ -12,6 +12,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import {InputLabel} from "@mui/material";
 import EventApis from "../Apis/EventApis/EventApis";
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 // import moment
 
@@ -42,7 +43,7 @@ const style = {
 
 export default function BasicModal() {
     const [open, setOpen] = React.useState(false);
-
+    const navigate = useNavigate();
     const handleOpen = () => {
         setOpen(true);
         setEventSubCategory(null);
@@ -99,7 +100,6 @@ export default function BasicModal() {
         const LOCAL_STORAGE_KEY = "token";
         const LOCAL_STORAGE_KEY_ID = "id";
         const organizerid = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_ID))
-
         try {
             alert(JSON.stringify(event))
             // const response = await EventApis.post("createEvent/1", event);
@@ -111,15 +111,15 @@ export default function BasicModal() {
             const v = `Bearer eyJhbGciOiJIUzI1NiJ9.eyJ2ZXJpZnlDb2RlIjoiNDU3NTUxIiwic3ViIjoibWljaGFhZWwubW9uaXIxMTlAZ21haWwuY29tIiwiaWF0IjoxNzAxMjIzNzgzLCJleHAiOjEwMDE3MDEyMjM3ODN9.nXT2ONm2cXz1ONYCuJRIpv7UY5PjCBy7Jle1nyqFh6g`
             console.log(v)
 
-            const response = await EventApis.post("createEvent/"+JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_ID)), event, {
-                headers:{
-                    // "Authorization": `Bearer ${localStorage.getItem(LOCAL_STORAGE_KEY)}`
-                    // "Authorization": `Bearer eyJhbGciOiJIUzI1NiJ9.eyJ2ZXJpZnlDb2RlIjoiNDU3NTUxIiwic3ViIjoibWljaGFhZWwubW9uaXIxMTlAZ21haWwuY29tIiwiaWF0IjoxNzAxMjIzNzgzLCJleHAiOjEwMDE3MDEyMjM3ODN9.nXT2ONm2cXz1ONYCuJRIpv7UY5PjCBy7Jle1nyqFh6g`
-                    "Authorization": v
-                }
-            });
-            alert(response)
-            alert("okk")
+            const response =
+                await EventApis.post("createEvent/"+JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_ID)), event)
+
+            const myId=response.data.id;
+            const params = {
+                id: myId,
+            };
+            // Navigate to a new route and pass parameters
+            navigate('/event', { state: params });
         }
         catch(error)
         {
