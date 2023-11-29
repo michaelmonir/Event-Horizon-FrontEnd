@@ -4,9 +4,21 @@ import CardContent from '@mui/material/CardContent';
 
 import Typography from '@mui/material/Typography';
 import {Button, CardActionArea, CardActions} from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+
 
 function MultiActionAreaCard(props) {
     let eventHeader = props.eventHeader;
+    const navigate = useNavigate();
+
+    const handleSeeMore = () => {
+        const params = {
+            id: eventHeader.id,
+        };
+        // Navigate to a new route and pass parameters
+        navigate('/event', { state: params });
+    }
+
     return (
         <Card className="card" style={{width: "90%", transition: "all 0.2s ease-in-out"}}>
             <CardActionArea>
@@ -35,7 +47,7 @@ function MultiActionAreaCard(props) {
             </CardActionArea>
             <CardActions>
                 <div className="card-footer">
-                    <Button size="small" color="primary">
+                    <Button size="small" color="primary" onClick={handleSeeMore}>
                         see more
                     </Button>
                     <div className="Organizer-name">

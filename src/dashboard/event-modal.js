@@ -128,7 +128,6 @@ export default function BasicModal() {
 
     }
 
-
     return (
         <div>
             <Button onClick={handleOpen} style={

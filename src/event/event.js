@@ -1,13 +1,10 @@
 import React, {useEffect} from "react";
 import "./event.css";
-import Button from "@mui/material/Button";
-import {FaPen} from "react-icons/fa6";
 import "../dashboard/dashboard.css";
-import UpdateModal from "./event-update-modal";
-import informationApis from "../Apis/UserApis/InformationApis";
 import EventApis from "../Apis/EventApis/EventApis";
+import { useLocation } from 'react-router-dom';
 
-function Event(props) {
+function Event() {
 
     const [attributes, setAttributes] = React.useState({
             "name":"",
@@ -20,26 +17,24 @@ function Event(props) {
                 "city":"",
                 "address":""
             },
-            "organizerHeader":{
+            "eventOrganizer":{
                 "id":0,
                 "name":""
             }
         });
+    const location = useLocation();
+    const params = location.state;
+    const id = params.id
 
-    const id = props.event;
 
     const f = async() => {
-        // try {
-        //     // alert("enter try ")
-        //     const response = await EventApis.get("getInformationViewDto", {
-        //         params: {
-        //             "id": id
-        //         },
-        //     });
-        //     setProfileAttributtes(response.data)
-        // } catch (error) {
-        //     alert("not Found")
-        // }
+        try {
+            const response = await EventApis.get("eventForUser/"+id);
+            alert(JSON.stringify(response.data))
+            setAttributes(response.data)
+        } catch (error) {
+            alert("not Found")
+        }
     }
 
     useEffect(() => {
@@ -49,42 +44,39 @@ function Event(props) {
     return <div className="event">
         <div className="event-header">
             <div className="event-header-title">
-                <span>{name}</span>
+                <span>{attributes.name}</span>
             </div>
-            <div className="event-header-content">
-                <UpdateModal/>
-            </div>
+            {/*next phase*/}
+            {/*<div className="event-header-content">*/}
+            {/*    <UpdateModal/>*/}
+            {/*</div>*/}
         </div>
         <div className="event-body">
             <div className="event-body-title">
-                <span>Made by : {organizerHeader.name}</span>
+                <span>Made by : {attributes.eventOrganizer.name}</span>
             </div>
             <div className="event-content">
                 <div className="event-location">
                     <span>Location: </span>
                     <span>
-                        {country}, {city}, {address}
+                        {attributes.eventLocation.country}, {attributes.eventLocation.city}, {attributes.eventLocation.address}
                     </span>
                 </div>
                 <div className="event-category">
                     <span>Category: </span>
-                    <span>{eventCategory}</span>
+                    <span>{attributes.eventCategory}</span>
                 </div>
-                <div className="event-ads">
-                    <span>Ads: </span>
-                    <span>{eventAds.name}</span>
-                </div>
+                {/*<div className="event-ads">*/}
+                {/*    <span>Ads: </span>*/}
+                {/*    <span>{attributes.eventAds.name}</span>*/}
+                {/*</div>*/}
                 <div className="event-date">
                     <span>Date: </span>
-                    <span>{eventDate}</span>
-                </div>
-                <div className="event-ticket">
-                    <span>Ticket: </span>
-                    <span>To be continued</span>
+                    <span>{attributes.eventDate}</span>
                 </div>
                 <div className="event-description">
                     <span>Description: </span>
-                    <span>{description}</span>
+                    <span>{attributes.description}</span>
                 </div>
             </div>
         </div>

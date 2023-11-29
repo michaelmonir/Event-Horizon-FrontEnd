@@ -34,6 +34,7 @@ function App() {
                     <Route path="/dashboard" element={<Dashboard/>}/>
                     <Route path="/profile" element={<Profile/>}/>
                     <Route path="/validation" element={<ValidationPage/>}/>
+                    <Route path="/event/:id" render={({ match }) => <Event id={match.params.id} />} />
                     <Route path="/event" element={<Event/>}/>
                 </Routes>
             </Router>

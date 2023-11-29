@@ -34,6 +34,7 @@ function Profile(props) {
 
     const f = async() => {
         try {
+
             // alert("enter try ")
             const response = await informationApis.get("getInformationViewDto", {
                 params: {

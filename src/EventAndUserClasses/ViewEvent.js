@@ -5,5 +5,5 @@ class ViewEvent{
       eventCategory;
       eventDate;
       eventLocation;
-      organizerHeader;
+      eventOrganizer;
 }
