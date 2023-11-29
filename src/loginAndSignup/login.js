@@ -56,7 +56,7 @@ function Login() {
                 navigate("/dashboard");
             } catch (error) {
                 actions.resetForm();
-                alert(error.response?.data?.message);
+                alert(error.response.data.message)
             }
         }
     });
@@ -94,7 +94,7 @@ function Login() {
                 navigate("/validation")
             } catch (error) {
                 actions.resetForm();
-                alert(error.response?.data?.message);
+                alert(error.response.data.message)
             }
         },
     });

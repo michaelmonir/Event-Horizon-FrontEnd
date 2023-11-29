@@ -52,7 +52,7 @@ function Dashboard() {
         }
         catch(error)
         {
-            alert("not okk")
+            alert(error.response.data.message)
         }
     }
     const handleChangePage = async(event, newPage) =>  {

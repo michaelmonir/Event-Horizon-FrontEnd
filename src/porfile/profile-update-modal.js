@@ -59,7 +59,7 @@ export default function BasicModal({defaultFirstName, defaultLastName, defaultGe
         try {
             const response = await informationApis.put("updateInformation", newInformation);
         } catch (error) {
-            alert("not Found")
+            alert(error.response.data.message)
         }
     }
 

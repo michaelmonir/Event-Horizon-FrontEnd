@@ -36,7 +36,7 @@ function Event() {
             const response = await EventApis.get("eventForUser/"+id);
             setAttributes(response.data)
         } catch (error) {
-            alert("not Found")
+            alert(error.response.data.message)
         }
     }
 

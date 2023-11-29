@@ -107,7 +107,6 @@ export default function BasicModal() {
         try {
             const response =
                 await EventApis.post("createEvent/"+JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_ID)), event)
-
             const myId=response.data.id;
             const params = {
                 id: myId,
@@ -117,7 +116,7 @@ export default function BasicModal() {
         }
         catch(error)
         {
-            alert("not okk")
+            alert(error.response.data.message)
         }
 
     }
