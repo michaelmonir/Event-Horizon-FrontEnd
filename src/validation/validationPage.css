@@ -2,7 +2,7 @@
     box-sizing: border-box;
 }
 
-.Body{
+.body{
     background: radial-gradient(circle at 1.3% 2.8%, rgb(239, 249, 249) 0%, rgb(182, 199, 226) 100.2%);
     font-family: "Times New Roman", sans-serif;
     height: 100vh;

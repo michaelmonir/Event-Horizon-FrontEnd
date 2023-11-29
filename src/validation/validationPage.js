@@ -54,7 +54,7 @@ function ValidationPage(props) {
         }
     }
     return (
-        <div className="Body">
+        <div className="body">
             <div className="container">
                 <h2>Verify Account</h2>
                 <div className="code">
