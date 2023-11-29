@@ -67,6 +67,8 @@ export default function BasicModal() {
             "name":"Premium Plan"
         },
     ]
+    const a1 = ["Free Plan", "Regular Plan", "Premium Plan"]
+    const planIndexMap = new Map(a1.map((plan, index) => [plan, index]));
 
     const handleClose = () => setOpen(false);
     const [eventCategory, setEventCategory] = React.useState("");
@@ -83,6 +85,7 @@ export default function BasicModal() {
     const [adsPlan, setAdsPlan] = React.useState("");
     const [date, setDate] = React.useState(new Date().toISOString().slice(0, 16));
 
+
     const handleEventCreation = async(e) => {
         e.preventDefault();
         const event = {
@@ -90,27 +93,18 @@ export default function BasicModal() {
             "description": description,
             "eventCategory": eventCategory + "-" + eventSubCategory,
             "eventDate": date,
-            "eventAds": adsPlan,
+            "eventAds": {
+                            "id": planIndexMap.get(adsPlan)+1,
+                            "name":adsPlan
+                        },
             "eventLocation": {
                 "country": country,
                 "city": state,
                 "address": address
             }
         }
-        const LOCAL_STORAGE_KEY = "token";
         const LOCAL_STORAGE_KEY_ID = "id";
-        const organizerid = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_ID))
         try {
-
-            // const response = await EventApis.post("createEvent/1", event);
-            // console.log(localStorage.getItem(LOCAL_STORAGE_KEY))
-            // console.log(organizerid)
-            const s = "Bearer " + JSON.stringify(localStorage.getItem(LOCAL_STORAGE_KEY));
-            // console.log(s);
-
-            const v = `Bearer eyJhbGciOiJIUzI1NiJ9.eyJ2ZXJpZnlDb2RlIjoiNDU3NTUxIiwic3ViIjoibWljaGFhZWwubW9uaXIxMTlAZ21haWwuY29tIiwiaWF0IjoxNzAxMjIzNzgzLCJleHAiOjEwMDE3MDEyMjM3ODN9.nXT2ONm2cXz1ONYCuJRIpv7UY5PjCBy7Jle1nyqFh6g`
-            console.log(v)
-
             const response =
                 await EventApis.post("createEvent/"+JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_ID)), event)
 
@@ -282,13 +276,14 @@ export default function BasicModal() {
                                     value={adsPlan}
                                     onChange={(event) => {
                                         setAdsPlan(event.target.value);
+                                        // alert(planIndexMap.get(event.target.value)+1)
                                     }
 
                                     }
                                 >
-                                    {adsPlansOptions.map((option) => (
-                                        <MenuItem key={option.id} value={option}>
-                                            {option.name}
+                                    {a1.map((option, index) => (
+                                        <MenuItem key={index} value={option}>
+                                            {option}
                                         </MenuItem>
                                     ))}
                                 </Select>
