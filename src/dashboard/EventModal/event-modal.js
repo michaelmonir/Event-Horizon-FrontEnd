@@ -5,7 +5,6 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
-import {Country, State} from "country-state-city";
 import MenuItem from '@mui/material/MenuItem';
 import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
@@ -13,8 +12,8 @@ import Select from '@mui/material/Select';
 import {InputLabel} from "@mui/material";
 import EventApis from "../../Apis/EventApis/EventApis";
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios'
-// import moment
+import {CountryCityStreet} from "./CountryCityStreet";
+
 
 let eventCategoriesMap = new Map([
     ["Social Events", ["Weddings", "Parties", "Reunions", "Celebrations"]],
@@ -58,18 +57,15 @@ export default function BasicModal() {
 
     const handleClose = () => setOpen(false);
     const [eventCategory, setEventCategory] = React.useState("");
-    let countries = Country.getAllCountries();
-    let countryNames = countries.map((country) => country.name);
-    let countryAndID = countries.map((country) => ({name: country.name, isoCode: country.isoCode}));
     const [name, setName] = React.useState("");
     const [description, setDescription] = React.useState("");
     const [eventSubCategory, setEventSubCategory] = React.useState("");
+    const [adsPlan, setAdsPlan] = React.useState("");
+    const [date, setDate] = React.useState(new Date().toISOString().slice(0, 16));
     const [country, setCountry] = React.useState("");
     const [state, setState] = React.useState("");
     const [address, setAddress] = React.useState("");
     const [statesInCountry, setStatesInCountry] = React.useState([]);
-    const [adsPlan, setAdsPlan] = React.useState("");
-    const [date, setDate] = React.useState(new Date().toISOString().slice(0, 16));
 
 
     const handleEventCreation = async(e) => {
@@ -145,66 +141,10 @@ export default function BasicModal() {
                                            setName(event.target.value);
                                        }}
                             />
-                            <div className="flex location">
-                                <Autocomplete
-                                    required={true}
-                                    disablePortal
-                                    value={country}
-                                    id="combo-box-demo"
-                                    options={countryNames}
-                                    sx={{width: 289}}
-                                    renderInput={(params) => <TextField required={true}{...params} label="Country"/>}
-                                    onChange={(event, value) => {
-                                        if (!value) {
-                                            setCountry(null);
-                                            setState(null);
-                                            setAddress("");
-                                            setStatesInCountry([]);
-                                            return;
-                                        }
-                                        setCountry(value);
-                                        let countryID = countryAndID.find((country) => country.name === value).isoCode;
-                                        let statesInCountry = State.getStatesOfCountry(countryID);
-                                        let stateNames = statesInCountry.map((state) => state.name);
-                                        setStatesInCountry(stateNames);
-                                    }}
-                                />
-                                <Autocomplete
-                                    disablePortal
-                                    required={true}
-                                    value={state}
-                                    id="combo-box-demo"
-                                    options={statesInCountry}
-                                    sx={{width: 300}}
-                                    renderInput={(params) => <TextField {...params} required={true}label="State"/>}
-                                    onChange={(event, value) => {
-                                        if (!value) {
-                                            setState(null);
-                                            setAddress("");
-                                            return;
-                                        }
-                                        setState(value)
-                                    }}
-                                />
-                                <TextField
-                                    required={true}
-                                    type={"text"}
-                                    label={"Address"}
-                                    value={address}
-                                    placeholder="Enter the Address"
-
-                                    onChange={(event) => {
-                                        if (!event.target.value) {
-                                            setAddress("");
-                                            return
-                                        }
-                                        setAddress(event.target.value);
-                                        // console.log(event.target.value)
-                                        // console.log(address)
-                                    }}
-
-                                />
-                            </div>
+                            <CountryCityStreet
+                                country={country} state={state} address={address} statesInCountry={statesInCountry}
+                                setCountry={setCountry} setState={setState} setAddress={setAddress} setStatesInCountry={setStatesInCountry}
+                            />
                             <Autocomplete
                                 disablePortal
                                 required={true}
