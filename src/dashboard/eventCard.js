@@ -5,6 +5,7 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import {Button, CardActionArea, CardActions} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import {RoutePathNames} from "../Routes/RoutePathNames";
 
 
 function MultiActionAreaCard(props) {
@@ -15,8 +16,7 @@ function MultiActionAreaCard(props) {
         const params = {
             id: eventHeader.id,
         };
-        // Navigate to a new route and pass parameters
-        navigate('/event', { state: params });
+        navigate(RoutePathNames.event, { state: params });
     }
 
     return (

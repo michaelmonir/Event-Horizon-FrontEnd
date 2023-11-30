@@ -1,6 +1,7 @@
-const RoutePathNames = {
+export const RoutePathNames = {
     dashboard:"/",
     profile:"/profile",
     login:"/login",
-    validation:"/validation"
+    validation:"/validation",
+    event:"/event"
 }

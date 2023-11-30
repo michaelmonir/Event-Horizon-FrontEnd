@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
-import validationPage from './validationPage.css';
 import ProxyApi from "../Apis/ProxyApis/ProxyApis";
-function ValidationPage(props) {
+import {RoutePathNames} from "../Routes/RoutePathNames";
+
+function ValidationPage() {
         useEffect(() => {
             const codes = document.querySelectorAll(".codeInput");
             codes[0].focus();
@@ -47,10 +48,9 @@ function ValidationPage(props) {
             console.log(verifyRequest)
             const response = await ProxyApi.post("verifyMail", verifyRequest)
             console.log(response)
-            navigate("/dashboard")
-            alert("okk")
+            navigate(RoutePathNames.profile)
         } catch (error) {
-            alert("not okk")
+            alert("not valid verification code")
         }
     }
     return (

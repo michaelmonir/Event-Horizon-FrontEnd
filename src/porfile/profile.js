@@ -9,6 +9,7 @@ import {RiLogoutBoxLine} from "react-icons/ri";
 import BasicModal from "./profile-update-modal";
 import informationApis from "../Apis/UserApis/InformationApis";
 import {getUserId, isUserLoggedIn, removeUserLocalStorageData} from "../Authentication/UserAuthentication";
+import {RoutePathNames} from "../Routes/RoutePathNames";
 
 
 function Profile(props) {
@@ -50,7 +51,7 @@ function Profile(props) {
                 <div className="profile-menu">
                     < div className="website-nav">
                         <div className="menu-item" onClick={() => {
-                            navigate("/dashboard")
+                            navigate(RoutePathNames.dashboard)
                         }
                         }>
                             <i><IoHome/></i>
@@ -73,7 +74,7 @@ function Profile(props) {
                     <div className="menu-item" onClick={
                         () => {
                                 removeUserLocalStorageData()
-                                navigate("/")
+                                navigate(RoutePathNames.dashboard)
                             }
                         }>
                         <RiLogoutBoxLine/>

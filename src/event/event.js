@@ -6,6 +6,7 @@ import { useLocation } from 'react-router-dom';
 import Dashboard from "../dashboard/dashboard";
 import {useNavigate} from "react-router-dom";
 import Button from "@mui/material/Button";
+import {RoutePathNames} from "../Routes/RoutePathNames";
 
 function Event() {
 
@@ -49,14 +50,10 @@ function Event() {
             <div className="event-header-title">
                 <span>{attributes.name}</span>
             </div>
-            {/*next phase*/}
-            {/*<div className="event-header-content">*/}
-            {/*    <UpdateModal/>*/}
-            {/*</div>*/}
 
             <div className="event-header-content">
                 <Button variant={"contained"} onClick={() => {
-                        navigate('/dashboard')
+                        navigate(RoutePathNames.dashboard)
                     }}
                 >
                     Dashboard
