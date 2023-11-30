@@ -23,7 +23,7 @@ function Login() {
     useEffect(() => {
         if (isUserLoggedIn()) {
             alert("User already logged in")
-            navigate('/dashboard')
+            navigate('/')
         }
     }, []);
 
@@ -43,7 +43,7 @@ function Login() {
             try {
                 const response = await ProxyApi.post("basicSignIn", authenticationRequest)
                 setUserLocalStorageData(response.data.id, response.data.token, response.data.role)
-                navigate("/dashboard");
+                navigate("/");
             } catch (error) {
                 actions.resetForm();
                 alert(error.response.data.message)

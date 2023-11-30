@@ -37,13 +37,7 @@ function Profile(props) {
     }
 
     useEffect(() => {
-        if (isUserLoggedIn() === false) {
-            alert("User not logged in")
-            navigate('/dashboard')
-        }
-        else {
-            f()
-        }
+        f()
     }, []);
     return (
         <div className="profile-container">
