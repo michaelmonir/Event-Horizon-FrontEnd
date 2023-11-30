@@ -14,19 +14,11 @@ import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import {useNavigate} from "react-router-dom";
+import {isUserLoggedIn, setUserLocalStorageData} from "../Authentication/UserAuthentication";
 
 
 function Login() {
     const navigate = useNavigate();
-
-    const LOCAL_STORAGE_KEY = "token";
-    const LOCAL_STORAGE_KEY_ID = "id";
-    const LOCAL_STORAGE_KEY_Role = "role";
-
-    const isUserLoggedIn = () => {
-        const otherid = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_ID))
-        return (typeof otherid === "number")
-    }
 
     useEffect(() => {
         if (isUserLoggedIn()) {
@@ -50,9 +42,7 @@ function Login() {
             }
             try {
                 const response = await ProxyApi.post("basicSignIn", authenticationRequest)
-                localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(response.data.token))
-                localStorage.setItem(LOCAL_STORAGE_KEY_ID, JSON.stringify(response.data.id))
-                localStorage.setItem(LOCAL_STORAGE_KEY_Role, JSON.stringify(response.data.role))
+                setUserLocalStorageData(response.data.id, response.data.token, response.data.role)
                 navigate("/dashboard");
             } catch (error) {
                 actions.resetForm();
@@ -87,10 +77,8 @@ function Login() {
             }
             try {
                 const response =await ProxyApi.post("basicSignUp", informationDto)
-                localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(response.data.token));
-                localStorage.setItem(LOCAL_STORAGE_KEY_ID, JSON.stringify(response.data.id))
-                localStorage.setItem(LOCAL_STORAGE_KEY_Role, JSON.stringify(response.data.role))
 
+                setUserLocalStorageData(response.data.id, response.data.token, response.data.role)
                 navigate("/validation")
             } catch (error) {
                 actions.resetForm();

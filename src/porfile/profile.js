@@ -8,21 +8,12 @@ import {FaBookmark} from "react-icons/fa";
 import {RiLogoutBoxLine} from "react-icons/ri";
 import BasicModal from "./profile-update-modal";
 import informationApis from "../Apis/UserApis/InformationApis";
+import {getUserId, isUserLoggedIn, removeUserLocalStorageData} from "../Authentication/UserAuthentication";
 
 
 function Profile(props) {
     const navigate = useNavigate();
-    const LOCAL_STORAGE_KEY = "token";
-    const LOCAL_STORAGE_KEY_ID = "id";
 
-    const [token, setToken] = useState(JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) ?? []);
-    const [id, setId] = useState(JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_ID)) ?? []);
-    useEffect(() => {
-        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(token));
-    }, [token]);
-    useEffect(() => {
-        localStorage.setItem(LOCAL_STORAGE_KEY_ID, JSON.stringify(id))
-    }, [id]);
     const [profileAttributtes, setProfileAttributtes] = React.useState({
         "firstName":"",
         "lastName":"",
@@ -34,26 +25,19 @@ function Profile(props) {
 
     const f = async() => {
         try {
-
             const response = await informationApis.get("getInformationViewDto", {
                 params: {
-                    "id": id
+                    "id": getUserId()
                 },
             });
             setProfileAttributtes(response.data)
         } catch (error) {
-            alert("User Not Logged In")
-            navigate('/dashboard')
+            alert(error.response.data.message)
         }
     }
 
-    const isUserLoggedIn = () => {
-        const otherid = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_ID))
-        return (typeof otherid === "number")
-    }
-
     useEffect(() => {
-        if (!isUserLoggedIn()) {
+        if (isUserLoggedIn() === false) {
             alert("User not logged in")
             navigate('/dashboard')
         }
@@ -94,13 +78,7 @@ function Profile(props) {
 
                     <div className="menu-item" onClick={
                         () => {
-                                const LOCAL_STORAGE_KEY = "token";
-                                const LOCAL_STORAGE_KEY_ID = "id";
-                                const LOCAL_STORAGE_KEY_Role = "role";
-
-                                localStorage.removeItem(LOCAL_STORAGE_KEY);
-                                localStorage.removeItem(LOCAL_STORAGE_KEY_ID);
-                                localStorage.removeItem(LOCAL_STORAGE_KEY_Role);
+                                removeUserLocalStorageData()
                                 navigate("/")
                             }
                         }>
