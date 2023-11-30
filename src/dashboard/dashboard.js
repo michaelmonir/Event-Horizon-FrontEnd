@@ -6,7 +6,7 @@ import {GiRamProfile} from "react-icons/gi";
 import {FaShuttleSpace} from "react-icons/fa6";
 import TablePagination from '@mui/material/TablePagination';
 import MultiActionAreaCard from "./eventCard";
-import BasicModal from "./event-modal";
+import BasicModal from "./EventModal/event-modal";
 import EventApis from "../Apis/EventApis/EventApis";
 import {Link} from "react-router-dom";
 

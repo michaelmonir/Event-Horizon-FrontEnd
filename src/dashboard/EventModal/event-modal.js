@@ -11,7 +11,7 @@ import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import {InputLabel} from "@mui/material";
-import EventApis from "../Apis/EventApis/EventApis";
+import EventApis from "../../Apis/EventApis/EventApis";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 // import moment
@@ -53,22 +53,8 @@ export default function BasicModal() {
         setStatesInCountry([]);
         setAdsPlan("");
     }
-    const adsPlansOptions = [
-        {
-            "id":1,
-            "name":"Free Plan"
-        },
-        {
-            "id":2,
-            "name":"Regular Plan"
-        },
-        {
-            "id":3,
-            "name":"Premium Plan"
-        },
-    ]
-    const a1 = ["Free Plan", "Regular Plan", "Premium Plan"]
-    const planIndexMap = new Map(a1.map((plan, index) => [plan, index]));
+    const adsPlansOptions = ["Free Plan", "Regular Plan", "Premium Plan"]
+    const planIndexMap = new Map(adsPlansOptions.map((plan, index) => [plan, index]));
 
     const handleClose = () => setOpen(false);
     const [eventCategory, setEventCategory] = React.useState("");
@@ -274,17 +260,15 @@ export default function BasicModal() {
                                     required={true}
                                     value={adsPlan}
                                     onChange={(event) => {
-                                        setAdsPlan(event.target.value);
-                                        // alert(planIndexMap.get(event.target.value)+1)
-                                    }
-
+                                            setAdsPlan(event.target.value);
+                                        }
                                     }
                                 >
-                                    {a1.map((option, index) => (
-                                        <MenuItem key={index} value={option}>
-                                            {option}
-                                        </MenuItem>
-                                    ))}
+                                {adsPlansOptions.map((option, index) => (
+                                    <MenuItem key={index} value={option}>
+                                        {option}
+                                    </MenuItem>
+                                ))}
                                 </Select>
                                 <FormHelperText>
                                     Choose your Suitable Ads plan
