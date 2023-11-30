@@ -11,11 +11,29 @@ import RequireAuth from "./Authentication/RequireAuth";
 import RequireNoAuth from "./Authentication/ReruireNoAuth";
 import {RoutePathNames} from "./Routes/RoutePathNames";
 import Button from "@mui/material/Button";
+import EventApis from "./Apis/EventApis/EventApis";
+import {getUserId, getUserToken} from "./Authentication/UserAuthentication";
 
 
 function App(){
-    const handleClick = () => {
-
+    const handleClick = async() => {
+        const event = {
+            "id":101,
+            "name":"myevent50"
+        }
+        try {
+            const config = {
+                headers: { Authorization: `Bearer ${getUserToken()}` }
+            };
+            console.log(config)
+            const response =
+                await EventApis.post("createEvent/" + getUserId(), event)
+            alert("ok")
+        }
+        catch (error)
+        {
+            alert("not ok")
+        }
     }
     return (
         <div className="App">

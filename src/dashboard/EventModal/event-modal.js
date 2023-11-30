@@ -13,6 +13,8 @@ import EventApis from "../../Apis/EventApis/EventApis";
 import { useNavigate } from 'react-router-dom';
 import {CountryCityStreet} from "./CountryCityStreet";
 import {Category} from "./Category";
+import {getUserId, getUserToken} from "../../Authentication/UserAuthentication";
+import {RoutePathNames} from "../../Routes/RoutePathNames";
 
 
 const style = {
@@ -72,16 +74,18 @@ export default function BasicModal() {
                 "address": address
             }
         }
-        const LOCAL_STORAGE_KEY_ID = "id";
         try {
+            const config = {
+                headers: { Authorization: `Bearer ${getUserToken()}` }
+            };
             const response =
-                await EventApis.post("createEvent/"+JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_ID)), event)
+                await EventApis.post("createEvent/" + getUserId(), event, config)
             const myId=response.data.id;
             const params = {
                 id: myId,
             };
-            // Navigate to a new route and pass parameters
-            navigate('/event', { state: params });
+
+            navigate(RoutePathNames.event, { state: params });
         }
         catch(error)
         {
