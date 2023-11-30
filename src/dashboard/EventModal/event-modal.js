@@ -13,20 +13,9 @@ import {InputLabel} from "@mui/material";
 import EventApis from "../../Apis/EventApis/EventApis";
 import { useNavigate } from 'react-router-dom';
 import {CountryCityStreet} from "./CountryCityStreet";
+import {Category} from "./Category";
 
 
-let eventCategoriesMap = new Map([
-    ["Social Events", ["Weddings", "Parties", "Reunions", "Celebrations"]],
-    ["Corporate Events", ["Conferences", "Seminars", "Trade Shows/Exhibitions", "Product Launches"]],
-    ["Cultural Events", ["Festivals", "Concerts", "Art Exhibitions", "Cultural Performances"]],
-    ["Educational Events", ["Workshops", "Lectures", "Training Programs"]],
-    ["Sports Events", ["Tournaments", "Matches/Games", "Marathons"]],
-    ["Charity and Fundraising Events", ["Galas", "Auctions", "Walks/Runs"]],
-    ["Political Events", ["Rallies", "Debates", "Election Days"]],
-    ["Religious Events", ["Services", "Festivals", "Pilgrimages"]],
-    ["Experiential Events", ["Escape Rooms", "Immersive Theater", "Virtual Reality Experiences"]],
-    ["Community Events", ["Parades", "Clean-up Campaigns", "Civic Meetings"]]
-]);
 
 const style = {
     position: 'absolute',
@@ -56,9 +45,9 @@ export default function BasicModal() {
     const planIndexMap = new Map(adsPlansOptions.map((plan, index) => [plan, index]));
 
     const handleClose = () => setOpen(false);
-    const [eventCategory, setEventCategory] = React.useState("");
     const [name, setName] = React.useState("");
     const [description, setDescription] = React.useState("");
+    const [eventCategory, setEventCategory] = React.useState("");
     const [eventSubCategory, setEventSubCategory] = React.useState("");
     const [adsPlan, setAdsPlan] = React.useState("");
     const [date, setDate] = React.useState(new Date().toISOString().slice(0, 16));
@@ -145,38 +134,12 @@ export default function BasicModal() {
                                 country={country} state={state} address={address} statesInCountry={statesInCountry}
                                 setCountry={setCountry} setState={setState} setAddress={setAddress} setStatesInCountry={setStatesInCountry}
                             />
-                            <Autocomplete
-                                disablePortal
-                                required={true}
-                                id="combo-box-demo"
-                                options={[...eventCategoriesMap.keys()]}
-                                sx={{width: 600}}
-                                renderInput={(params) => <TextField {...params}required={true} label="Event category"/>}
-                                onChange={(event, value) => {
-                                    if (!value) {
-                                        setEventCategory(null);
-                                        setEventSubCategory(null);
-                                        return;
-                                    }
-                                    setEventCategory(value);
-                                }}
+
+                            <Category
+                                eventCategory={eventCategory} eventSubCategory={eventSubCategory}
+                                setEventCategory={setEventCategory} setEventSubCategory={setEventSubCategory}
                             />
-                            <Autocomplete
-                                disablePortal
-                                required={true}
-                                id="combo-box-demo"
-                                options={eventCategory ? eventCategoriesMap.get(eventCategory) : []}
-                                sx={{width: 600}}
-                                value={eventSubCategory}
-                                renderInput={(params) => <TextField {...params}required={true} label="Event sub-category"/>}
-                                onChange={(event, value) => {
-                                    if (!value) {
-                                        setEventSubCategory(null);
-                                        return;
-                                    }
-                                    setEventSubCategory(value);
-                                }}
-                            />
+
                             <TextField
                                 id="fullWidth"
                                 type={"number"}
