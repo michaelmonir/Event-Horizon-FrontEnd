@@ -10,11 +10,11 @@ import ProxyApi from "../Apis/ProxyApis/ProxyApis";
 import {InputLabel} from "@mui/material";
 import * as React from "react";
 import MenuItem from '@mui/material/MenuItem';
-import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import {useNavigate} from "react-router-dom";
 import {isUserLoggedIn, setUserLocalStorageData} from "../Authentication/UserAuthentication";
+import {RoutePathNames} from "../Routes/RoutePathNames";
 
 
 function Login() {
@@ -23,7 +23,7 @@ function Login() {
     useEffect(() => {
         if (isUserLoggedIn()) {
             alert("User already logged in")
-            navigate('/')
+            navigate(RoutePathNames.dashboard)
         }
     }, []);
 
@@ -43,7 +43,7 @@ function Login() {
             try {
                 const response = await ProxyApi.post("basicSignIn", authenticationRequest)
                 setUserLocalStorageData(response.data.id, response.data.token, response.data.role)
-                navigate("/");
+                navigate(RoutePathNames.dashboard);
             } catch (error) {
                 actions.resetForm();
                 alert(error.response.data.message)
@@ -79,7 +79,7 @@ function Login() {
                 const response =await ProxyApi.post("basicSignUp", informationDto)
 
                 setUserLocalStorageData(response.data.id, response.data.token, response.data.role)
-                navigate("/validation")
+                navigate(RoutePathNames.validation)
             } catch (error) {
                 actions.resetForm();
                 alert(error.response.data.message)

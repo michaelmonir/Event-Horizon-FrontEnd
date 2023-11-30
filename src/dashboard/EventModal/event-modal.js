@@ -4,7 +4,6 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import TextField from "@mui/material/TextField";
-import Autocomplete from "@mui/material/Autocomplete";
 import MenuItem from '@mui/material/MenuItem';
 import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
@@ -14,7 +13,6 @@ import EventApis from "../../Apis/EventApis/EventApis";
 import { useNavigate } from 'react-router-dom';
 import {CountryCityStreet} from "./CountryCityStreet";
 import {Category} from "./Category";
-
 
 
 const style = {

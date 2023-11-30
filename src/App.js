@@ -1,4 +1,3 @@
-import React, {useState, useEffect} from 'react';
 import {Routes, Route} from "react-router-dom";
 import {BrowserRouter as Router} from "react-router-dom";
 
@@ -10,20 +9,21 @@ import ValidationPage from "./validation/validationPage";
 import Event from "./event/event";
 import RequireAuth from "./Authentication/RequireAuth";
 import RequireNoAuth from "./Authentication/ReruireNoAuth";
+import {RoutePathNames} from "./Routes/RoutePathNames";
 
 function App() {
     return (
         <div className="App">
             <Router>
                 <Routes>
-                    <Route path="/" element={<Dashboard />} />
+                    <Route path={RoutePathNames.dashboard} element={<Dashboard />} />
                     <Route element={<RequireAuth />}>
-                        <Route path="/event" element={<Event />} />
-                        <Route path="/profile" element={<Profile />} />
+                        <Route path={RoutePathNames.event} element={<Event />} />
+                        <Route path={RoutePathNames.profile} element={<Profile />} />
                     </Route>
                     <Route element={<RequireNoAuth />}>
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/validation" element={<ValidationPage />} />
+                        <Route path={RoutePathNames.login} element={<Login />} />
+                        <Route path={RoutePathNames.validation} element={<ValidationPage />} />
                     </Route>
                 </Routes>
             </Router>
