@@ -10,10 +10,16 @@ import Event from "./event/event";
 import RequireAuth from "./Authentication/RequireAuth";
 import RequireNoAuth from "./Authentication/ReruireNoAuth";
 import {RoutePathNames} from "./Routes/RoutePathNames";
+import Button from "@mui/material/Button";
 
-function App() {
+
+function App(){
+    const handleClick = () => {
+
+    }
     return (
         <div className="App">
+            <Button onClick={handleClick}>Butonnnnnnnnnnnnnnnnnnnnnnn</Button>
             <Router>
                 <Routes>
                     <Route path={RoutePathNames.dashboard} element={<Dashboard />} />

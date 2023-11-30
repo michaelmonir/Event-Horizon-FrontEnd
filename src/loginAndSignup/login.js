@@ -20,14 +20,6 @@ import {RoutePathNames} from "../Routes/RoutePathNames";
 function Login() {
     const navigate = useNavigate();
 
-    useEffect(() => {
-        if (isUserLoggedIn()) {
-            alert("User already logged in")
-            navigate(RoutePathNames.dashboard)
-        }
-    }, []);
-
-
     const [isLoginActive, setIsLoginActive] = useState(false);
     const loginFormik = useFormik({
         initialValues: {
@@ -87,7 +79,6 @@ function Login() {
         },
     });
 
-
     return (
         <div className="Body">
             <div className={classNames({"Container": true, "active": isLoginActive})} id="container">
@@ -117,15 +108,9 @@ function Login() {
                                 name={"role"}
                                 label="Role"
                             >
-                                <MenuItem value="ROLE_CLIENT">
-                                    CLIENT
-                                </MenuItem>
-                                <MenuItem value="ROLE_ORGANIZER">
-                                    ORGANIZER
-                                </MenuItem>
-                                <MenuItem value="ROLE_SPONSOR">
-                                    SPONSOR
-                                </MenuItem>
+                                <MenuItem value="ROLE_CLIENT"> CLIENT </MenuItem>
+                                <MenuItem value="ROLE_ORGANIZER">ORGANIZER</MenuItem>
+                                <MenuItem value="ROLE_SPONSOR"> SPONSOR </MenuItem>
                             </Select>
                         </FormControl>
                         <input name={"userName"}
@@ -143,7 +128,7 @@ function Login() {
                                className={
                                    signupFormik.touched.firstName && signupFormik.errors.firstName ? "Input error" : "Input"
                                }
-                               type="text" placeholder="First Name "/>
+                               type="text" placeholder="First Name"/>
                         {signupFormik.touched.firstName && signupFormik.errors.firstName ? (
                             <div className=" text-error">{signupFormik.errors.firstName}</div>) : null}
                         <input name={"lastName"}
@@ -189,7 +174,6 @@ function Login() {
                 <div className="form-container sign-in-container">
                     <form onSubmit={loginFormik.handleSubmit}>
                         <h2>Sign in</h2>
-
                         {/*for another phase when we add the google authentication */}
                         {
                             false ? (

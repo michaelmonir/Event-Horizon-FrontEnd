@@ -1,7 +1,7 @@
 export const RoutePathNames = {
     dashboard:"/",
     profile:"/profile",
-    login:"/login",
+    login:"/signup-login",
     validation:"/validation",
     event:"/event"
 }
