@@ -8,38 +8,25 @@ import Profile from "./porfile/profile";
 import Dashboard from './dashboard/dashboard.js';
 import ValidationPage from "./validation/validationPage";
 import Event from "./event/event";
+import RequireAuth from "./Authentication/RequireAuth";
+import RequireNoAuth from "./Authentication/ReruireNoAuth";
 
 function App() {
-
-
-
-    const LOCAL_STORAGE_KEY = "token";
-    const LOCAL_STORAGE_KEY_ID = "id";
-
-
-    const [token, setToken] = useState(JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) ?? []);
-    const [id, setId] = useState(JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_ID)) ?? []);
-    useEffect(() => {
-        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(token));
-    }, [token]);
-    useEffect(() => {
-        localStorage.setItem(LOCAL_STORAGE_KEY_ID, JSON.stringify(id))
-    }, [id]);
-
     return (
         <div className="App">
-            {/*<Dashboard />*/}
             <Router>
                 <Routes>
-                    <Route path="/" element={<Login/>}/>
-                    <Route path="/dashboard" element={<Dashboard/>}/>
-                    <Route path="/profile" element={<Profile/>}/>
-                    <Route path="/validation" element={<ValidationPage/>}/>
-                    <Route path="/event/:id" render={({ match }) => <Event id={match.params.id} />} />
-                    <Route path="/event" element={<Event/>}/>
+                    <Route path="/" element={<Dashboard />} />
+                    <Route element={<RequireAuth />}>
+                        <Route path="/event" element={<Event />} />
+                        <Route path="/profile" element={<Profile />} />
+                    </Route>
+                    <Route element={<RequireNoAuth />}>
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/validation" element={<ValidationPage />} />
+                    </Route>
                 </Routes>
             </Router>
-
         </div>
     );
 }

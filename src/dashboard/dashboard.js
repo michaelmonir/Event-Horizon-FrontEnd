@@ -47,11 +47,10 @@ function Dashboard() {
     const modifyPages= async ()=>{
 
         try {
-            const response = await EventApis.get("dashboard/"+page+"/"+rowsPerPage);
+            const response = await EventApis.get("dashboard/" + page + "/" + rowsPerPage);
             setEvents(response.data);
         }
-        catch(error)
-        {
+        catch(error) {
             alert(error.response.data.message)
         }
     }
