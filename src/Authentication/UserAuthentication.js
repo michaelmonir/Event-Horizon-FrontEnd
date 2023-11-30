@@ -31,3 +31,8 @@ export function removeUserLocalStorageData()
 export function isUserLoggedIn() {
     return (typeof getUserId() === "number")
 }
+
+
+export function isTheUserAnOrganizer(){
+    return (getUserRole() === "ROLE_ORGANIZER");
+}

@@ -9,6 +9,7 @@ import MultiActionAreaCard from "./eventCard";
 import BasicModal from "./EventModal/event-modal";
 import EventApis from "../Apis/EventApis/EventApis";
 import {Link} from "react-router-dom";
+import {isTheUserAnOrganizer} from "../Authentication/UserAuthentication";
 
 
 function Dashboard() {
@@ -146,7 +147,9 @@ function Dashboard() {
                 </div>
             </div>
         </div>
-        <BasicModal/>
+        {
+            isTheUserAnOrganizer() ? <BasicModal/> : null
+        }
     </div>
 }
 

@@ -91,26 +91,19 @@ export default function BasicModal() {
         }
 
     }
-    const LOCAL_STORAGE_KEY_Role = "role";
-
-    const isTheUserOrganizer = () => {
-        return (JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_Role)) === "ROLE_ORGANIZER");
-    }
 
     return (
         <div>
-            { isTheUserOrganizer() ? (
-                    <Button onClick={handleOpen}
-                            style={
-                                {
-                                    position: "absolute",
-                                    bottom: "40px",
-                                    right: "40px",
-                                }
-                            }
-                    >create event</Button>
-                ) : null
-            }
+            <Button onClick={handleOpen}
+                    style={
+                        {
+                            position: "absolute",
+                            bottom: "40px",
+                            right: "40px",
+                        }
+                    }
+            >create event</Button>
+
             <Modal
                 open={open}
                 onClose={handleClose}
