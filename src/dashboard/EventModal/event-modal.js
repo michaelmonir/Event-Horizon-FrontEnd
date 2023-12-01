@@ -4,17 +4,15 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import TextField from "@mui/material/TextField";
-import MenuItem from '@mui/material/MenuItem';
-import FormHelperText from '@mui/material/FormHelperText';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import {InputLabel} from "@mui/material";
 import EventApis from "../../Apis/EventApis/EventApis";
 import { useNavigate } from 'react-router-dom';
 import {CountryCityStreet} from "./CountryCityStreet";
 import {Category} from "./Category";
-import {getUserId, getUserToken} from "../../Authentication/UserAuthentication";
 import {RoutePathNames} from "../../Routes/RoutePathNames";
+import {AdsPlan} from "./AdsOptions";
+import {Description} from "./Description";
+import {DateTime} from "./DateTime"
+import {getUserId} from "../../Authentication/UserAuthentication";
 
 
 const style = {
@@ -41,12 +39,9 @@ export default function BasicModal() {
         setStatesInCountry([]);
         setAdsPlan("");
     }
-    const adsPlansOptions = ["Free Plan", "Regular Plan", "Premium Plan"]
-    const planIndexMap = new Map(adsPlansOptions.map((plan, index) => [plan, index]));
 
     const handleClose = () => setOpen(false);
     const [name, setName] = React.useState("");
-    const [description, setDescription] = React.useState("");
     const [eventCategory, setEventCategory] = React.useState("");
     const [eventSubCategory, setEventSubCategory] = React.useState("");
     const [adsPlan, setAdsPlan] = React.useState("");
@@ -56,6 +51,7 @@ export default function BasicModal() {
     const [address, setAddress] = React.useState("");
     const [statesInCountry, setStatesInCountry] = React.useState([]);
 
+    const [description, setDescription] = React.useState("");
 
     const handleEventCreation = async(e) => {
         e.preventDefault();
@@ -64,10 +60,7 @@ export default function BasicModal() {
             "description": description,
             "eventCategory": eventCategory + "-" + eventSubCategory,
             "eventDate": date,
-            "eventAds": {
-                            "id": planIndexMap.get(adsPlan)+1,
-                            "name":adsPlan
-                        },
+            "eventAds": adsPlan,
             "eventLocation": {
                 "country": country,
                 "city": state,
@@ -75,11 +68,8 @@ export default function BasicModal() {
             }
         }
         try {
-            const config = {
-                headers: { Authorization: `Bearer ${getUserToken()}` }
-            };
             const response =
-                await EventApis.post("createEvent/" + getUserId(), event, config)
+                await EventApis.post("createEvent/" + getUserId(), event)
             const myId=response.data.id;
             const params = {
                 id: myId,
@@ -87,8 +77,7 @@ export default function BasicModal() {
 
             navigate(RoutePathNames.event, { state: params });
         }
-        catch(error)
-        {
+        catch(error) {
             alert(error.response.data.message)
         }
 
@@ -129,65 +118,14 @@ export default function BasicModal() {
                                 country={country} state={state} address={address} statesInCountry={statesInCountry}
                                 setCountry={setCountry} setState={setState} setAddress={setAddress} setStatesInCountry={setStatesInCountry}
                             />
-
                             <Category
                                 eventCategory={eventCategory} eventSubCategory={eventSubCategory}
                                 setEventCategory={setEventCategory} setEventSubCategory={setEventSubCategory}
                             />
+                            <Description description={description} setDescription={setDescription}/>
+                            <AdsPlan setAdsPlan={setAdsPlan} />
+                            <DateTime date={date} setDate={setDate} />
 
-                            <TextField
-                                id="fullWidth"
-                                type={"number"}
-                                label="Description"
-                                placeholder="description"
-                                multiline
-                                required={true}
-                                sx={{width: 600}}
-                                helperText="please enter the Event Description"
-                                value={description}
-                                onChange={(event) => {
-                                    setDescription(event.target.value)
-                                }}
-                            />
-                            <FormControl sx={{minWidth: 600}}>
-                                <InputLabel id="demo-simple-select-helper-label">The Ads plan</InputLabel>
-                                <Select
-                                    labelId="demo-simple-select-helper-label"
-                                    id="demo-simple-select-helper"
-                                    label="ads Plans"
-                                    required={true}
-                                    value={adsPlan}
-                                    onChange={(event) => {
-                                            setAdsPlan(event.target.value);
-                                        }
-                                    }
-                                >
-                                {adsPlansOptions.map((option, index) => (
-                                    <MenuItem key={index} value={option}>
-                                        {option}
-                                    </MenuItem>
-                                ))}
-                                </Select>
-                                <FormHelperText>
-                                    Choose your Suitable Ads plan
-                                </FormHelperText>
-                            </FormControl>
-                            <TextField
-                                id="datetime-local"
-                                label="Event Date"
-                                value={date}
-
-                                onChange={(event) => {
-                                    setDate(event.target.value)
-                                }}
-                                defaultValue={new Date().toISOString().slice(0, 16)}
-                                type="datetime-local"
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                                required={true}
-                                helperText="please enter the Event Date"
-                            />
                             <Button type="submit" value="Submit" variant="contained">
                                 Submit
                             </Button>
