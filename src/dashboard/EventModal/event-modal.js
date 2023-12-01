@@ -4,16 +4,13 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import TextField from "@mui/material/TextField";
-import MenuItem from '@mui/material/MenuItem';
-import FormHelperText from '@mui/material/FormHelperText';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import {InputLabel} from "@mui/material";
 import EventApis from "../../Apis/EventApis/EventApis";
 import { useNavigate } from 'react-router-dom';
 import {CountryCityStreet} from "./CountryCityStreet";
 import {Category} from "./Category";
 import {AdsPlan} from "./AdsOptions";
+import {Description} from "./Description";
+import {DateTime} from "./DateTime";
 
 
 const style = {
@@ -43,7 +40,6 @@ export default function BasicModal() {
 
     const handleClose = () => setOpen(false);
     const [name, setName] = React.useState("");
-    const [description, setDescription] = React.useState("");
     const [eventCategory, setEventCategory] = React.useState("");
     const [eventSubCategory, setEventSubCategory] = React.useState("");
     const [adsPlan, setAdsPlan] = React.useState("");
@@ -53,6 +49,7 @@ export default function BasicModal() {
     const [address, setAddress] = React.useState("");
     const [statesInCountry, setStatesInCountry] = React.useState([]);
 
+    const [description, setDescription] = React.useState("");
 
     const handleEventCreation = async(e) => {
         e.preventDefault();
@@ -79,8 +76,7 @@ export default function BasicModal() {
             // Navigate to a new route and pass parameters
             navigate('/event', { state: params });
         }
-        catch(error)
-        {
+        catch(error) {
             alert(error.response.data.message)
         }
 
@@ -121,45 +117,14 @@ export default function BasicModal() {
                                 country={country} state={state} address={address} statesInCountry={statesInCountry}
                                 setCountry={setCountry} setState={setState} setAddress={setAddress} setStatesInCountry={setStatesInCountry}
                             />
-
                             <Category
                                 eventCategory={eventCategory} eventSubCategory={eventSubCategory}
                                 setEventCategory={setEventCategory} setEventSubCategory={setEventSubCategory}
                             />
-
-                            <TextField
-                                id="fullWidth"
-                                type={"number"}
-                                label="Description"
-                                placeholder="description"
-                                multiline
-                                required={true}
-                                sx={{width: 600}}
-                                helperText="please enter the Event Description"
-                                value={description}
-                                onChange={(event) => {
-                                    setDescription(event.target.value)
-                                }}
-                            />
-
+                            <Description description={description} setDescription={setDescription}/>
                             <AdsPlan setAdsPlan={setAdsPlan} />
+                            <DateTime date={date} setDate={setDate} />
 
-                            <TextField
-                                id="datetime-local"
-                                label="Event Date"
-                                value={date}
-
-                                onChange={(event) => {
-                                    setDate(event.target.value)
-                                }}
-                                defaultValue={new Date().toISOString().slice(0, 16)}
-                                type="datetime-local"
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                                required={true}
-                                helperText="please enter the Event Date"
-                            />
                             <Button type="submit" value="Submit" variant="contained">
                                 Submit
                             </Button>
