@@ -13,6 +13,7 @@ import EventApis from "../../Apis/EventApis/EventApis";
 import { useNavigate } from 'react-router-dom';
 import {CountryCityStreet} from "./CountryCityStreet";
 import {Category} from "./Category";
+import {AdsPlan} from "./AdsOptions";
 
 
 const style = {
@@ -39,8 +40,6 @@ export default function BasicModal() {
         setStatesInCountry([]);
         setAdsPlan("");
     }
-    const adsPlansOptions = ["Free Plan", "Regular Plan", "Premium Plan"]
-    const planIndexMap = new Map(adsPlansOptions.map((plan, index) => [plan, index]));
 
     const handleClose = () => setOpen(false);
     const [name, setName] = React.useState("");
@@ -62,10 +61,7 @@ export default function BasicModal() {
             "description": description,
             "eventCategory": eventCategory + "-" + eventSubCategory,
             "eventDate": date,
-            "eventAds": {
-                            "id": planIndexMap.get(adsPlan)+1,
-                            "name":adsPlan
-                        },
+            "eventAds": adsPlan,
             "eventLocation": {
                 "country": country,
                 "city": state,
@@ -145,29 +141,9 @@ export default function BasicModal() {
                                     setDescription(event.target.value)
                                 }}
                             />
-                            <FormControl sx={{minWidth: 600}}>
-                                <InputLabel id="demo-simple-select-helper-label">The Ads plan</InputLabel>
-                                <Select
-                                    labelId="demo-simple-select-helper-label"
-                                    id="demo-simple-select-helper"
-                                    label="ads Plans"
-                                    required={true}
-                                    value={adsPlan}
-                                    onChange={(event) => {
-                                            setAdsPlan(event.target.value);
-                                        }
-                                    }
-                                >
-                                {adsPlansOptions.map((option, index) => (
-                                    <MenuItem key={index} value={option}>
-                                        {option}
-                                    </MenuItem>
-                                ))}
-                                </Select>
-                                <FormHelperText>
-                                    Choose your Suitable Ads plan
-                                </FormHelperText>
-                            </FormControl>
+
+                            <AdsPlan setAdsPlan={setAdsPlan} />
+
                             <TextField
                                 id="datetime-local"
                                 label="Event Date"
