@@ -14,6 +14,7 @@ import {
     Typography,
     Modal
 } from "@mui/material";
+import {getUserId} from "../Authentication/UserAuthentication";
 
 
 const style = {
@@ -32,37 +33,32 @@ const style = {
 
 export default function BasicModal({defaultFirstName, defaultLastName, defaultGender, defaultPaypalAccount}) {
 
-    const [firstName, setFirstName] = React.useState(defaultFirstName);
+    const [firstName, setFirstName] = React.useState(defaultFirstName || '');
     const [lastName, setLastName] = React.useState(defaultLastName);
     const [gender, setGender] = React.useState(defaultGender);
     const [paypalAccount, setPaypalAccount] = React.useState(defaultPaypalAccount);
-
 
     const [open, setOpen] = React.useState(false);
 
     const handleOpen = () => {
         setOpen(true);
     }
-
     const handleClose = () => setOpen(false);
 
-    const LOCAL_STORAGE_KEY_ID = "id";
-    const handleInformationChange = async (event) => {
-        // event.preventDefault(); //////  to  handle page refresh
+    const handleInformationChange = async () => {
         const newInformation = {
-            "id":JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_ID)),
-            "firstName": firstName,
-            "lastName": lastName,
-            "gender": gender,
-            "payPalAccount": paypalAccount,
+            id:getUserId(),
+            firstName: firstName,
+            lastName: lastName,
+            gender: gender,
+            payPalAccount: paypalAccount,
         }
         try {
-            const response = await informationApis.put("updateInformation", newInformation);
+            await informationApis.put("updateInformation", newInformation);
         } catch (error) {
             alert(error.response.data.message)
         }
     }
-
 
     return (
         <div>
@@ -79,56 +75,53 @@ export default function BasicModal({defaultFirstName, defaultLastName, defaultGe
                     </Typography>
                     <Typography id="modal-modal-description" sx={{mt: 1}}>
                         <form className="profile-update-modal-form" onSubmit={handleInformationChange}>
-                            <TextField variant={"outlined"} label={"First Name"} defaultValue={defaultFirstName}
 
+
+                            <TextField variant={"outlined"} label={"First Name"}
+                                       defaultValue={defaultFirstName}
                                        value={firstName}
                                        onChange={(event) => {
                                            setFirstName(event.target.value)
                                        }}
-
                             />
-                            <TextField variant={"outlined"} label={"Last Name"} defaultValue={defaultLastName}
-
+                            {/*defaultValue={defaultLastName}*/}
+                            <TextField variant={"outlined"} label={"Last Name"}
+                                       defaultValue={defaultLastName}
                                        value={lastName}
                                        onChange={(event) => {
                                            setLastName(event.target.value)
                                        }}
-
                             />
-                            <TextField variant={"outlined"} label={"Paypal Account"} defaultValue={defaultPaypalAccount}
+                            {/*defaultValue={defaultPaypalAccount}*/}
+                            <TextField variant={"outlined"} label={"Paypal Account"}
 
                                        value={paypalAccount}
                                        onChange={(event) => {
                                            setPaypalAccount(event.target.value)
                                        }}
-
-
                             />
                             <FormControl sx={{maxWidth: 200}}>
                                 <InputLabel id="demo-simple-select-helper-label">gender</InputLabel>
                                 <Select
-                                    labelId="demo-simple-select-helper-label"
-                                    id="demo-simple-select-helper"
-                                    label="gender"
-                                    value={gender}
-                                    onChange={(event) => {
-                                        setGender(event.target.value)
-                                        defaultGender = event.target.value
-                                        console.log(gender)
-                                    }
-                                    }
+                                    labelId = "demo-simple-select-helper-label"
+                                    id = "demo-simple-select-helper"
+                                    label = "gender"
+                                    value = {gender}
+                                    onChange = { (event) => setGender(event.target.value) }
                                 >
-                                    <MenuItem value={defaultGender}>{defaultGender}</MenuItem>
-                                    <MenuItem
-                                        value={defaultGender === "MALE" ? "FEMALE" : "MALE"}>{defaultGender === "MALE" ? "FEMALE" : "MALE"} </MenuItem>
+                                    <MenuItem value="Male">Male</MenuItem>
+                                    <MenuItem value="Female">Female</MenuItem>
+
+                                    {/*<MenuItem value={defaultGender}>{defaultGender}</MenuItem>*/}
+                                    {/*<MenuItem value={defaultGender === "MALE" ? "FEMALE" : "MALE"}>{defaultGender === "MALE" ? "FEMALE" : "MALE"} </MenuItem>*/}
                                 </Select>
                                 <FormHelperText>
                                     select Gender of your choice
                                 </FormHelperText>
                             </FormControl>
                             <Button type="submit" value="Submit" variant="contained" style={{
-                                width: "150px", color: "##150044",
-                            }}>
+                                    width: "150px", color: "##150044",
+                                }}>
                                 Submit
                             </Button>
                         </form>

@@ -9,32 +9,32 @@ import {ProfileAttributeComponent} from "./ProfileAttributeComponent";
 
 function Profile() {
 
-
     const [profileAttributes, setProfileAttributes] = React.useState({
+        userName:"",
         firstName:"",
         lastName:"",
-        paypalAccount:"",
-        userName:"",
         role:"",
-        gender:""
+        gender:"",
+        paypalAccount:"",
     });
 
-    const f = async() => {
-        try {
-            const response = await informationApis.get("getInformationViewDto", {
-                params: {
-                    "id": getUserId()
-                },
-            });
-            setProfileAttributes(response.data)
-        } catch (error) {
-            alert(error.response.data.message)
-        }
-    }
-
     useEffect(() => {
-        f()
+        const sendInformationRequest = async() => {
+            try {
+                const response = await informationApis.get("getInformationViewDto", {
+                    params: {
+                        "id": getUserId()
+                    },
+                });
+                alert(JSON.stringify(response.data))
+                setProfileAttributes(response.data)
+            } catch (error) {
+                alert(error.response.data.message)
+            }
+        }
+        sendInformationRequest()
     }, []);
+
     return (
         <div className="profile-container">
             <ProfileSideMenu profileAttributes={profileAttributes} />
@@ -53,14 +53,13 @@ function Profile() {
                 </div>
                 <div className="profile-main-content-body">
 
-                    <ProfileAttributeComponent attributeName={"UserName"} attributeValue={profileAttributes.userName} />
-                    <ProfileAttributeComponent attributeName={"First Name"} attributeValue={profileAttributes.firstName} />
-                    <ProfileAttributeComponent attributeName={"Last Name"} attributeValue={profileAttributes.lastName} />
-                    <ProfileAttributeComponent attributeName={"Last Name"} attributeValue={profileAttributes.lastName} />
-                    <ProfileAttributeComponent attributeName={"Role"} attributeValue={profileAttributes.role} />
-                    <ProfileAttributeComponent attributeName={"Email"} attributeValue={profileAttributes.email} />
+                    <ProfileAttributeComponent attributeName="UserName" attributeValue={profileAttributes.userName} />
+                    <ProfileAttributeComponent attributeName="Email" attributeValue={profileAttributes.email} />
+                    <ProfileAttributeComponent attributeName="First Name" attributeValue={profileAttributes.firstName} />
+                    <ProfileAttributeComponent attributeName="Last Name" attributeValue={profileAttributes.lastName} />
+                    <ProfileAttributeComponent attributeName="Role" attributeValue={profileAttributes.role} />
                     <ProfileAttributeComponent attributeName={"Gender"} attributeValue={profileAttributes.gender} />
-                    <ProfileAttributeComponent attributeName={"Paypal Account"} attributeValue={profileAttributes.gender} />
+                    <ProfileAttributeComponent attributeName="Paypal Account" attributeValue={profileAttributes.paypalAccount} />
                 </div>
             </div>
         </div>
