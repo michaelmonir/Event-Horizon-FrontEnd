@@ -1,5 +1,5 @@
 class Location{
-    Country;
-    City;
-    Street;
+    country;
+    city;
+    address;
 }

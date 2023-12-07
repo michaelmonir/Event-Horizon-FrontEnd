@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import informationApis from "../Apis/UserApis/InformationApis";
-import axios from 'axios'
 import {FaPen} from "react-icons/fa6";
 import {
     FormControl,
@@ -15,8 +14,7 @@ import {
     Typography,
     Modal
 } from "@mui/material";
-import EventApis from "../Apis/EventApis/EventApis";
-import {useState} from "react";
+
 
 const style = {
     position: 'absolute',
@@ -30,11 +28,6 @@ const style = {
     borderRadius: "24px",
     width: "50%",
 };
-
-
-
-
-
 
 
 export default function BasicModal({defaultFirstName, defaultLastName, defaultGender, defaultPaypalAccount}) {
@@ -53,26 +46,20 @@ export default function BasicModal({defaultFirstName, defaultLastName, defaultGe
 
     const handleClose = () => setOpen(false);
 
-
-
+    const LOCAL_STORAGE_KEY_ID = "id";
     const handleInformationChange = async (event) => {
-        event.preventDefault(); //////  to  handle page refresh
+        // event.preventDefault(); //////  to  handle page refresh
         const newInformation = {
+            "id":JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_ID)),
             "firstName": firstName,
             "lastName": lastName,
             "gender": gender,
             "payPalAccount": paypalAccount,
         }
-        const id = 1;
         try {
-            alert("enter try ")
             const response = await informationApis.put("updateInformation", newInformation);
-            alert(response)
-            console.log(response);
-            alert("okk")
         } catch (error) {
-
-            alert("not Found")
+            alert(error.response.data.message)
         }
     }
 
@@ -94,16 +81,16 @@ export default function BasicModal({defaultFirstName, defaultLastName, defaultGe
                         <form className="profile-update-modal-form" onSubmit={handleInformationChange}>
                             <TextField variant={"outlined"} label={"First Name"} defaultValue={defaultFirstName}
 
-                                   value={firstName}
-                                   onChange={(event)=> {
-                                       setFirstName(event.target.value)
-                                   }}
+                                       value={firstName}
+                                       onChange={(event) => {
+                                           setFirstName(event.target.value)
+                                       }}
 
                             />
                             <TextField variant={"outlined"} label={"Last Name"} defaultValue={defaultLastName}
 
                                        value={lastName}
-                                       onChange={(event)=> {
+                                       onChange={(event) => {
                                            setLastName(event.target.value)
                                        }}
 
@@ -111,7 +98,7 @@ export default function BasicModal({defaultFirstName, defaultLastName, defaultGe
                             <TextField variant={"outlined"} label={"Paypal Account"} defaultValue={defaultPaypalAccount}
 
                                        value={paypalAccount}
-                                       onChange={(event)=> {
+                                       onChange={(event) => {
                                            setPaypalAccount(event.target.value)
                                        }}
 
@@ -123,16 +110,17 @@ export default function BasicModal({defaultFirstName, defaultLastName, defaultGe
                                     labelId="demo-simple-select-helper-label"
                                     id="demo-simple-select-helper"
                                     label="gender"
-                                    value={defaultGender}
+                                    value={gender}
                                     onChange={(event) => {
+                                        setGender(event.target.value)
                                         defaultGender = event.target.value
-                                        console.log(defaultGender)
+                                        console.log(gender)
                                     }
                                     }
                                 >
                                     <MenuItem value={defaultGender}>{defaultGender}</MenuItem>
                                     <MenuItem
-                                        value={defaultGender === "Male" ? "Female" : "Male"}>{defaultGender === "Male" ? "Female" : "Male"} </MenuItem>
+                                        value={defaultGender === "MALE" ? "FEMALE" : "MALE"}>{defaultGender === "MALE" ? "FEMALE" : "MALE"} </MenuItem>
                                 </Select>
                                 <FormHelperText>
                                     select Gender of your choice

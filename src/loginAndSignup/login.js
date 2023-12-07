@@ -1,4 +1,4 @@
-import {useState,useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import './login.css';
 import Button from '@mui/material/Button';
 import {FaGoogle} from "react-icons/fa";
@@ -10,18 +10,15 @@ import ProxyApi from "../Apis/ProxyApis/ProxyApis";
 import {InputLabel} from "@mui/material";
 import * as React from "react";
 import MenuItem from '@mui/material/MenuItem';
-import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import {useNavigate} from "react-router-dom";
+import {isUserLoggedIn, setUserLocalStorageData} from "../Authentication/UserAuthentication";
+import {RoutePathNames} from "../Routes/RoutePathNames";
+
 
 function Login() {
-    const LOCAL_STORAGE_KEY = "token";
-
-    const [token, setToken] = useState(JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) ?? []);
-
-    useEffect(() => {
-        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(token));
-    }, [token]);
+    const navigate = useNavigate();
 
     const [isLoginActive, setIsLoginActive] = useState(false);
     const loginFormik = useFormik({
@@ -31,20 +28,17 @@ function Login() {
         },
         validationSchema: loginValidation,
         onSubmit: async (values, actions) => {
-            console.log(values);
-            console.log(actions);
             const authenticationRequest = {
                 "email": values.email,
                 "password": values.password
             }
             try {
-                const response = await ProxyApi.post("basicSignIn", authenticationRequest);
-                setToken(response.data.token);
-                console.log(response)
-                alert("okk")
+                const response = await ProxyApi.post("basicSignIn", authenticationRequest)
+                setUserLocalStorageData(response.data.id, response.data.token, response.data.role)
+                navigate(RoutePathNames.dashboard);
             } catch (error) {
                 actions.resetForm();
-                alert("not okk")
+                alert(error.response.data.message)
             }
         }
     });
@@ -73,18 +67,17 @@ function Login() {
                 "payPalAccount": "",
                 "signInWithEmail": 0
             }
-            console.log(informationDto);
             try {
-                const response = await ProxyApi.post("basicSignUp", informationDto);
-                setToken(response.data.token);
-                console.log(response)
-                alert("okk")
+                const response =await ProxyApi.post("basicSignUp", informationDto)
+
+                setUserLocalStorageData(response.data.id, response.data.token, response.data.role)
+                navigate(RoutePathNames.validation)
             } catch (error) {
-                alert("not okk")
+                actions.resetForm();
+                alert(error.response.data.message)
             }
         },
     });
-
 
     return (
         <div className="Body">
@@ -92,11 +85,20 @@ function Login() {
                 <div className="form-container sign-up-container">
                     <form onSubmit={signupFormik.handleSubmit}>
                         <h2>Create Account</h2>
-                        <div className="social-container">
-                            <a href="#" className="social"><FaGoogle className="social-icon"/></a>
-                        </div>
-                        <span>or use your Gmail to register</span>
-                        <FormControl  sx={{minWidth: 300}}>
+
+                        {/*will be added in the next phase*/}
+                        {
+                            false ? (
+                                <div>
+                                    <div className="social-container">
+                                    <a href="#" className="social"><FaGoogle className="social-icon"/></a>
+                                    </div>
+                                    <span>or use your Gmail to register</span>
+                                </div>
+                            ) : null
+                        }
+
+                        <FormControl sx={{minWidth: 300}}>
                             <InputLabel id="demo-simple-select-helper-label">Role</InputLabel>
                             <Select
                                 required={true}
@@ -106,17 +108,11 @@ function Login() {
                                 name={"role"}
                                 label="Role"
                             >
-                                <MenuItem value= "ROLE_CLIENT">
-                                    CLIENT
-                                </MenuItem>
-                                <MenuItem value= "ROLE_ORGANIZER">
-                                    ORGANIZER
-                                </MenuItem>
-                                <MenuItem value= "ROLE_SPONSOR">
-                                    SPONSOR
-                                </MenuItem>
+                                <MenuItem value="ROLE_CLIENT"> CLIENT </MenuItem>
+                                <MenuItem value="ROLE_ORGANIZER">ORGANIZER</MenuItem>
+                                <MenuItem value="ROLE_SPONSOR"> SPONSOR </MenuItem>
                             </Select>
-                            </FormControl>
+                        </FormControl>
                         <input name={"userName"}
                                onChange={signupFormik.handleChange}
                                onBlur={signupFormik.handleBlur}
@@ -132,7 +128,7 @@ function Login() {
                                className={
                                    signupFormik.touched.firstName && signupFormik.errors.firstName ? "Input error" : "Input"
                                }
-                               type="text" placeholder="First Name "/>
+                               type="text" placeholder="First Name"/>
                         {signupFormik.touched.firstName && signupFormik.errors.firstName ? (
                             <div className=" text-error">{signupFormik.errors.firstName}</div>) : null}
                         <input name={"lastName"}
@@ -178,10 +174,17 @@ function Login() {
                 <div className="form-container sign-in-container">
                     <form onSubmit={loginFormik.handleSubmit}>
                         <h2>Sign in</h2>
-                        <div className="social-container">
-                            <a href="#" className="social"><FaGoogle className="social-icon"/></a>
-                        </div>
-                        <span>use your account</span>
+                        {/*for another phase when we add the google authentication */}
+                        {
+                            false ? (
+                                <div>
+                                    <div className="social-container">
+                                        <a href="#" className="social"><FaGoogle className="social-icon"/></a>
+                                    </div>
+                                    <span>use your account</span>
+                                </div>
+                            ) : null
+                        }
                         <input
                             name={"email"}
                             value={loginFormik.values.email}
@@ -201,8 +204,13 @@ function Login() {
                             type="password" placeholder="Password"/>
                         {loginFormik.touched.password && loginFormik.errors.password ? (
                             <div className=" text-error">{loginFormik.errors.password}</div>) : null}
-                        <a href="#">Forgot your password?</a>
-                        <Button variant="contained" type="submit">Sign In</Button>
+                        {
+                            false ? (
+                                <a href="#">Forgot your password?</a>
+                            ) : null
+                        }
+                        <Button variant="contained" type="submit">
+                            >Sign In</Button>
                     </form>
                 </div>
                 <div className="overlay-container">

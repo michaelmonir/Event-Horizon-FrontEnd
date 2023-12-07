@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import "./dashboard.css";
 import {FaUnlock, FaLock, FaSearch} from "react-icons/fa";
 import {FiMenu} from "react-icons/fi";
@@ -6,7 +6,10 @@ import {GiRamProfile} from "react-icons/gi";
 import {FaShuttleSpace} from "react-icons/fa6";
 import TablePagination from '@mui/material/TablePagination';
 import MultiActionAreaCard from "./eventCard";
-import BasicModal from "./event-modal";
+import BasicModal from "./EventModal/event-modal";
+import EventApis from "../Apis/EventApis/EventApis";
+import {Link} from "react-router-dom";
+import {isTheUserAnOrganizer} from "../Authentication/UserAuthentication";
 
 
 function Dashboard() {
@@ -33,15 +36,34 @@ function Dashboard() {
         }
     }
 
-    const [page, setPage] = React.useState(2);
+    const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
-    const handleChangePage = (event, newPage) => {
+    const [events, setEvents] = React.useState([]);
+    useEffect(() => {
+        modifyPages();// Access the updated value here
+    }, [page]);
+    useEffect(() => {
+        modifyPages();// Access the updated value here
+    }, [rowsPerPage]);
+    const modifyPages= async ()=>{
+
+        try {
+            const response = await EventApis.get("dashboard/" + page + "/" + rowsPerPage);
+            setEvents(response.data);
+        }
+        catch(error) {
+            alert(error.response.data.message)
+        }
+    }
+    const handleChangePage = async(event, newPage) =>  {
         setPage(newPage);
+        modifyPages();
     };
 
     const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(parseInt(event.target.value, 10));
+        setRowsPerPage(parseInt(event.target.value));
         setPage(0);
+        modifyPages();
     };
 
 
@@ -84,10 +106,10 @@ function Dashboard() {
             <div className="sidebar-profile-container flex">
                 <div className="sidebar-profile flex">
                     {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                    <a className="flex"><GiRamProfile/></a>
+                    <Link to={"/profile"} className="flex"><GiRamProfile/></Link>
                     <div className="sidebar-profile-info">
-                        <span className="sidebar-profile-name">Youssef</span>
-                        <sub className="sidebar-profile-position">Admin</sub>
+                        <span className="sidebar-profile-name">User</span>
+                        {/*<sub className="sidebar-profile-position">Profile</sub>*/}
                     </div>
                 </div>
             </div>
@@ -118,14 +140,16 @@ function Dashboard() {
             </nav>
             <div className="content-container center">
                 <div className="content-body flex">
-                    {Array(50).fill(0).map((_, i) => <div className="card-container center">
-                        <MultiActionAreaCard key={i}/>
+                    {events.map((e, i) => <div className="card-container center">
+                        <MultiActionAreaCard key={i} eventHeader={e}/>
                     </div>)
                     }
                 </div>
             </div>
         </div>
-        <BasicModal/>
+        {
+            isTheUserAnOrganizer() ? <BasicModal/> : null
+        }
     </div>
 }
 

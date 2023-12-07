@@ -1,42 +1,92 @@
-import React from "react";
+import React, {useEffect} from "react";
 import "./event.css";
-import Button from "@mui/material/Button";
-import {FaPen} from "react-icons/fa6";
 import "../dashboard/dashboard.css";
-import UpdateModal from "./event-update-modal";
+import EventApis from "../Apis/EventApis/EventApis";
+import { useLocation } from 'react-router-dom';
+import Dashboard from "../dashboard/dashboard";
+import {useNavigate} from "react-router-dom";
+import Button from "@mui/material/Button";
+import {RoutePathNames} from "../Routes/RoutePathNames";
 
 function Event() {
+
+    const navigate = useNavigate();
+    const [attributes, setAttributes] = React.useState({
+            "name":"",
+            "description":"",
+            "eventCategory":"",
+            "eventDate":"",
+            "eventAds":"",
+            "eventLocation":{
+                "country":"",
+                "city":"",
+                "address":""
+            },
+            "eventOrganizer":{
+                "id":0,
+                "name":""
+            }
+        });
+    const location = useLocation();
+    const params = location.state;
+    const id = params.id
+
+
+    const f = async() => {
+        try {
+            const response = await EventApis.get("eventForUser/"+id);
+            setAttributes(response.data)
+        } catch (error) {
+            alert(error.response.data.message)
+        }
+    }
+
+    useEffect(() => {
+        f()
+    }, []);
+
     return <div className="event">
         <div className="event-header">
             <div className="event-header-title">
-                <span>event name here</span>
+                <span>{attributes.name}</span>
             </div>
+
             <div className="event-header-content">
-                   <UpdateModal/>
+                <Button variant={"contained"} onClick={() => {
+                        navigate(RoutePathNames.dashboard)
+                    }}
+                >
+                    Dashboard
+                </Button>
             </div>
         </div>
         <div className="event-body">
             <div className="event-body-title">
-                <span>Made by: Mohammad</span>
+                <span>Made by : {attributes.eventOrganizer.name}</span>
             </div>
             <div className="event-content">
                 <div className="event-location">
                     <span>Location: </span>
-                    <span> location here</span>
+                    <span>
+                        {attributes.eventLocation.country}, {attributes.eventLocation.city}, {attributes.eventLocation.address}
+                    </span>
                 </div>
+                <div className="event-category">
+                    <span>Category: </span>
+                    <span>{attributes.eventCategory}</span>
+                </div>
+                {/*<div className="event-ads">*/}
+                {/*    <span>Ads: </span>*/}
+                {/*    <span>{attributes.eventAds.name}</span>*/}
+                {/*</div>*/}
                 <div className="event-date">
                     <span>Date: </span>
-                    <span> date here</span>
-                </div>
-                <div className="event-ticket">
-                    <span>Ticket: </span>
-                    <span>ticket here</span>
+                    <span>{attributes.eventDate}</span>
                 </div>
                 <div className="event-description">
                     <span>Description: </span>
-                    <span>description here</span>
+                    <span>{attributes.description}</span>
                 </div>
-
             </div>
         </div>
     </div>

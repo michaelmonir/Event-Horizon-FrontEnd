@@ -1,30 +1,59 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import {useNavigate} from "react-router-dom";
 import './profie.css';
 import {IoHome} from "react-icons/io5";
-import {FaPen} from "react-icons/fa6";
-import { FaTrashAlt } from "react-icons/fa";
 
 import {GiMailbox} from "react-icons/gi";
 import {FaBookmark} from "react-icons/fa";
 import {RiLogoutBoxLine} from "react-icons/ri";
 import BasicModal from "./profile-update-modal";
+import informationApis from "../Apis/UserApis/InformationApis";
+import {getUserId, isUserLoggedIn, removeUserLocalStorageData} from "../Authentication/UserAuthentication";
+import {RoutePathNames} from "../Routes/RoutePathNames";
 
 
 function Profile(props) {
+    const navigate = useNavigate();
 
-    const { firstName, lastName, email, gender, paypalAccount, userName, role } = props.profileAttributes;
+    const [profileAttributtes, setProfileAttributtes] = React.useState({
+        "firstName":"",
+        "lastName":"",
+        "paypalAccount":"",
+        "userName":"",
+        "role":"",
+        "gender":""
+    });
 
+    const f = async() => {
+        try {
+            const response = await informationApis.get("getInformationViewDto", {
+                params: {
+                    "id": getUserId()
+                },
+            });
+            setProfileAttributtes(response.data)
+        } catch (error) {
+            alert(error.response.data.message)
+        }
+    }
+
+    useEffect(() => {
+        f()
+    }, []);
     return (
         <div className="profile-container">
             <div className="profile-sidebar">
                 <div className="profile-header">
                     <div className="profile-pic"></div>
-                    <div className="profile-name">Mohamed Ryad</div>
-                    <div className="profile-desc">Admin</div>
+                    <div className="profile-name"> {profileAttributtes.firstName + " " + profileAttributtes.lastName} </div>
+                    <div className="profile-desc"> {profileAttributtes.role} </div>
                 </div>
                 <div className="profile-menu">
                     < div className="website-nav">
-                        <div className="menu-item">
+                        <div className="menu-item" onClick={() => {
+                            navigate(RoutePathNames.dashboard)
+                        }
+                        }>
                             <i><IoHome/></i>
                             <span>Home</span>
                         </div>
@@ -42,7 +71,12 @@ function Profile(props) {
                         </div>
                     </div>
 
-                    <div className="menu-item">
+                    <div className="menu-item" onClick={
+                        () => {
+                                removeUserLocalStorageData()
+                                navigate(RoutePathNames.dashboard)
+                            }
+                        }>
                         <RiLogoutBoxLine/>
                         <span>Log out</span>
                     </div>
@@ -54,40 +88,41 @@ function Profile(props) {
                         Profile
                     </div>
                     <div className="header-btns">
-                       <BasicModal defaultFirstName={firstName} defaultGender={gender} defaultLastName={lastName} defaultPaypalAccount={paypalAccount}/>
+                        <BasicModal defaultFirstName={profileAttributtes.firstName} defaultGender={profileAttributtes.gender} defaultLastName={profileAttributtes.lastName}
+                                    defaultPaypalAccount={profileAttributtes.paypalAccount}/>
                     </div>
                 </div>
                 <div className="profile-main-content-body">
                     <div className="profile-info-container"
-                            style={{
-                                borderTopLeftRadius: "35px",
-                                borderTopRightRadius: "35px",
-                            }}
+                         style={{
+                             borderTopLeftRadius: "35px",
+                             borderTopRightRadius: "35px",
+                         }}
                     >
                         <div className="profile-info-item">
                             <div className="profile-info-item-title">UserName:</div>
-                            <div className="profile-info-item-value">{userName}</div>
+                            <div className="profile-info-item-value">{profileAttributtes.userName}</div>
                         </div>
 
                     </div>
                     <div className="profile-info-container">
                         <div className="profile-info-item">
                             <div className="profile-info-item-title">first name:</div>
-                            <div className="profile-info-item-value">{firstName}</div>
+                            <div className="profile-info-item-value">{profileAttributtes.firstName}</div>
                         </div>
 
                     </div>
                     <div className="profile-info-container">
                         <div className="profile-info-item">
                             <div className="profile-info-item-title">last name:</div>
-                            <div className="profile-info-item-value">{lastName}</div>
+                            <div className="profile-info-item-value">{profileAttributtes.lastName}</div>
                         </div>
 
                     </div>
                     <div className="profile-info-container">
                         <div className="profile-info-item">
                             <div className="profile-info-item-title">Role:</div>
-                            <div className="profile-info-item-value">{role}</div>
+                            <div className="profile-info-item-value">{profileAttributtes.role}</div>
                         </div>
 
                     </div>
@@ -95,14 +130,14 @@ function Profile(props) {
                         <div className="profile-info-item">
                             <div className="profile-info-item-title">Email:</div>
                             <div className="profile-info-item-value">
-                                {email}
+                                {profileAttributtes.email}
                             </div>
                         </div>
                     </div>
                     <div className="profile-info-container">
                         <div className="profile-info-item">
                             <div className="profile-info-item-title">gender:</div>
-                            <div className="profile-info-item-value">{gender}</div>
+                            <div className="profile-info-item-value">{profileAttributtes.gender}</div>
                         </div>
                     </div>
                     <div className="profile-info-container"
@@ -113,13 +148,11 @@ function Profile(props) {
                     >
                         <div className="profile-info-item">
                             <div className="profile-info-item-title">paypal account:</div>
-                            <div className="profile-info-item-value"> {paypalAccount}</div>
+                            <div className="profile-info-item-value"> {profileAttributtes.paypalAccount}</div>
                         </div>
                     </div>
                 </div>
             </div>
-
-
         </div>
     );
 }
