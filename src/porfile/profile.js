@@ -52,7 +52,6 @@ function Profile() {
                     </div>
                 </div>
                 <div className="profile-main-content-body">
-
                     <ProfileAttributeComponent attributeName="UserName" attributeValue={profileAttributes.userName} />
                     <ProfileAttributeComponent attributeName="Email" attributeValue={profileAttributes.email} />
                     <ProfileAttributeComponent attributeName="First Name" attributeValue={profileAttributes.firstName} />

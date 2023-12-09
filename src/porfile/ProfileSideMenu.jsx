@@ -50,7 +50,7 @@ export const ProfileSideMenu = (props) => {
                         navigate(RoutePathNames.dashboard)
                     }
                 }>
-                    <RiLogoutBoxLine/>
+                    <i><RiLogoutBoxLine/></i>
                     <span>Log out</span>
                 </div>
             </div>
