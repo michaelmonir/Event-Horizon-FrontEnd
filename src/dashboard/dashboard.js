@@ -10,6 +10,7 @@ import BasicModal from "./EventModal/event-modal";
 import EventApis from "../Apis/EventApis/EventApis";
 import {Link} from "react-router-dom";
 import {isTheUserAnOrganizer} from "../Authentication/UserAuthentication";
+import LabTabs from "./tabs";
 
 
 function Dashboard() {
@@ -139,6 +140,9 @@ function Dashboard() {
                 </div>
             </nav>
             <div className="content-container center">
+                <div className="content-header">
+                    <LabTabs/>
+                </div>
                 <div className="content-body flex">
                     {events.map((e, i) => <div className="card-container center">
                         <MultiActionAreaCard key={i} eventHeader={e}/>
