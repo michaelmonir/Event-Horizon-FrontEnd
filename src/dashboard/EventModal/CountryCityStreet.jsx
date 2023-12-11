@@ -10,7 +10,7 @@ let countryAndID = countries.map((country) => ({name: country.name, isoCode: cou
 
 export const CountryCityStreet
     = ({country, state, address, statesInCountry,
-           setCountry, setState, setAddress, setStatesInCountry}) => {
+           setCountry, setState, setAddress, setStatesInCountry,req}) => {
 
     return (
         <div className="flex location">
@@ -21,7 +21,7 @@ export const CountryCityStreet
                 id="combo-box-demo"
                 options={countryNames}
                 sx={{width: 289}}
-                renderInput={(params) => <TextField required={true}{...params} label="Country"/>}
+                renderInput={(params) => <TextField required={req}{...params} label="Country"/>}
                 onChange={(event, value) => {
                     if (!value) {
                         setCountry(null);
@@ -44,7 +44,7 @@ export const CountryCityStreet
                 id="combo-box-demo"
                 options={statesInCountry}
                 sx={{width: 300}}
-                renderInput={(params) => <TextField {...params} required={true}label="State"/>}
+                renderInput={(params) => <TextField {...params} required={req} label="State"/>}
                 onChange={(event, value) => {
                     if (!value) {
                         setState(null);

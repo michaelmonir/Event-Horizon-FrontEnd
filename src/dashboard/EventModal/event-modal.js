@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import TextField from "@mui/material/TextField";
 import EventApis from "../../Apis/EventApis/EventApis";
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import {CountryCityStreet} from "./CountryCityStreet";
 import {Category} from "./Category";
 import {RoutePathNames} from "../../Routes/RoutePathNames";
@@ -53,7 +53,7 @@ export default function BasicModal() {
 
     const [description, setDescription] = React.useState("");
 
-    const handleEventCreation = async(e) => {
+    const handleEventCreation = async (e) => {
         e.preventDefault();
         const event = {
             "name": name,
@@ -70,14 +70,13 @@ export default function BasicModal() {
         try {
             const response =
                 await EventApis.post("createEvent/" + getUserId(), event)
-            const myId=response.data.id;
+            const myId = response.data.id;
             const params = {
                 id: myId,
             };
 
-            navigate(RoutePathNames.event, { state: params });
-        }
-        catch(error) {
+            navigate(RoutePathNames.event, {state: params});
+        } catch (error) {
             alert(error.response.data.message)
         }
 
@@ -116,15 +115,18 @@ export default function BasicModal() {
                             />
                             <CountryCityStreet
                                 country={country} state={state} address={address} statesInCountry={statesInCountry}
-                                setCountry={setCountry} setState={setState} setAddress={setAddress} setStatesInCountry={setStatesInCountry}
+                                setCountry={setCountry} setState={setState} setAddress={setAddress}
+                                setStatesInCountry={setStatesInCountry}
+                                req={true}
                             />
                             <Category
                                 eventCategory={eventCategory} eventSubCategory={eventSubCategory}
                                 setEventCategory={setEventCategory} setEventSubCategory={setEventSubCategory}
+                                req={true}
                             />
                             <Description description={description} setDescription={setDescription}/>
-                            <AdsPlan setAdsPlan={setAdsPlan} />
-                            <DateTime date={date} setDate={setDate} />
+                            <AdsPlan setAdsPlan={setAdsPlan} req={true}/>
+                            <DateTime date={date} setDate={setDate} req={true}/>
 
                             <Button type="submit" value="Submit" variant="contained">
                                 Submit

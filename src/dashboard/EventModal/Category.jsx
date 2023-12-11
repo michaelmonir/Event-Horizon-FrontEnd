@@ -18,17 +18,18 @@ let eventCategoriesMap = new Map([
 
 export const Category
     = ({eventCategory, eventSubCategory,
-           setEventCategory,setEventSubCategory}) => {
+           setEventCategory,setEventSubCategory,req}) => {
 
     return (
         <div>
             <Autocomplete
                 disablePortal
-                required={true}
                 id="combo-box-demo"
                 options={[...eventCategoriesMap.keys()]}
                 sx={{width: 600}}
-                renderInput={(params) => <TextField {...params}required={true} label="Event category"/>}
+                renderInput={(params) => <TextField {...params}
+                                                    required={req}
+                                                    label="Event category"/>}
                 onChange={(event, value) => {
                     if (!value) {
                         setEventCategory(null);
@@ -45,7 +46,8 @@ export const Category
                 options={eventCategory ? eventCategoriesMap.get(eventCategory) : []}
                 sx={{width: 600}}
                 value={eventSubCategory}
-                renderInput={(params) => <TextField {...params}required={true} label="Event sub-category"/>}
+                renderInput={(params) => <TextField {...params} required={req}
+                                                    label="Event sub-category"/>}
                 onChange={(event, value) => {
                     if (!value) {
                         setEventSubCategory(null);

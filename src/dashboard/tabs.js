@@ -1,6 +1,6 @@
 // Date: 2021-08-29
 
-import  { useState } from 'react';
+import {useState} from 'react';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
@@ -15,16 +15,15 @@ export default function LabTabs() {
     };
 
     return (
-        <Box sx={{ width: '100%', typography: 'body1' }}>
+        <Box sx={{width: '100%', typography: 'body1'}}>
             <TabContext value={value}>
-                <Box sx={{ borderBottom: 1, borderColor: 'divider' , width: '100%'}}>
+                <Box sx={{borderBottom: 1, borderColor: 'divider', width: '100%'}}>
                     <TabList onChange={handleChange} aria-label="lab API tabs example">
-                        <Tab sx={{width: '33.3%'}} label="Item One" value="1" />
-                        <Tab sx={{width: '33.3%'}} label="Item Two" value="2" />
-                        <Tab sx={{width: '33.3%'}} label="Item Three" value="3" />
+                        <Tab sx={{width: '33.3%'}} label="Future Events" value="1"/>
+                        <Tab sx={{width: '33.3%'}} label="Running Events" value="2"/>
+                        <Tab sx={{width: '33.3%'}} label="Past Events" value="3"/>
                     </TabList>
                 </Box>
-
             </TabContext>
         </Box>
     );
