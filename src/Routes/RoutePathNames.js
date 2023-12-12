@@ -5,4 +5,5 @@ export const RoutePathNames = {
     validation:"/validation",
     event:"/event",
     myEvents:"/myEvents",
+    ticket:"/ticket"
 }
