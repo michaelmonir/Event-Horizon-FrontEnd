@@ -66,7 +66,7 @@ export default function BasicPopover() {
                     horizontal: 'right',
                 }}
             >
-                <Typography sx={{ p: 2, height: 500 }}>
+                <Typography sx={{p: 2, height: 500}}>
                     <form className="filter-tab" onSubmit={handleFilter}>
                         <div className="filter-tab-header">
                             <h3>Filter</h3>
