@@ -10,40 +10,19 @@ import Event from "./event/event";
 import RequireAuth from "./Authentication/RequireAuth";
 import RequireNoAuth from "./Authentication/ReruireNoAuth";
 import {RoutePathNames} from "./Routes/RoutePathNames";
-import Button from "@mui/material/Button";
-import EventApis from "./Apis/EventApis/EventApis";
-import {getUserId, getUserToken} from "./Authentication/UserAuthentication";
+import MyEvents from "./myEventsPage/myEvents";
 
 
 function App(){
-    // const handleClick = async() => {
-    //     const event = {
-    //         "id":101,
-    //         "name":"myevent50"
-    //     }
-    //     try {
-    //         const config = {
-    //             headers: { Authorization: `Bearer ${getUserToken()}` }
-    //         };
-    //         console.log(config)
-    //         const response =
-    //             await EventApis.post("createEvent/" + getUserId(), event)
-    //         alert("ok")
-    //     }
-    //     catch (error)
-    //     {
-    //         alert("not ok")
-    //     }
-    // }
     return (
         <div className="App">
-            {/*<Button onClick={handleClick}>Butonnnnnnnnnnnnnnnnnnnnnnn</Button>*/}
             <Router>
                 <Routes>
                     <Route path={RoutePathNames.dashboard} element={<Dashboard />} />
                     <Route element={<RequireAuth />}>
                         <Route path={RoutePathNames.event} element={<Event />} />
                         <Route path={RoutePathNames.profile} element={<Profile />} />
+                        <Route path={RoutePathNames.myEvents} element={<MyEvents />} />
                     </Route>
                     <Route element={<RequireNoAuth />}>
                         <Route path={RoutePathNames.login} element={<Login />} />

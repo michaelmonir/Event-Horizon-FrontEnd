@@ -27,7 +27,7 @@ export const AdsPlan = ({setAdsPlan}) => {
                         "id" : planIndexMap.get(event.target.value)+1,
                         "name" : event.target.value
                     })
-                    setViewedAdsPlan(event.target.value);;
+                    setViewedAdsPlan(event.target.value)
                 }
                 }
             >

@@ -2,39 +2,39 @@ import React, {useEffect} from "react";
 import "./event.css";
 import "../dashboard/dashboard.css";
 import EventApis from "../Apis/EventApis/EventApis";
-import { useLocation } from 'react-router-dom';
-import Dashboard from "../dashboard/dashboard";
+import {useLocation} from 'react-router-dom';
 import {useNavigate} from "react-router-dom";
 import Button from "@mui/material/Button";
 import {RoutePathNames} from "../Routes/RoutePathNames";
+import EventBodyAttribute from "./event-body-attribute";
+
 
 function Event() {
-
     const navigate = useNavigate();
     const [attributes, setAttributes] = React.useState({
-            "name":"",
-            "description":"",
-            "eventCategory":"",
-            "eventDate":"",
-            "eventAds":"",
-            "eventLocation":{
-                "country":"",
-                "city":"",
-                "address":""
-            },
-            "eventOrganizer":{
-                "id":0,
-                "name":""
-            }
-        });
+        "name": "",
+        "description": "",
+        "eventCategory": "",
+        "eventDate": "",
+        "eventAds": "",
+        "eventLocation": {
+            "country": "",
+            "city": "",
+            "address": ""
+        },
+        "eventOrganizer": {
+            "id": 0,
+            "name": ""
+        }
+    });
     const location = useLocation();
     const params = location.state;
     const id = params.id
 
 
-    const f = async() => {
+    const f = async () => {
         try {
-            const response = await EventApis.get("eventForUser/"+id);
+            const response = await EventApis.get("eventForUser/" + id);
             setAttributes(response.data)
         } catch (error) {
             alert(error.response.data.message)
@@ -44,47 +44,26 @@ function Event() {
     useEffect(() => {
         f()
     }, []);
-
-    return <div className="event">
-        <div className="event-header">
-            <div className="event-header-title">
-                <span>{attributes.name}</span>
-            </div>
-
-            <div className="event-header-content">
-                <Button variant={"contained"} onClick={() => {
-                        navigate(RoutePathNames.dashboard)
-                    }}
-                >
-                    Dashboard
-                </Button>
-            </div>
+    return <div className="event-container">
+        <div className="dashboard-back-button">
+            <Button variant={"contained"} onClick={() => {
+                navigate(RoutePathNames.dashboard)
+            }}>back to dashboard </Button>
         </div>
-        <div className="event-body">
-            <div className="event-body-title">
-                <span>Made by : {attributes.eventOrganizer.name}</span>
+        <div className="event">
+            <div className="event-header">
+                <div className="event-header-center">
+                    <span className="event-organizer">{attributes.eventOrganizer.name}</span>
+                    <span>represents</span>
+                </div>
             </div>
-            <div className="event-content">
-                <div className="event-location">
-                    <span>Location: </span>
-                    <span>
-                        {attributes.eventLocation.country}, {attributes.eventLocation.city}, {attributes.eventLocation.address}
-                    </span>
-                </div>
-                <div className="event-category">
-                    <span>Category: </span>
-                    <span>{attributes.eventCategory}</span>
-                </div>
-                {/*<div className="event-ads">*/}
-                {/*    <span>Ads: </span>*/}
-                {/*    <span>{attributes.eventAds.name}</span>*/}
-                {/*</div>*/}
-                <div className="event-date">
-                    <span>Date: </span>
-                    <span>{attributes.eventDate}</span>
-                </div>
+            <div className="event-body">
+                <EventBodyAttribute label={"Event Name"} value={attributes.name}/>
+                <EventBodyAttribute label={"Event Category"} value={attributes.eventCategory}/>
+                <EventBodyAttribute label={"Event Date"} value={attributes.eventDate}/>
+                <EventBodyAttribute label={"Event Ads"} value={attributes.eventAds}/>
+                <EventBodyAttribute label={"Event Location"} value={attributes.eventLocation.country + " , " + attributes.eventLocation.city + " , " + attributes.eventLocation.address}/>
                 <div className="event-description">
-                    <span>Description: </span>
                     <span>{attributes.description}</span>
                 </div>
             </div>

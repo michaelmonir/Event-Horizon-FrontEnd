@@ -1,16 +1,12 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import "./dashboard.css";
-import {FaUnlock, FaLock, FaSearch} from "react-icons/fa";
-import {FiMenu} from "react-icons/fi";
+import {FaUnlock, FaLock} from "react-icons/fa";
 import {GiRamProfile} from "react-icons/gi";
-import {FaShuttleSpace} from "react-icons/fa6";
-import TablePagination from '@mui/material/TablePagination';
-import MultiActionAreaCard from "./eventCard";
 import BasicModal from "./EventModal/event-modal";
 import EventApis from "../Apis/EventApis/EventApis";
 import {Link} from "react-router-dom";
 import {isTheUserAnOrganizer} from "../Authentication/UserAuthentication";
-import LabTabs from "./tabs";
+import EventDashboard from "./EventsDashboard";
 
 
 function Dashboard() {
@@ -41,30 +37,29 @@ function Dashboard() {
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
     const [events, setEvents] = React.useState([]);
     useEffect(() => {
-        modifyPages();// Access the updated value here
+        modifyPages().then(r => console.log(r));// Access the updated value here
     }, [page]);
     useEffect(() => {
-        modifyPages();// Access the updated value here
+        modifyPages().then(r => console.log(r));// Access the updated value here
     }, [rowsPerPage]);
-    const modifyPages= async ()=>{
+    const modifyPages = async () => {
 
         try {
             const response = await EventApis.get("dashboard/" + page + "/" + rowsPerPage);
             setEvents(response.data);
-        }
-        catch(error) {
+        } catch (error) {
             alert(error.response.data.message)
         }
     }
-    const handleChangePage = async(event, newPage) =>  {
+    const handleChangePage = async (event, newPage) => {
         setPage(newPage);
-        modifyPages();
+        modifyPages().then(r => console.log(r));
     };
 
     const handleChangeRowsPerPage = (event) => {
         setRowsPerPage(parseInt(event.target.value));
         setPage(0);
-        modifyPages();
+        modifyPages().then(r => console.log(r));
     };
 
 
@@ -78,7 +73,6 @@ function Dashboard() {
                 </i>
 
             </div>
-            {/* eslint-disable-next-line array-callback-return */}
             {Array(3).fill(0).map(() => {
                 return <div className="sidebar-body">
                     <ul className="sidebar-menu">
@@ -87,14 +81,13 @@ function Dashboard() {
                             <span className="underline"></span>
                         </div>
                         <li className="sidebar-menu-item">
-                            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                             <a href="#" className="sidebar-menu-link flex ">
                                 <i className="sidebar-menu-icon center">X</i>
                                 <span className="sidebar-menu-text">Dashboard</span>
                             </a>
                         </li>
                         <li className="sidebar-menu-item">
-                            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+
                             <a href="#" className="sidebar-menu-link flex ">
                                 <i className="sidebar-menu-icon center">X</i>
                                 <span className="sidebar-menu-text">Dashboard</span>
@@ -103,57 +96,21 @@ function Dashboard() {
                     </ul>
                 </div>
             })}
-
             <div className="sidebar-profile-container flex">
                 <div className="sidebar-profile flex">
-                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                     <Link to={"/profile"} className="flex"><GiRamProfile/></Link>
                     <div className="sidebar-profile-info">
                         <span className="sidebar-profile-name">User</span>
-                        {/*<sub className="sidebar-profile-position">Profile</sub>*/}
                     </div>
                 </div>
             </div>
         </nav>
+        <EventDashboard events={events} page={page}
+                        rowsPerPage={rowsPerPage} handleChangePage={handleChangePage}
+                        handleChangeRowsPerPage={handleChangeRowsPerPage}
+                        toggleLockButton={toggleLockButton}/>
 
-        <div className="main center">
-            <nav className="navbar flex">
-                <div className="left flex">
-                    <button className="sidebar-open " onClick={toggleLockButton}><FiMenu/></button>
-                </div>
-                <div className="middle flex">
-                    <button className="search-button"><FaSearch/></button>
-                    <input type="text" placeholder="Search"/>
-                    <i className="space-icon"><FaShuttleSpace/></i>
-                </div>
-                <div className="right flex">
-                    <div className="content-header-breadcrumb">
-                        <TablePagination
-                            component="div"
-                            count={100}
-                            page={page}
-                            onPageChange={handleChangePage}
-                            rowsPerPage={rowsPerPage}
-                            onRowsPerPageChange={handleChangeRowsPerPage}
-                        />
-                    </div>
-                </div>
-            </nav>
-            <div className="content-container center">
-                <div className="content-header">
-                    <LabTabs/>
-                </div>
-                <div className="content-body flex">
-                    {events.map((e, i) => <div className="card-container center">
-                        <MultiActionAreaCard key={i} eventHeader={e}/>
-                    </div>)
-                    }
-                </div>
-            </div>
-        </div>
-        {
-            isTheUserAnOrganizer() ? <BasicModal/> : null
-        }
+        { isTheUserAnOrganizer() ? <BasicModal/> : null }
     </div>
 }
 

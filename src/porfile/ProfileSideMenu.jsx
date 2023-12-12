@@ -36,14 +36,13 @@ export const ProfileSideMenu = (props) => {
                         </i>
                         <span>Messages</span>
                     </div>
-                    <div className="menu-item">
+                    <div className="menu-item" onClick={() => { navigate(RoutePathNames.myEvents)}}>
                         <i>
                             <FaBookmark/>
                         </i>
-                        <span>Bookmarks</span>
+                        <span>My Events</span>
                     </div>
                 </div>
-
                 <div className="menu-item" onClick={
                     () => {
                         removeUserLocalStorageData()

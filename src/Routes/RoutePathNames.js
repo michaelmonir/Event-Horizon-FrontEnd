@@ -3,5 +3,6 @@ export const RoutePathNames = {
     profile:"/profile",
     login:"/signup-login",
     validation:"/validation",
-    event:"/event"
+    event:"/event",
+    myEvents:"/myEvents",
 }
