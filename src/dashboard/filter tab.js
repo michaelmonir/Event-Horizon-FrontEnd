@@ -16,7 +16,7 @@ export default function BasicPopover() {
     const [state, setState] = React.useState("");
     const [address, setAddress] = React.useState("");
     const [statesInCountry, setStatesInCountry] = React.useState([]);
-    const [OrganizerName, setOrganizerName] = React.useState("");
+    const [organizerName, setOrganizerName] = React.useState("");
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -24,11 +24,19 @@ export default function BasicPopover() {
 
     const handleClose = () => {
         setAnchorEl(null);
+        setAddress("");
+        setCountry("");
+        setState("");
+        setStatesInCountry([]);
+        setEventCategory("");
+        setEventSubCategory("");
+        setName("");
+        setOrganizerName("");
     };
 
     const handleFilter = (e) => {
         e.preventDefault();
-        console.log(name, eventCategory, eventSubCategory, country, state, address, OrganizerName);
+        console.log(name, eventCategory, eventSubCategory, country, state, address, organizerName);
         handleClose();
     };
 
@@ -97,7 +105,7 @@ export default function BasicPopover() {
                                 label="Organizer Name"
                                 variant="outlined"
                                 helperText="please enter the Organizer Name"
-                                value={OrganizerName}
+                                value={organizerName}
                                 onChange={(event) => {
                                     setOrganizerName(event.target.value);
                                 }}
