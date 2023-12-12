@@ -2,6 +2,7 @@ import EventsDashboard from "../dashboard/EventsDashboard";
 import EventApis from "../Apis/EventApis/EventApis";
 import {useEffect} from "react";
 import {useState} from "react";
+import "./MyEvents.css";
 
 
 function myEvents() {
@@ -36,7 +37,6 @@ function myEvents() {
 
     return (
         <div className="myEvents">
-            myEvents
             <EventsDashboard
                 events={events}
                 page={page}

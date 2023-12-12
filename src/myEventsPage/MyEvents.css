@@ -1,0 +1,8 @@
+.myEvents{
+    background-image: url("./image.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100%;
+    width: 100%;
+}
