@@ -2,9 +2,17 @@ import EventsDashboard from "../dashboard/EventsDashboard";
 import EventApis from "../Apis/EventApis/EventApis";
 import {useEffect} from "react";
 import {useState} from "react";
+import "./MyEvents.css";
+import Button from "@mui/material/Button";
+import {RoutePathNames} from "../Routes/RoutePathNames";
+import {useNavigate} from "react-router-dom";
 
 
 function myEvents() {
+
+
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const navigate = useNavigate();
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [page, setPage] = useState(0);
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -15,6 +23,7 @@ function myEvents() {
     useEffect(() => {
         fetchEvents().then(r => console.log(r));
     }, [page, rowsPerPage]);
+
 
     const fetchEvents = async () => {
         try {
@@ -36,7 +45,9 @@ function myEvents() {
 
     return (
         <div className="myEvents">
-            myEvents
+            <Button className="btn" variant="contained" onClick={() => {
+                navigate(RoutePathNames.profile);
+            }}>go to profile</Button>
             <EventsDashboard
                 events={events}
                 page={page}
@@ -47,4 +58,5 @@ function myEvents() {
         </div>
     );
 }
+
 export default myEvents;
