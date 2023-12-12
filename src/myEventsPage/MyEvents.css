@@ -5,4 +5,11 @@
     background-position: center;
     height: 100%;
     width: 100%;
+    position: relative;
+}
+.myEvents .btn{
+    position: absolute;
+    z-index: 1;
+    top: 20px;
+    right: 20px;
 }
