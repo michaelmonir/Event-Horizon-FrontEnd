@@ -26,8 +26,8 @@ function App(){
                     </Route>
                     <Route element={<RequireNoAuth />}>
                         <Route path={RoutePathNames.login} element={<Login />} />
-                        <Route path={RoutePathNames.validation} element={<ValidationPage />} />
                     </Route>
+                    <Route path={RoutePathNames.validation} element={<ValidationPage />} />
                 </Routes>
             </Router>
         </div>

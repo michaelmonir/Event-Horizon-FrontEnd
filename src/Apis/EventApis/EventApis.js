@@ -7,6 +7,6 @@ const config = {
 
 export default axios.create({
     baseURL: "http://localhost:8080/event/",
-    headers: {'Authorization': 'Bearer '+getUserToken()}
+    // headers: {'Authorization': 'Bearer '+getUserToken()}
 });
 
