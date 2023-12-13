@@ -7,6 +7,7 @@ import EventApis from "../Apis/EventApis/EventApis";
 import {Link} from "react-router-dom";
 import {isTheUserAnOrganizer} from "../Authentication/UserAuthentication";
 import EventDashboard from "./EventsDashboard";
+import FilterApis from "../Apis/EventApis/FilterApis";
 
 
 function Dashboard() {
@@ -42,10 +43,16 @@ function Dashboard() {
     useEffect(() => {
         modifyPages().then(r => console.log(r));// Access the updated value here
     }, [rowsPerPage]);
+
+    const filterDto={
+        filters:[
+
+        ]
+    }
     const modifyPages = async () => {
 
         try {
-            const response = await EventApis.get("dashboard/" + page + "/" + rowsPerPage);
+            const response = await FilterApis.post("dashboard/" + 0 + "/" + 50, filterDto);
             setEvents(response.data);
         } catch (error) {
             alert(error.response.data.message)
