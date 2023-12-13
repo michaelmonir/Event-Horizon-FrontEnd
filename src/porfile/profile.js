@@ -2,9 +2,10 @@ import React, {useEffect} from 'react';
 import './profie.css';
 import BasicModal from "./profile-update-modal";
 import informationApis from "../Apis/UserApis/InformationApis";
-import {getUserId} from "../Authentication/UserAuthentication";
+import {getUserId, isTheUserAnAdmin} from "../Authentication/UserAuthentication";
 import {ProfileSideMenu} from "./ProfileSideMenu";
 import {ProfileAttributeComponent} from "./ProfileAttributeComponent";
+import AddingModeratorModal from "./AddingModeratorModal";
 
 
 function Profile() {
@@ -43,6 +44,12 @@ function Profile() {
                         Profile
                     </div>
                     <div className="header-btns">
+
+                        {
+                            isTheUserAnAdmin() ?
+                                <AddingModeratorModal/>
+                            : null
+                        }
                         <BasicModal
                             defaultFirstName={profileAttributes.firstName}
                             defaultGender={profileAttributes.gender}
