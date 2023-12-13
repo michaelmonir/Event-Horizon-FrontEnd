@@ -61,6 +61,7 @@ export default function BasicModal() {
             "eventCategory": eventCategory + "-" + eventSubCategory,
             "eventDate": date,
             "eventAds": adsPlan,
+            "eventType":0,
             "eventLocation": {
                 "country": country,
                 "city": state,
