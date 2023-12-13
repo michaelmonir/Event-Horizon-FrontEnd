@@ -80,7 +80,7 @@ function Event() {
                     <span>{attributes.description}</span>
                 </div>
 
-                <BasicModal eventId={id} responseFunction={updateResponseFunction}/>
+                <BasicModal eventId={id} responseFunction={updateResponseFunction} buttonName="Update Event"/>
 
             </div>
         </div>

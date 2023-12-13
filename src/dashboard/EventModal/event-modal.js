@@ -27,7 +27,7 @@ const style = {
     borderRadius: "24px",
 };
 
-export default function BasicModal({responseFunction, eventId}) {
+export default function BasicModal({responseFunction, eventId,buttonName}) {
     const [open, setOpen] = React.useState(false);
     const navigate = useNavigate();
     const handleOpen = () => {
@@ -98,7 +98,8 @@ export default function BasicModal({responseFunction, eventId}) {
                             right: "40px",
                         }
                     }
-            >create event</Button>
+                    variant={"contained"}
+            >{buttonName}</Button>
 
             <Modal
                 open={open}

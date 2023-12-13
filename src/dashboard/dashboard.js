@@ -174,7 +174,7 @@ function Dashboard() {
                         modifyPages={modifyPages}
         />
 
-        { isTheUserAnOrganizer() ? <BasicModal responseFunction={responseFunction}/> : null }
+        { isTheUserAnOrganizer() ? <BasicModal responseFunction={responseFunction} buttonName="Create Event"/> : null }
     </div>
 }
 
