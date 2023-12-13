@@ -32,7 +32,7 @@ function Event() {
     const id = params.id
 
 
-    const f = async () => {
+    const fetchEvents = async () => {
         try {
             const response = await EventApis.get("eventForUser/" + id);
             setAttributes(response.data)
@@ -42,7 +42,7 @@ function Event() {
     }
 
     useEffect(() => {
-        f()
+        fetchEvents()
     }, []);
     return <div className="event-container">
         <div className="dashboard-back-button">
@@ -63,6 +63,9 @@ function Event() {
                 <EventBodyAttribute label={"Event Date"} value={attributes.eventDate}/>
                 <EventBodyAttribute label={"Event Ads"} value={attributes.eventAds}/>
                 <EventBodyAttribute label={"Event Location"} value={attributes.eventLocation.country + " , " + attributes.eventLocation.city + " , " + attributes.eventLocation.address}/>
+                <Button variant={"outlined"} onClick={() => {
+                    navigate(RoutePathNames.ticket, {state: {id: id}})
+                }}>Buy Ticket</Button>
                 <div className="event-description">
                     <span>{attributes.description}</span>
                 </div>

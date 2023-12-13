@@ -11,6 +11,7 @@ import RequireAuth from "./Authentication/RequireAuth";
 import RequireNoAuth from "./Authentication/ReruireNoAuth";
 import {RoutePathNames} from "./Routes/RoutePathNames";
 import MyEvents from "./myEventsPage/myEvents";
+import Ticket from "./tickets/tickets";
 
 
 function App(){
@@ -23,6 +24,7 @@ function App(){
                         <Route path={RoutePathNames.event} element={<Event />} />
                         <Route path={RoutePathNames.profile} element={<Profile />} />
                         <Route path={RoutePathNames.myEvents} element={<MyEvents />} />
+                        <Route path={RoutePathNames.ticket} element={<Ticket/>} />
                     </Route>
                     <Route element={<RequireNoAuth />}>
                         <Route path={RoutePathNames.login} element={<Login />} />
