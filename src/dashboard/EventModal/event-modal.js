@@ -27,7 +27,7 @@ const style = {
     borderRadius: "24px",
 };
 
-export default function BasicModal() {
+export default function BasicModal({responseFunction, eventId}) {
     const [open, setOpen] = React.useState(false);
     const navigate = useNavigate();
     const handleOpen = () => {
@@ -56,6 +56,7 @@ export default function BasicModal() {
     const handleEventCreation = async (e) => {
         e.preventDefault();
         const event = {
+            "id": eventId,
             "name": name,
             "description": description,
             "eventCategory": eventCategory + "-" + eventSubCategory,
@@ -70,7 +71,7 @@ export default function BasicModal() {
         }
         try {
             const response =
-                await EventApis.post("createEvent/" + getUserId(), event)
+                await responseFunction(event)
             const myId = response.data.id;
             const params = {
                 id: myId,

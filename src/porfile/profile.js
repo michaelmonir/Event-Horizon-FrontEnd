@@ -26,7 +26,6 @@ function Profile() {
                         "id": getUserId()
                     },
                 });
-                alert(JSON.stringify(response.data))
                 setProfileAttributes(response.data)
             } catch (error) {
                 alert(error.response.data.message)

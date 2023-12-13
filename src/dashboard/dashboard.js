@@ -5,12 +5,18 @@ import {GiRamProfile} from "react-icons/gi";
 import BasicModal from "./EventModal/event-modal";
 import EventApis from "../Apis/EventApis/EventApis";
 import {Link} from "react-router-dom";
-import {isTheUserAnOrganizer} from "../Authentication/UserAuthentication";
+import {getUserId, isTheUserAnOrganizer} from "../Authentication/UserAuthentication";
 import EventDashboard from "./EventsDashboard";
 import FilterApis from "../Apis/EventApis/FilterApis";
 
 
 function Dashboard() {
+
+
+    const responseFunction = (event) => {
+       return  EventApis.post("createEvent/" + getUserId(), event)
+    }
+
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [name, setName] = React.useState("");
@@ -168,7 +174,7 @@ function Dashboard() {
                         modifyPages={modifyPages}
         />
 
-        { isTheUserAnOrganizer() ? <BasicModal/> : null }
+        { isTheUserAnOrganizer() ? <BasicModal responseFunction={responseFunction}/> : null }
     </div>
 }
 

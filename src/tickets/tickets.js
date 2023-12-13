@@ -7,7 +7,7 @@ import {useNavigate} from "react-router-dom";
 
 
 
-function tickets() {
+function Tickets() {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const navigate = useNavigate();
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -22,7 +22,8 @@ function tickets() {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const location = useLocation();
     const params = location.state;
-    const id = params.id
+    // const id = params.id             ////////////////////////////////////////////////// i played here
+     const id=5
     return <div className="tickets-container">
         <div className="tickets-title"><span>Tickets available</span> </div>
         <div className="tickets-body"
@@ -51,4 +52,4 @@ function tickets() {
     </div>
 
 }
-export default tickets;
+export default Tickets;

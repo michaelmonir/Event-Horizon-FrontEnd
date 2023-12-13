@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import ProxyApi from "../Apis/ProxyApis/ProxyApis";
 import {RoutePathNames} from "../Routes/RoutePathNames";
-
+import "./validationPage.css"
 function ValidationPage() {
         useEffect(() => {
             const codes = document.querySelectorAll(".codeInput");

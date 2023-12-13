@@ -7,9 +7,19 @@ import {useNavigate} from "react-router-dom";
 import Button from "@mui/material/Button";
 import {RoutePathNames} from "../Routes/RoutePathNames";
 import EventBodyAttribute from "./event-body-attribute";
+import {getUserId} from "../Authentication/UserAuthentication";
+import BasicModal from "../dashboard/EventModal/event-modal";
 
 
 function Event() {
+
+
+
+    const updateResponseFunction = (event) => {
+        return EventApis.put("updateEvent/" + getUserId() , event)
+    }
+
+
     const navigate = useNavigate();
     const [attributes, setAttributes] = React.useState({
         "name": "",
@@ -69,6 +79,9 @@ function Event() {
                 <div className="event-description">
                     <span>{attributes.description}</span>
                 </div>
+
+                <BasicModal eventId={id} responseFunction={updateResponseFunction}/>
+
             </div>
         </div>
     </div>
