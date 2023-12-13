@@ -12,6 +12,23 @@ import FilterApis from "../Apis/EventApis/FilterApis";
 
 function Dashboard() {
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [name, setName] = React.useState("");
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [eventCategory, setEventCategory] = React.useState("");
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [eventSubCategory, setEventSubCategory] = React.useState("");
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [country, setCountry] = React.useState("");
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [state, setState] = React.useState("");
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [address, setAddress] = React.useState("");
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [statesInCountry, setStatesInCountry] = React.useState([]);
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [organizerName, setOrganizerName] = React.useState("");
+
     const [sidebarClass, setSidebarClass] = useState("sidebar hover closed");
     const [sidebarLocked, setSidebarLocked] = useState(false);
 
@@ -44,15 +61,44 @@ function Dashboard() {
         modifyPages().then(r => console.log(r));// Access the updated value here
     }, [rowsPerPage]);
 
-    const filterDto={
-        filters:[
-
-        ]
-    }
     const modifyPages = async () => {
-
+        const filterDto={
+            filters:[
+                {
+                    "first":"NAME",
+                    "second":"AND",
+                    "third":name
+                },
+                {
+                    "first":"ADDRESS",
+                    "second":"AND",
+                    "third":address
+                },
+                {
+                    "first":"COUNTRY",
+                    "second":"AND",
+                    "third":country
+                },
+                {
+                    "first":"CITY",
+                    "second":"AND",
+                    "third":state
+                },
+                {
+                    "first":"CATEGORY",
+                    "second":"AND",
+                    "third":eventCategory+"-"+eventSubCategory
+                },
+                {
+                    "first":"ORGANIZER",
+                    "second":"AND",
+                    "third":organizerName
+                }
+            ]
+        }
+       console.log(filterDto);
         try {
-            const response = await FilterApis.post("dashboard/" + 0 + "/" + 50, filterDto);
+            const response = await FilterApis.post("dashboard/" + page + "/" + rowsPerPage, filterDto);
             setEvents(response.data);
         } catch (error) {
             alert(error.response.data.message)
@@ -115,7 +161,12 @@ function Dashboard() {
         <EventDashboard events={events} page={page}
                         rowsPerPage={rowsPerPage} handleChangePage={handleChangePage}
                         handleChangeRowsPerPage={handleChangeRowsPerPage}
-                        toggleLockButton={toggleLockButton}/>
+                        toggleLockButton={toggleLockButton}
+                        name={name} address={address} country={country} state={state} eventCategory={eventCategory} eventSubCategory={eventSubCategory} organizerName={organizerName}
+                        setName={setName} setAddress={setAddress} setCountry={setCountry} setState={setState} setEventCategory={setEventCategory} setEventSubCategory={setEventSubCategory} setOrganizerName={setOrganizerName}
+                        statesInCountry={statesInCountry} setStatesInCountry={setStatesInCountry}
+                        modifyPages={modifyPages}
+        />
 
         { isTheUserAnOrganizer() ? <BasicModal/> : null }
     </div>
