@@ -13,7 +13,7 @@ import {AdsPlan} from "./AdsOptions";
 import {Description} from "./Description";
 import {DateTime} from "./DateTime"
 import {getUserId} from "../../Authentication/UserAuthentication";
-
+import { useHistory } from 'react-router'
 
 const style = {
     position: 'absolute',
@@ -53,6 +53,9 @@ export default function BasicModal({responseFunction, eventId}) {
 
     const [description, setDescription] = React.useState("");
 
+
+    const [tempKey, setTempKey] = React.useState(0);
+
     const handleEventCreation = async (e) => {
         e.preventDefault();
         const event = {
@@ -62,7 +65,7 @@ export default function BasicModal({responseFunction, eventId}) {
             "eventCategory": eventCategory + "-" + eventSubCategory,
             "eventDate": date,
             "eventAds": adsPlan,
-            "eventType":0,
+            "eventType": 0,
             "eventLocation": {
                 "country": country,
                 "city": state,
@@ -76,12 +79,13 @@ export default function BasicModal({responseFunction, eventId}) {
             const params = {
                 id: myId,
             };
-
+            handleClose()
             navigate(RoutePathNames.event, {state: params});
+
+            navigate(0)
         } catch (error) {
             alert(error.response.data.message)
         }
-
     }
 
     return (
