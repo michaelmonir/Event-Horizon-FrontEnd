@@ -3,8 +3,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import TextField from "@mui/material/TextField";
-import EventApis from "../../Apis/EventApis/EventApis";
+import TextField from "@mui/material/TextField"
 import {useNavigate} from 'react-router-dom';
 import {CountryCityStreet} from "./CountryCityStreet";
 import {Category} from "./Category";
@@ -12,8 +11,8 @@ import {RoutePathNames} from "../../Routes/RoutePathNames";
 import {AdsPlan} from "./AdsOptions";
 import {Description} from "./Description";
 import {DateTime} from "./DateTime"
-import {getUserId} from "../../Authentication/UserAuthentication";
-import { useHistory } from 'react-router'
+import SeatType from "./seatType"
+
 
 const style = {
     position: 'absolute',
@@ -23,7 +22,8 @@ const style = {
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
-    p: 4,
+    p: 3.5,
+    width: "70%",
     borderRadius: "24px",
 };
 
@@ -50,11 +50,9 @@ export default function BasicModal({responseFunction, eventId,buttonName}) {
     const [state, setState] = React.useState("");
     const [address, setAddress] = React.useState("");
     const [statesInCountry, setStatesInCountry] = React.useState([]);
-
     const [description, setDescription] = React.useState("");
-
-
-    const [tempKey, setTempKey] = React.useState(0);
+    const [seatTypes, setSeatTypes] = React.useState([]);
+    const [numberOfSeatTypes, setNumberOfSeatTypes] = React.useState(0);
 
     const handleEventCreation = async (e) => {
         e.preventDefault();
@@ -71,7 +69,7 @@ export default function BasicModal({responseFunction, eventId,buttonName}) {
                 "city": state,
                 "address": address
             },
-            "seatTypes":[]
+            "seatTypes":seatTypes
         }
         try {
             const response =
@@ -90,7 +88,7 @@ export default function BasicModal({responseFunction, eventId,buttonName}) {
     }
 
     return (
-        <div>
+        <div >
             <Button onClick={handleOpen}
                     style={
                         {
@@ -135,7 +133,9 @@ export default function BasicModal({responseFunction, eventId,buttonName}) {
                             <Description description={description} setDescription={setDescription}/>
                             <AdsPlan setAdsPlan={setAdsPlan} req={true}/>
                             <DateTime date={date} setDate={setDate} req={true}/>
-
+                            <div className={"seat-type"}>
+                                <SeatType seatTypes={seatTypes} setSeatTypes={setSeatTypes} numberOfSeatTypes={numberOfSeatTypes} setNumberOfSeatTypes={setNumberOfSeatTypes}/>
+                            </div>
                             <Button type="submit" value="Submit" variant="contained">
                                 Submit
                             </Button>
