@@ -70,7 +70,8 @@ export default function BasicModal({responseFunction, eventId,buttonName}) {
                 "country": country,
                 "city": state,
                 "address": address
-            }
+            },
+            "seatTypes":[]
         }
         try {
             const response =
