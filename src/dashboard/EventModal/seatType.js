@@ -16,9 +16,22 @@ export default function seatType({seatTypes, setSeatTypes, numberOfSeatTypes, se
                         numberOfSeats: "",
                         // "description": ""
                     }])
-                }}>add seat type
+                }}>Add Seat Type
+                </Button>
+
+                <Button
+                    onClick={(e) => {
+                        e.preventDefault();
+                        if (numberOfSeatTypes > 0) {
+                            setNumberOfSeatTypes(numberOfSeatTypes - 1);
+                            setSeatTypes(seatTypes.slice(0, -1)); // Remove the last element
+                        }
+                    }}
+                >
+                    Remove Seat Type
                 </Button>
             </div>
+
             <div className={"seat-type-body"}>
                 {
                     seatTypes.map((seatType) => {
