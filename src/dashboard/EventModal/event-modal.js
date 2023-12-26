@@ -73,6 +73,7 @@ export default function BasicModal({responseFunction, eventId,buttonName}) {
         try {
             const response =
                 await responseFunction(event)
+            alert(JSON.stringify(response.data))
             const myId = response.data.id;
             const params = {
                 id: myId,

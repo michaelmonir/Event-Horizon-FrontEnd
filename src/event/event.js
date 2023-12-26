@@ -32,17 +32,28 @@ function Event() {
         eventOrganizer: {
             id: 0,
             name: ""
-        }
+        },
+        eventType: ""
     });
     const location = useLocation();
     const params = location.state;
-    const id = params.id
+    let id = params.id
 
 
     const fetchEvents = async () => {
         try {
             const response = await EventApis.get("eventForUser/" + id);
+            id = response.data.id
             setAttributes(response.data)
+        } catch (error) {
+            alert(error.response.data.message)
+        }
+    }
+
+    const handleLaunchEvent = async() => {
+        try {
+            await EventApis.put("launchEvent/" + getUserId() + "/" + id);
+            navigate(0)
         } catch (error) {
             alert(error.response.data.message)
         }
@@ -69,16 +80,21 @@ function Event() {
                 <EventBodyAttribute label={"Event Category"} value={attributes.eventCategory}/>
                 <EventBodyAttribute label={"Event Date"} value={attributes.eventDate}/>
                 <EventBodyAttribute label={"Event Ads"} value={attributes.eventAds.name}/>
-                <EventBodyAttribute label={"Event Location"} value={attributes.eventLocation.country + " , " + attributes.eventLocation.city + " , " + attributes.eventLocation.address}/>
-                <Button variant={"outlined"} onClick={() => {
-                    navigate(RoutePathNames.ticket, {state: {id: id}})
-                }}>Buy Ticket</Button>
+                <EventBodyAttribute label={"Event Location"}
+                                    value={attributes.eventLocation.country
+                                        + " , " + attributes.eventLocation.city
+                                        + " , " + attributes.eventLocation.address}/>
+                <EventBodyAttribute label={"Event Organizer"} value={attributes.eventOrganizer.name}/>
+                <EventBodyAttribute label={"Event Type"} value={attributes.eventType}/>
                 <div className="event-description">
                     <span>{attributes.description}</span>
                 </div>
+                <Button variant={"outlined"} onClick={() => {
+                    navigate(RoutePathNames.ticket, {state: {id: id}})
+                }}>Buy Ticket</Button>
 
+                <Button variant={"outlined"} onClick={handleLaunchEvent}>Launch Event</Button>
                 <BasicModal eventId={id} responseFunction={updateResponseFunction} buttonName="Update Event"/>
-
             </div>
         </div>
     </div>
