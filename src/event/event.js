@@ -13,28 +13,25 @@ import BasicModal from "../dashboard/EventModal/event-modal";
 
 function Event() {
 
-
-
     const updateResponseFunction = (event) => {
         return EventApis.put("updateEvent/" + getUserId() , event)
     }
 
-
     const navigate = useNavigate();
     const [attributes, setAttributes] = React.useState({
-        "name": "",
-        "description": "",
-        "eventCategory": "",
-        "eventDate": "",
-        "eventAds": "",
-        "eventLocation": {
-            "country": "",
-            "city": "",
-            "address": ""
+        name: "",
+        description: "",
+        eventCategory: "",
+        eventDate: "",
+        eventAds: "",
+        eventLocation: {
+           country: "",
+            city: "",
+            address: ""
         },
-        "eventOrganizer": {
-            "id": 0,
-            "name": ""
+        eventOrganizer: {
+            id: 0,
+            name: ""
         }
     });
     const location = useLocation();
@@ -71,7 +68,7 @@ function Event() {
                 <EventBodyAttribute label={"Event Name"} value={attributes.name}/>
                 <EventBodyAttribute label={"Event Category"} value={attributes.eventCategory}/>
                 <EventBodyAttribute label={"Event Date"} value={attributes.eventDate}/>
-                <EventBodyAttribute label={"Event Ads"} value={attributes.eventAds}/>
+                <EventBodyAttribute label={"Event Ads"} value={attributes.eventAds.name}/>
                 <EventBodyAttribute label={"Event Location"} value={attributes.eventLocation.country + " , " + attributes.eventLocation.city + " , " + attributes.eventLocation.address}/>
                 <Button variant={"outlined"} onClick={() => {
                     navigate(RoutePathNames.ticket, {state: {id: id}})

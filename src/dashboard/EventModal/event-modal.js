@@ -63,7 +63,6 @@ export default function BasicModal({responseFunction, eventId,buttonName}) {
             "eventCategory": eventCategory + "-" + eventSubCategory,
             "eventDate": date,
             "eventAds": adsPlan,
-            "eventType": 0,
             "eventLocation": {
                 "country": country,
                 "city": state,
