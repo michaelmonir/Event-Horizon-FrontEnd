@@ -39,6 +39,14 @@ function Event() {
     const params = location.state;
     let id = params.id
 
+    const handleLaunchEvent = async() => {
+        try {
+            await EventApis.put("launchEvent/" + getUserId() + "/" + id);
+            navigate(0)
+        } catch (error) {
+            alert(error.response.data.message)
+        }
+    }
 
     const fetchEvents = async () => {
         try {
@@ -49,19 +57,10 @@ function Event() {
             alert(error.response.data.message)
         }
     }
-
-    const handleLaunchEvent = async() => {
-        try {
-            await EventApis.put("launchEvent/" + getUserId() + "/" + id);
-            navigate(0)
-        } catch (error) {
-            alert(error.response.data.message)
-        }
-    }
-
     useEffect(() => {
         fetchEvents()
     }, []);
+
     return <div className="event-container">
         <div className="dashboard-back-button">
             <Button variant={"contained"} onClick={() => {
@@ -90,7 +89,7 @@ function Event() {
                     <span>{attributes.description}</span>
                 </div>
                 <Button variant={"outlined"} onClick={() => {
-                    navigate(RoutePathNames.ticket, {state: {id: id}})
+                    navigate(RoutePathNames.ticket, {state: {eventId: id}})
                 }}>Buy Ticket</Button>
 
                 <Button variant={"outlined"} onClick={handleLaunchEvent}>Launch Event</Button>
