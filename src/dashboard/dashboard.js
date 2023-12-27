@@ -104,6 +104,7 @@ function Dashboard() {
         }
        console.log(filterDto);
         try {
+            // const response = await FilterApis.post("draftedForOrganizer/" + page + "/" + rowsPerPage+"/" + getUserId(), filterDto);
             const response = await FilterApis.post("dashboard/" + page + "/" + rowsPerPage, filterDto);
             setEvents(response.data);
         } catch (error) {

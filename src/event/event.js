@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import "./event.css";
 import "../dashboard/dashboard.css";
 import EventApis from "../Apis/EventApis/EventApis";
@@ -37,12 +37,19 @@ function Event() {
     });
     const location = useLocation();
     const params = location.state;
-    let id = params.id
+    // let id = params.id
+
+    const[id,setId] =useState(params.id);
 
     const handleLaunchEvent = async() => {
         try {
-            await EventApis.put("launchEvent/" + getUserId() + "/" + id);
-            navigate(0)
+            const response = await EventApis.put("launchEvent/" + getUserId() + "/" + id);
+            const params = {
+                id: response.data.id,
+            };
+            // const newId = response.data.id;
+            // setId(newId);
+            navigate(RoutePathNames.dashboard)
         } catch (error) {
             alert(error.response.data.message)
         }
@@ -51,7 +58,8 @@ function Event() {
     const fetchEvents = async () => {
         try {
             const response = await EventApis.get("eventForUser/" + id);
-            id = response.data.id
+            const newId = response.data.id;
+            setId(newId);
             setAttributes(response.data)
         } catch (error) {
             alert(error.response.data.message)
