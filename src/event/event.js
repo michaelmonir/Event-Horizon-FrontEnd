@@ -59,6 +59,7 @@ function Event() {
         try {
             const response = await EventApis.get("eventForUser/" + id);
             const newId = response.data.id;
+            console.log(response.data)
             setId(newId);
             setAttributes(response.data)
         } catch (error) {
@@ -102,7 +103,7 @@ function Event() {
 
                 <Button variant={"outlined"} onClick={handleLaunchEvent}>Launch Event</Button>
 
-                {( (attributes.eventType === "DRAFTED_EVENT") ?
+                {( (attributes.eventType === "DRAFTEDEVENT") ?
                 <BasicModal eventId={id} responseFunction={updateResponseFunction} buttonName="Update Event"/>
                 : null )}
             </div>

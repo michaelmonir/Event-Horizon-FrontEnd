@@ -73,6 +73,14 @@ function Dashboard() {
         modifyPages().then(r => console.log(r));// Access the updated value here
     }, [tabIndex]);
 
+    useEffect(() => {
+        modifyPages().then(r => console.log(r));// Access the updated value here
+    }, [tabIndex]);
+
+    useEffect(() => {
+       setTabIndex('1');
+    }, []);
+
     const modifyPages = async () => {
         const filterDto = {
             filters: [
