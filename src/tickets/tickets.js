@@ -4,7 +4,6 @@ import {useLocation} from "react-router-dom";
 import TicketsModal from "./ticketsModal";
 import Button from "@mui/material/Button";
 import {useNavigate} from "react-router-dom";
-import EventApis from "../Apis/EventApis/EventApis";
 import TicketApis from "../Apis/EventApis/TicketApis";
 import {getUserId} from "../Authentication/UserAuthentication";
 
@@ -16,13 +15,6 @@ function Tickets() {
     const location = useLocation();
     const eventId = location.state.eventId
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    // const [tickets, setTickets] = React.useState([{ "name": "ticket1", "price": 100, "description": "hjbdslhjbemp ip dum" },
-    //     { "name": "ticket2", "price": "200", "description": "ticket2" },{ "name": "ticket1",  "price": 100, "description": "ticket1" },
-    //     { "name": "ticket1",  "price": 100, "description": "ticket1" },
-    //     { "name": "ticket1",  "price": 100, "description": "ticket1" },
-    //     { "name": "ticket1", "price": 100, "description": "ticket1" },
-    //     { "name": "ticket1", "price": 100, "description": "ticket1" },
-    // ]);
 
     const [tickets, setTickets] = React.useState([]);
 
@@ -48,8 +40,11 @@ function Tickets() {
             {tickets.map((ticket) => {
                     return <div className="ticket">
                         <div className="ticket-header">
-                            <span className="ticket-title">{ticket.name} : </span>
-                            <span className="ticket-price"> {ticket.price} $$</span>
+                            <p>{ticket.name} : </p>
+                            <p> price: {ticket.price} $</p>
+                            <p> Total number of tickets {ticket.totalNumberOfSeats}</p>
+                            <p> Available number of Tickets {ticket.availableNumberOfSeats}</p>
+                            <p> number of buyed tickets: {ticket.numberOfBuyedTickets} </p>
                         </div>
                         <div className="ticket-body">
                             <span className="ticket-description">{ticket.description}</span>
