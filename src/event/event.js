@@ -102,9 +102,9 @@ function Event() {
 
                 <Button variant={"outlined"} onClick={handleLaunchEvent}>Launch Event</Button>
 
-                ( (attributes.eventType === "DRAFTED_EVENT") ?
+                {( (attributes.eventType === "DRAFTED_EVENT") ?
                 <BasicModal eventId={id} responseFunction={updateResponseFunction} buttonName="Update Event"/>
-                : null )
+                : null )}
             </div>
         </div>
     </div>
