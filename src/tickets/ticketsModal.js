@@ -4,6 +4,9 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import TextField from "@mui/material/TextField";
+import TicketApis from "../Apis/EventApis/TicketApis";
+import {getUserId} from "../Authentication/UserAuthentication";
+import {useNavigate} from "react-router-dom";
 
 const style = {
     position: 'absolute',
@@ -20,10 +23,13 @@ const style = {
 };
 
 export default function TicketsModal({tickets}) {
+
+    const navigate = useNavigate();
     const [ticketsNumber, setTicketsNumber] = React.useState(Array(tickets.length).fill(0))
     const [ticketsPrice, setTicketsPrice] = React.useState(Array(tickets.length).fill(0))
 
     const [open, setOpen] = React.useState(false);
+
     const handleOpen = () => {
         setOpen(true)
         setTicketsNumber(Array(tickets.length).fill(0))
@@ -35,8 +41,21 @@ export default function TicketsModal({tickets}) {
         setTicketsPrice(Array(tickets.length).fill(0))
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault()
+        const data = Array(tickets.length);
+        tickets.forEach((ticket, index) => {
+            data[index] = {
+                seatTypeId: ticket.seatTypeId,
+                numOfTickets: ticketsNumber[index]
+            }
+        })
+        try{
+            const response = await TicketApis.put("buyTicket/" + getUserId(), data)
+            navigate(0)
+        } catch (error) {
+            alert(error.response.data.message)
+        }
     }
 
     return (
@@ -68,16 +87,22 @@ export default function TicketsModal({tickets}) {
                                     tickets.map((ticket, index) => {
                                             return <div className="buy-row">
                                                 <div className="ticket-name"> {ticket.name} </div>
-                                                <TextField id="outlined-basic" label="Number of tickets" variant="outlined"
-                                                           type={"number"} onChange={(e) => {
-                                                    if (e.target.value < 0) e.target.value = 0
-                                                    let newTicketsNumber = ticketsNumber
-                                                    newTicketsNumber[index] = e.target.value
-                                                    setTicketsNumber(newTicketsNumber)
-                                                    let newTicketsPrice = ticketsPrice
-                                                    newTicketsPrice[index] = e.target.value * ticket.price
-                                                    setTicketsPrice(newTicketsPrice)
-                                                }}/>
+                                                <TextField
+                                                    id="outlined-basic" label="Number of tickets" variant="outlined" type="number"
+                                                    value={ticketsNumber[index] || 0}  // Set the default value to 0
+                                                    onChange={(e) => {
+                                                        const inputValue = parseInt(e.target.value, 10);  // Parse input as an integer
+                                                        if (!isNaN(inputValue)) {
+                                                            let newTicketsNumber = [...ticketsNumber];
+                                                            newTicketsNumber[index] = inputValue;
+                                                            setTicketsNumber(newTicketsNumber);
+
+                                                            let newTicketsPrice = [...ticketsPrice];
+                                                            newTicketsPrice[index] = inputValue * ticket.price;
+                                                            setTicketsPrice(newTicketsPrice);
+                                                        }
+                                                    }}
+                                                />
                                                 <div className="ticket-price"> {ticket.price} $</div>
                                             </div>
                                         }
