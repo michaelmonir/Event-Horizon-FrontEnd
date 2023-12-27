@@ -21,12 +21,12 @@ export const Category
            setEventCategory,setEventSubCategory,req}) => {
 
     return (
-        <div>
+        <div className={"event-Category"}>
             <Autocomplete
                 disablePortal
                 id="combo-box-demo"
                 options={[...eventCategoriesMap.keys()]}
-                sx={{width: 600}}
+                sx={{width: 265}}
                 renderInput={(params) => <TextField {...params}
                                                     required={req}
                                                     label="Event category"/>}
@@ -44,7 +44,7 @@ export const Category
                 required={true}
                 id="combo-box-demo"
                 options={eventCategory ? eventCategoriesMap.get(eventCategory) : []}
-                sx={{width: 600}}
+                sx={{width: 275}}
                 value={eventSubCategory}
                 renderInput={(params) => <TextField {...params} required={req}
                                                     label="Event sub-category"/>}

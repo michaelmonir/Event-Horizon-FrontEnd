@@ -36,3 +36,7 @@ export function isUserLoggedIn() {
 export function isTheUserAnOrganizer(){
     return (getUserRole() === "ROLE_ORGANIZER");
 }
+
+export function isTheUserAnAdmin(){
+    return (getUserRole() === "ROLE_ADMIN");
+}

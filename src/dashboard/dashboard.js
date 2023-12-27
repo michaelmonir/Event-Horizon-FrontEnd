@@ -5,11 +5,35 @@ import {GiRamProfile} from "react-icons/gi";
 import BasicModal from "./EventModal/event-modal";
 import EventApis from "../Apis/EventApis/EventApis";
 import {Link} from "react-router-dom";
-import {isTheUserAnOrganizer} from "../Authentication/UserAuthentication";
+import {getUserId, isTheUserAnOrganizer} from "../Authentication/UserAuthentication";
 import EventDashboard from "./EventsDashboard";
+import FilterApis from "../Apis/EventApis/FilterApis";
 
 
 function Dashboard() {
+
+
+    const responseFunction = (event) => {
+       return  EventApis.post("createEvent/" + getUserId(), event)
+    }
+
+
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [name, setName] = React.useState("");
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [eventCategory, setEventCategory] = React.useState("");
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [eventSubCategory, setEventSubCategory] = React.useState("");
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [country, setCountry] = React.useState("");
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [state, setState] = React.useState("");
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [address, setAddress] = React.useState("");
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [statesInCountry, setStatesInCountry] = React.useState([]);
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [organizerName, setOrganizerName] = React.useState("");
 
     const [sidebarClass, setSidebarClass] = useState("sidebar hover closed");
     const [sidebarLocked, setSidebarLocked] = useState(false);
@@ -42,10 +66,45 @@ function Dashboard() {
     useEffect(() => {
         modifyPages().then(r => console.log(r));// Access the updated value here
     }, [rowsPerPage]);
-    const modifyPages = async () => {
 
+    const modifyPages = async () => {
+        const filterDto={
+            filters:[
+                {
+                    "first":"NAME",
+                    "second":"AND",
+                    "third":name
+                },
+                {
+                    "first":"ADDRESS",
+                    "second":"AND",
+                    "third":address
+                },
+                {
+                    "first":"COUNTRY",
+                    "second":"AND",
+                    "third":country
+                },
+                {
+                    "first":"CITY",
+                    "second":"AND",
+                    "third":state
+                },
+                {
+                    "first":"CATEGORY",
+                    "second":"AND",
+                    "third":eventCategory+"-"+eventSubCategory
+                },
+                {
+                    "first":"ORGANIZER",
+                    "second":"AND",
+                    "third":organizerName
+                }
+            ]
+        }
+       console.log(filterDto);
         try {
-            const response = await EventApis.get("dashboard/" + page + "/" + rowsPerPage);
+            const response = await FilterApis.post("dashboard/" + page + "/" + rowsPerPage, filterDto);
             setEvents(response.data);
         } catch (error) {
             alert(error.response.data.message)
@@ -108,9 +167,14 @@ function Dashboard() {
         <EventDashboard events={events} page={page}
                         rowsPerPage={rowsPerPage} handleChangePage={handleChangePage}
                         handleChangeRowsPerPage={handleChangeRowsPerPage}
-                        toggleLockButton={toggleLockButton}/>
+                        toggleLockButton={toggleLockButton}
+                        name={name} address={address} country={country} state={state} eventCategory={eventCategory} eventSubCategory={eventSubCategory} organizerName={organizerName}
+                        setName={setName} setAddress={setAddress} setCountry={setCountry} setState={setState} setEventCategory={setEventCategory} setEventSubCategory={setEventSubCategory} setOrganizerName={setOrganizerName}
+                        statesInCountry={statesInCountry} setStatesInCountry={setStatesInCountry}
+                        modifyPages={modifyPages}
+        />
 
-        { isTheUserAnOrganizer() ? <BasicModal/> : null }
+        { isTheUserAnOrganizer() ? <BasicModal responseFunction={responseFunction} buttonName="Create Event"/> : null }
     </div>
 }
 
