@@ -69,6 +69,10 @@ function Dashboard() {
         modifyPages().then(r => console.log(r));// Access the updated value here
     }, [rowsPerPage]);
 
+    useEffect(() => {
+        modifyPages().then(r => console.log(r));// Access the updated value here
+    }, [tabIndex]);
+
     const modifyPages = async () => {
         const filterDto = {
             filters: [
@@ -107,7 +111,7 @@ function Dashboard() {
         console.log(filterDto);
         try {
             let response;
-            if (tabIndex === '1') {
+            if (tabIndex !== '1') {
                 response = await FilterApis.post("draftedForOrganizer/" + page + "/" + rowsPerPage + "/" + getUserId(), filterDto);
             } else {
                 response = await FilterApis.post("dashboard/" + page + "/" + rowsPerPage, filterDto);
