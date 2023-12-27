@@ -7,11 +7,12 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 
 
-export default function LabTabs() {
+export default function LabTabs({setTabIndex}) {
     const [value, setValue] = useState('1');
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
+        setTabIndex(newValue)
     };
 
     return (

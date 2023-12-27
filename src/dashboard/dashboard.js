@@ -60,6 +60,8 @@ function Dashboard() {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
     const [events, setEvents] = React.useState([]);
+    const [tabIndex, setTabIndex] = React.useState(0);
+
     useEffect(() => {
         modifyPages().then(r => console.log(r));// Access the updated value here
     }, [page]);
@@ -68,44 +70,48 @@ function Dashboard() {
     }, [rowsPerPage]);
 
     const modifyPages = async () => {
-        const filterDto={
-            filters:[
+        const filterDto = {
+            filters: [
                 {
-                    "first":"NAME",
-                    "second":"AND",
-                    "third":name
+                    "first": "NAME",
+                    "second": "AND",
+                    "third": name
                 },
                 {
-                    "first":"ADDRESS",
-                    "second":"AND",
-                    "third":address
+                    "first": "ADDRESS",
+                    "second": "AND",
+                    "third": address
                 },
                 {
-                    "first":"COUNTRY",
-                    "second":"AND",
-                    "third":country
+                    "first": "COUNTRY",
+                    "second": "AND",
+                    "third": country
                 },
                 {
-                    "first":"CITY",
-                    "second":"AND",
-                    "third":state
+                    "first": "CITY",
+                    "second": "AND",
+                    "third": state
                 },
                 {
-                    "first":"CATEGORY",
-                    "second":"AND",
-                    "third":eventCategory+"-"+eventSubCategory
+                    "first": "CATEGORY",
+                    "second": "AND",
+                    "third": eventCategory + "-" + eventSubCategory
                 },
                 {
-                    "first":"ORGANIZER",
-                    "second":"AND",
-                    "third":organizerName
+                    "first": "ORGANIZER",
+                    "second": "AND",
+                    "third": organizerName
                 }
             ]
         }
-       console.log(filterDto);
+        console.log(filterDto);
         try {
-            // const response = await FilterApis.post("draftedForOrganizer/" + page + "/" + rowsPerPage+"/" + getUserId(), filterDto);
-            const response = await FilterApis.post("dashboard/" + page + "/" + rowsPerPage, filterDto);
+            let response;
+            if (tabIndex === '1') {
+                response = await FilterApis.post("draftedForOrganizer/" + page + "/" + rowsPerPage + "/" + getUserId(), filterDto);
+            } else {
+                response = await FilterApis.post("dashboard/" + page + "/" + rowsPerPage, filterDto);
+            }
             setEvents(response.data);
         } catch (error) {
             alert(error.response.data.message)
@@ -173,6 +179,7 @@ function Dashboard() {
                         setName={setName} setAddress={setAddress} setCountry={setCountry} setState={setState} setEventCategory={setEventCategory} setEventSubCategory={setEventSubCategory} setOrganizerName={setOrganizerName}
                         statesInCountry={statesInCountry} setStatesInCountry={setStatesInCountry}
                         modifyPages={modifyPages}
+                        setTabIndex={setTabIndex}
         />
 
         { isTheUserAnOrganizer() ? <BasicModal responseFunction={responseFunction} buttonName="Create Event"/> : null }

@@ -17,7 +17,7 @@ function eventDashboard({events, page, rowsPerPage, handleChangePage, handleChan
                             address, setAddress,
                             statesInCountry, setStatesInCountry,
                             organizerName, setOrganizerName,
-                            modifyPages
+                            modifyPages,setTabIndex
                         }) {
 
     return (
@@ -51,7 +51,7 @@ function eventDashboard({events, page, rowsPerPage, handleChangePage, handleChan
             </nav>
             <div className="content-container center">
                 <div className="content-header">
-                    <LabTabs/>
+                    <LabTabs setTabIndex={setTabIndex}/>
                 </div>
                 <div className="content-body flex">
                     {events.map((e, i) => <div className="card-container center">
