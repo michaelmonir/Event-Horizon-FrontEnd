@@ -109,8 +109,8 @@ export default function BasicModal({defaultFirstName, defaultLastName, defaultGe
                                     value = {gender}
                                     onChange = { (event) => setGender(event.target.value) }
                                 >
-                                    <MenuItem value="Male">Male</MenuItem>
-                                    <MenuItem value="Female">Female</MenuItem>
+                                    <MenuItem value="MALE">Male</MenuItem>
+                                    <MenuItem value="FEMALE">Female</MenuItem>
 
                                     {/*<MenuItem value={defaultGender}>{defaultGender}</MenuItem>*/}
                                     {/*<MenuItem value={defaultGender === "MALE" ? "FEMALE" : "MALE"}>{defaultGender === "MALE" ? "FEMALE" : "MALE"} </MenuItem>*/}

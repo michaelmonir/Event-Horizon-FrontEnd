@@ -3,8 +3,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import TextField from "@mui/material/TextField";
-import EventApis from "../../Apis/EventApis/EventApis";
+import TextField from "@mui/material/TextField"
 import {useNavigate} from 'react-router-dom';
 import {CountryCityStreet} from "./CountryCityStreet";
 import {Category} from "./Category";
@@ -12,7 +11,7 @@ import {RoutePathNames} from "../../Routes/RoutePathNames";
 import {AdsPlan} from "./AdsOptions";
 import {Description} from "./Description";
 import {DateTime} from "./DateTime"
-import {getUserId} from "../../Authentication/UserAuthentication";
+import SeatType from "./seatType"
 
 
 const style = {
@@ -23,11 +22,12 @@ const style = {
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
-    p: 4,
+    p: 3.5,
+    width: "70%",
     borderRadius: "24px",
 };
 
-export default function BasicModal() {
+export default function BasicModal({responseFunction, eventId,buttonName}) {
     const [open, setOpen] = React.useState(false);
     const navigate = useNavigate();
     const handleOpen = () => {
@@ -50,12 +50,14 @@ export default function BasicModal() {
     const [state, setState] = React.useState("");
     const [address, setAddress] = React.useState("");
     const [statesInCountry, setStatesInCountry] = React.useState([]);
-
     const [description, setDescription] = React.useState("");
+    const [seatTypes, setSeatTypes] = React.useState([]);
+    const [numberOfSeatTypes, setNumberOfSeatTypes] = React.useState(0);
 
     const handleEventCreation = async (e) => {
         e.preventDefault();
         const event = {
+            "id": eventId,
             "name": name,
             "description": description,
             "eventCategory": eventCategory + "-" + eventSubCategory,
@@ -65,25 +67,28 @@ export default function BasicModal() {
                 "country": country,
                 "city": state,
                 "address": address
-            }
+            },
+            "seatTypes":seatTypes
         }
         try {
             const response =
-                await EventApis.post("createEvent/" + getUserId(), event)
+                await responseFunction(event)
+            alert(JSON.stringify(response.data))
             const myId = response.data.id;
             const params = {
                 id: myId,
             };
-
+            handleClose()
             navigate(RoutePathNames.event, {state: params});
+
+            navigate(0)
         } catch (error) {
             alert(error.response.data.message)
         }
-
     }
 
     return (
-        <div>
+        <div >
             <Button onClick={handleOpen}
                     style={
                         {
@@ -92,7 +97,8 @@ export default function BasicModal() {
                             right: "40px",
                         }
                     }
-            >create event</Button>
+                    variant={"contained"}
+            >{buttonName}</Button>
 
             <Modal
                 open={open}
@@ -127,7 +133,9 @@ export default function BasicModal() {
                             <Description description={description} setDescription={setDescription}/>
                             <AdsPlan setAdsPlan={setAdsPlan} req={true}/>
                             <DateTime date={date} setDate={setDate} req={true}/>
-
+                            <div className={"seat-type"}>
+                                <SeatType seatTypes={seatTypes} setSeatTypes={setSeatTypes} numberOfSeatTypes={numberOfSeatTypes} setNumberOfSeatTypes={setNumberOfSeatTypes}/>
+                            </div>
                             <Button type="submit" value="Submit" variant="contained">
                                 Submit
                             </Button>

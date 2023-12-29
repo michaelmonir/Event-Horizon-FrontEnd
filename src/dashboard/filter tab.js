@@ -7,16 +7,19 @@ import {CountryCityStreet} from "./EventModal/CountryCityStreet";
 import {Category} from "./EventModal/Category";
 import TextField from "@mui/material/TextField";
 
-export default function BasicPopover() {
+export default function BasicPopover({name, setName,
+                                         eventCategory, setEventCategory,
+                                         eventSubCategory, setEventSubCategory,
+                                         country, setCountry,
+                                         state, setState,
+                                         address, setAddress,
+                                         statesInCountry, setStatesInCountry,
+                                         organizerName, setOrganizerName,
+                                            modifyPages
+                                     })
+   {
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const [name, setName] = React.useState("");
-    const [eventCategory, setEventCategory] = React.useState("");
-    const [eventSubCategory, setEventSubCategory] = React.useState("");
-    const [country, setCountry] = React.useState("");
-    const [state, setState] = React.useState("");
-    const [address, setAddress] = React.useState("");
-    const [statesInCountry, setStatesInCountry] = React.useState([]);
-    const [organizerName, setOrganizerName] = React.useState("");
+
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -37,6 +40,7 @@ export default function BasicPopover() {
     const handleFilter = (e) => {
         e.preventDefault();
         console.log(name, eventCategory, eventSubCategory, country, state, address, organizerName);
+        modifyPages();
         handleClose();
     };
 
@@ -79,7 +83,9 @@ export default function BasicPopover() {
                                 helperText="please enter the Event Name"
                                 value={name}
                                 onChange={(event) => {
+                                    console.log(event.target.value);
                                     setName(event.target.value);
+                                    console.log(name);
                                 }}
                             />
                             <CountryCityStreet

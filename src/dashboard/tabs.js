@@ -7,11 +7,12 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 
 
-export default function LabTabs() {
+export default function LabTabs({setTabIndex}) {
     const [value, setValue] = useState('1');
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
+        setTabIndex(newValue)
     };
 
     return (
@@ -19,9 +20,9 @@ export default function LabTabs() {
             <TabContext value={value}>
                 <Box sx={{borderBottom: 1, borderColor: 'divider', width: '100%'}}>
                     <TabList onChange={handleChange} aria-label="lab API tabs example">
-                        <Tab sx={{width: '33.3%'}} label="Future Events" value="1"/>
-                        <Tab sx={{width: '33.3%'}} label="Running Events" value="2"/>
-                        <Tab sx={{width: '33.3%'}} label="Past Events" value="3"/>
+                        <Tab sx={{width: '50%',maxWidth:"100%"}} label="Launched Events" value="1"/>
+                        <Tab sx={{width: '50%',maxWidth:"100%"}} label="Drafted Events" value="2"/>
+                        {/*<Tab sx={{width: '33.3%'}} label="Past Events" value="3"/>*/}
                     </TabList>
                 </Box>
             </TabContext>

@@ -52,6 +52,9 @@ function MultiActionAreaCard(props) {
                     </Button>
                     <div className="Organizer-name">
                         made by: {eventHeader.eventOrganizer.name}
+                        {
+                            console.log(eventHeader.eventOrganizer.name)
+                        }
                     </div>
                 </div>
             </CardActions>
