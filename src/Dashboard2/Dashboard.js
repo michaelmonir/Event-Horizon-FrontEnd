@@ -3,11 +3,11 @@ import "./Dashboard.css";
 import TablePagination from "@mui/material/TablePagination";
 import Tabs from "./Tabs";
 import BasicModal from "../EventModal/event-modal";
-import EventDashBoardCard from "./EventDashBoardCard";
+import EventDashBoardCard from "./EventDashboardCard";
 import Filter from "./Filter";
 import EventApis from "../Apis/EventApis/EventApis";
 import {useMyContext} from "../Authentication/LogInContext";
-import {getBackEndCallingFunction} from "./DashBoardTypes";
+import {getBackEndCallingFunction} from "./DashboardTypes";
 
 export default function Dashboard({viewComponentIndex}) {
 

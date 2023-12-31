@@ -8,7 +8,7 @@ import {Category} from "../EventModal/Category";
 import TextField from "@mui/material/TextField";
 
 export default function Filter({ getDtoListFromBackEnd })
-   {
+{
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const [name, setName] = React.useState("");

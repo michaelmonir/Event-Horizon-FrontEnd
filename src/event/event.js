@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import "./event.css";
-import "../DashBoard/Dashboard.css";
+import "../Dashboard2/Dashboard.css";
 import EventApis from "../Apis/EventApis/EventApis";
 import {useLocation} from 'react-router-dom';
 import {useNavigate} from "react-router-dom";
