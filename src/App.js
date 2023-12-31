@@ -13,26 +13,29 @@ import {RoutePathNames} from "./Routes/RoutePathNames";
 import MyEvents from "./myEventsPage/myEvents";
 import Ticket from "./tickets/tickets";
 import Header from "./Header/Header";
+import {LoginContextProvider} from "./Authentication/LogInContext";
 
 
 function App(){
     return (
         <div className="App">
             <Router>
-                <Header />
-            {/*    <Routes>*/}
-            {/*        <Route path={RoutePathNames.dashboard} element={<Dashboard />} />*/}
-            {/*        <Route element={<RequireAuth />}>*/}
-            {/*            <Route path={RoutePathNames.event} element={<Event />} />*/}
-            {/*            <Route path={RoutePathNames.profile} element={<Profile />} />*/}
-            {/*            <Route path={RoutePathNames.myEvents} element={<MyEvents />} />*/}
-            {/*            <Route path={RoutePathNames.ticket} element={<Ticket/>} />*/}
-            {/*        </Route>*/}
-            {/*        <Route element={<RequireNoAuth />}>*/}
-            {/*            <Route path={RoutePathNames.login} element={<Login />} />*/}
-            {/*        </Route>*/}
-            {/*        <Route path={RoutePathNames.validation} element={<ValidationPage />} />*/}
-            {/*    </Routes>*/}
+                <LoginContextProvider>
+                    <Header />
+                    <Routes>
+                        <Route path={RoutePathNames.dashboard} element={<Dashboard />} />
+                        <Route element={<RequireAuth />}>
+                            <Route path={RoutePathNames.event} element={<Event />} />
+                            <Route path={RoutePathNames.profile} element={<Profile />} />
+                            <Route path={RoutePathNames.myEvents} element={<MyEvents />} />
+                            <Route path={RoutePathNames.ticket} element={<Ticket/>} />
+                        </Route>
+                        <Route element={<RequireNoAuth />}>
+                            <Route path={RoutePathNames.login} element={<Login />} />
+                        </Route>
+                        <Route path={RoutePathNames.validation} element={<ValidationPage />} />
+                    </Routes>
+                </LoginContextProvider>
             </Router>
         </div>
     );

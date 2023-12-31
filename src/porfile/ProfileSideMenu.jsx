@@ -2,14 +2,15 @@ import {RoutePathNames} from "../Routes/RoutePathNames";
 import {IoHome} from "react-icons/io5";
 import {GiMailbox} from "react-icons/gi";
 import {FaBookmark} from "react-icons/fa";
-import {removeUserLocalStorageData} from "../Authentication/UserAuthentication";
 import {RiLogoutBoxLine} from "react-icons/ri";
 import React from "react";
 import {useNavigate} from "react-router-dom";
+import {useMyContext} from "../Authentication/LogInContext";
 
 
 export const ProfileSideMenu = (props) => {
 
+    const { removeUserLocalStorageData } = useMyContext();
     const profileAttributes = props.profileAttributes
 
     const navigate = useNavigate();

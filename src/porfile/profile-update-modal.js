@@ -14,7 +14,7 @@ import {
     Typography,
     Modal
 } from "@mui/material";
-import {getUserId} from "../Authentication/UserAuthentication";
+import {useMyContext} from "../Authentication/LogInContext";
 
 
 const style = {
@@ -33,6 +33,7 @@ const style = {
 
 export default function BasicModal({defaultFirstName, defaultLastName, defaultGender, defaultPaypalAccount}) {
 
+    const { getUserId} = useMyContext();
     const [firstName, setFirstName] = React.useState(defaultFirstName || '');
     const [lastName, setLastName] = React.useState(defaultLastName);
     const [gender, setGender] = React.useState(defaultGender);

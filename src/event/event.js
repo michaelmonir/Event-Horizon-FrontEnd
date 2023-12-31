@@ -7,12 +7,13 @@ import {useNavigate} from "react-router-dom";
 import Button from "@mui/material/Button";
 import {RoutePathNames} from "../Routes/RoutePathNames";
 import EventBodyAttribute from "./event-body-attribute";
-import {getUserId} from "../Authentication/UserAuthentication";
 import BasicModal from "../dashboard/EventModal/event-modal";
+import {useMyContext} from "../Authentication/LogInContext";
 
 
 function Event() {
 
+    const { getUserId } = useMyContext();
     const updateResponseFunction = (event) => {
         return EventApis.put("updateEvent/" + getUserId() , event)
     }

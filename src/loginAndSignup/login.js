@@ -13,11 +13,13 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import {useNavigate} from "react-router-dom";
-import {isUserLoggedIn, setUserLocalStorageData} from "../Authentication/UserAuthentication";
 import {RoutePathNames} from "../Routes/RoutePathNames";
+import {useMyContext} from "../Authentication/LogInContext";
 
 
 function Login() {
+
+    const { setUserLocalStorageData } = useMyContext();
     const navigate = useNavigate();
 
     const [isLoginActive, setIsLoginActive] = useState(false);

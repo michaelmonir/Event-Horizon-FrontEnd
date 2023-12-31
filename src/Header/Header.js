@@ -3,11 +3,13 @@ import React, { useState, useEffect } from "react";
 import "./Header.css";
 import { CSSTransition } from "react-transition-group";
 import {Link} from "react-router-dom";
-import {removeUserLocalStorageData} from "../Authentication/UserAuthentication";
+import {RoutePathNames} from "../Routes/RoutePathNames";
+import { useMyContext } from '../Authentication/LogInContext';
 
-export default function Header({isLoggedIn, setIsLoggedIn}) {
+export default function Header() {
     const [isNavVisible, setNavVisibility] = useState(false);
     const [isSmallScreen, setIsSmallScreen] = useState(false);
+    const { isUserLoggedIn, removeUserLocalStorageData, ff } = useMyContext();
 
     useEffect(() => {
         const mediaQuery = window.matchMedia("(max-width: 700px)");
@@ -20,7 +22,7 @@ export default function Header({isLoggedIn, setIsLoggedIn}) {
     }, []);// Assuming initial state is logged in
 
     useEffect(() => {
-    }, [isLoggedIn]);
+    }, [isUserLoggedIn]);
 
     const handleMediaQueryChange = mediaQuery => {
         if (mediaQuery.matches) {
@@ -47,16 +49,16 @@ export default function Header({isLoggedIn, setIsLoggedIn}) {
                 unmountOnExit
             >
                 <nav className="Nav">
-                    <a href="/">Home</a>
-                    <a href="/profile">Profile</a>
-                    <a href="/shelter">Shelter</a>
-                    <a href="/myPets">My Pets</a>
-                    <a href="/myApplications">My Applications</a>
-                    <Link to="/login">
+                    <a href={RoutePathNames.dashboard}>Home</a>
+                    <a href={RoutePathNames.profile}>Profile</a>
+                    {/*{ isUserLoggedIn ?*/}
+                    {/*    <a href="">logged in</a>*/}
+                    {/*    :*/}
+                    {/*    <a href="">Not logged in</a>}*/}
+                    <Link to={RoutePathNames.login}>
                         <button onClick={
                             () => {
                                 removeUserLocalStorageData();
-                                setIsLoggedIn(false);
                             }
                         }>Logout </button>
                     </Link>

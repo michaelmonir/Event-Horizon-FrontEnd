@@ -5,11 +5,13 @@ import TicketsModal from "./ticketsModal";
 import Button from "@mui/material/Button";
 import {useNavigate} from "react-router-dom";
 import TicketApis from "../Apis/EventApis/TicketApis";
-import {getUserId} from "../Authentication/UserAuthentication";
+import {useMyContext} from "../Authentication/LogInContext";
 
 
 
 function Tickets() {
+
+    const { getUserId } = useMyContext();
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const navigate = useNavigate();
     const location = useLocation();

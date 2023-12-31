@@ -5,8 +5,8 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import TextField from "@mui/material/TextField";
 import TicketApis from "../Apis/EventApis/TicketApis";
-import {getUserId} from "../Authentication/UserAuthentication";
 import {useNavigate} from "react-router-dom";
+import {useMyContext} from "../Authentication/LogInContext";
 
 const style = {
     position: 'absolute',
@@ -24,6 +24,7 @@ const style = {
 
 export default function TicketsModal({tickets}) {
 
+    const { getUserId } = useMyContext();
     const navigate = useNavigate();
     const [ticketsNumber, setTicketsNumber] = React.useState(Array(tickets.length).fill(0))
     const [ticketsPrice, setTicketsPrice] = React.useState(Array(tickets.length).fill(0))

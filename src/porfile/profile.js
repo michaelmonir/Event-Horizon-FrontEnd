@@ -2,14 +2,15 @@ import React, {useEffect} from 'react';
 import './profie.css';
 import BasicModal from "./profile-update-modal";
 import informationApis from "../Apis/UserApis/InformationApis";
-import {getUserId, isTheUserAnAdmin} from "../Authentication/UserAuthentication";
 import {ProfileSideMenu} from "./ProfileSideMenu";
 import {ProfileAttributeComponent} from "./ProfileAttributeComponent";
 import AddingModeratorModal from "./AddingModeratorModal";
+import {useMyContext} from "../Authentication/LogInContext";
 
 
 function Profile() {
 
+    const { getUserId, isTheUserAnAdmin } = useMyContext();
     const [profileAttributes, setProfileAttributes] = React.useState({
         userName:"",
         firstName:"",
