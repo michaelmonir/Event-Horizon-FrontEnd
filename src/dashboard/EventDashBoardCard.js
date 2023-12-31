@@ -8,8 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import {RoutePathNames} from "../Routes/RoutePathNames";
 
 
-function MultiActionAreaCard(props) {
-    let eventHeader = props.eventHeader;
+export default function EventDashBoardCard({ eventHeader }) {
     const navigate = useNavigate();
 
     const handleSeeMore = () => {
@@ -52,15 +51,9 @@ function MultiActionAreaCard(props) {
                     </Button>
                     <div className="Organizer-name">
                         made by: {eventHeader.eventOrganizer.name}
-                        {
-                            console.log(eventHeader.eventOrganizer.name)
-                        }
                     </div>
                 </div>
             </CardActions>
         </Card>
     );
-
 }
-
-export default MultiActionAreaCard;

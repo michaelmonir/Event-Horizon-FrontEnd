@@ -1,5 +1,5 @@
 .dashboard {
-    background-image: url("./image.png");
+    background-image: url("./img.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -8,28 +8,6 @@
     height: 100vh;
     width: 100%;
     position: relative;
-}
-
-.sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    z-index: 1;
-    width: 235px;
-    transition: all 0.4s ease-in-out;
-    padding: 20px;
-    overflow-y: auto;
-    backdrop-filter: blur(10px);
-    color: white;
-    border: rgba(255, 255, 255, 0.3) 1px solid;
-    border-radius: 10px;
-    background: rgba(0, 0, 0, 0.3);
-    box-shadow: 0 0 6px rgba(255, 255, 255, 0.2);
-}
-
-.sidebar.closed {
-    width: 45px;
 }
 
 .flex {
@@ -41,195 +19,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.sidebar-logo {
-    min-width: 50px;
-    min-height: 50px;
-    border-radius: 50%;
-    background-image: url("./blackhole.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-.transition {
-
-}
-
-.sidebar-header {
-    gap: 10px;
-    margin-bottom: 20px;
-    transition: all 0.4s ease-in-out;
-}
-
-.sidebar .sidebar-title {
-    font-size: 22px;
-    font-weight: 600;
-    transition: all 0.4s ease-in-out;
-}
-
-.sidebar.closed .sidebar-title,
-.sidebar.closed .sidebar-open {
-    width: 0;
-    opacity: 0;
-}
-
-.sidebar.closed .sidebar-header {
-    display: flex;
-    align-items: center;
-    transition: all 0.4s ease-in-out;
-}
-
-.sidebar.closed .sidebar-menu-link span, .sidebar.closed .sidebar-menu-text {
-    opacity: 0;
-    width: 0;
-    transition: all 0.4s ease-in-out;
-}
-
-
-.sidebar .sidebar-open,
-.sidebar .sidebar-close {
-    padding: 10px;
-    font-size: 20px;
-    cursor: pointer;
-    color: #330091;
-}
-
-.sidebar .sidebar-close {
-    display: none;
-    transition: all 0.4s ease-in-out;
-}
-
-.sidebar .sidebar-body {
-    margin-top: 30px;
-    width: 100%;
-    list-style: none;
-    padding: 0;
-    transition: all 0.4s ease-in-out;
-}
-
-.sidebar .sidebar-menu {
-    list-style: none;
-    padding: 0;
-}
-
-.sidebar .sidebar-menu-title {
-    position: relative;
-    width: 55px;
-    height: 50px;
-    transition: all 0.4s ease-in-out;
-}
-
-.sidebar .underline {
-    opacity: 0;
-}
-
-.sidebar.closed .underline {
-    opacity: 1;
-}
-
-.sidebar .underline {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    height: 2px;
-    width: 15px;
-    background: #ffffff;
-    border-radius: 25px;
-}
-
-.sidebar-menu-item {
-    margin-bottom: 10px;
-    border-radius: 10px;
-    transition: all 0.4s ease-in-out;
-}
-
-.sidebar-menu-link {
-    text-decoration: none;
-    color: #ffffff;
-    margin-bottom: 8px;
-    border-radius: 10px;
-    justify-content: flex-start;
-    transition: all 0.4s ease-in-out;
-}
-
-.sidebar-menu-link i {
-    height: 50px;
-    min-width: 50px;
-    font-size: 22px;
-    margin-right: 15px;
-}
-
-.sidebar-menu-link span {
-    font-size: 18px;
-    font-weight: 500;
-
-}
-
-.sidebar .sidebar-menu-item:hover .sidebar-menu-link {
-    background: #150044;
-    color: #fff;
-}
-
-.sidebar-profile-container {
-    border-top: #150044 1px solid;
-    padding-top: 20px;
-    transition: all 0.4s ease-in-out;
-}
-
-.sidebar-profile {
-    justify-content: flex-start;
-    gap: 10px;
-    padding-right: 20px;
-    background: #fffefe;
-    height: 50px;
-    margin-right: auto;
-    border: #150044 1px solid;
-    border-radius: 30px;
-    transition: all 0.4s ease-in-out;
-}
-
-.sidebar-profile span {
-    font-size: 18px;
-    font-weight: 500;
-    letter-spacing: 1px;
-    transition: all 0.4s ease-in-out;
-    color: #150044;
-
-}
-
-.sidebar-profile-info {
-    color: #150044;
-}
-
-.sidebar.closed .sidebar-profile-info {
-    width: 0;
-    opacity: 0;
-    margin: 0;
-}
-
-.sidebar.closed .sidebar-profile {
-    gap: 0;
-    padding: 0;
-}
-
-.sidebar-profile a {
-    text-decoration: none;
-    border-radius: 50%;
-    height: 50px;
-    width: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 30px;
-    color: #000;
-    transition: all 0.4s ease-in-out;
-}
-
-.sidebar-profile a:hover {
-    background: #150044;
-    color: #fff;
 }
 
 .navbar {
@@ -247,6 +36,13 @@
 
 .middle {
     justify-content: space-between;
+}
+.dashboard-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.75);
+    margin-left: 100px;
+
 }
 
 .middle .search-button {

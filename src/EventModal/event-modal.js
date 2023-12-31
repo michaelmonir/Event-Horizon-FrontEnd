@@ -7,7 +7,7 @@ import TextField from "@mui/material/TextField"
 import {useNavigate} from 'react-router-dom';
 import {CountryCityStreet} from "./CountryCityStreet";
 import {Category} from "./Category";
-import {RoutePathNames} from "../../Routes/RoutePathNames";
+import {RoutePathNames} from "../Routes/RoutePathNames";
 import {AdsPlan} from "./AdsOptions";
 import {Description} from "./Description";
 import {DateTime} from "./DateTime"

@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from "react";
 import "./event.css";
-import "../dashboard/dashboard.css";
+import "../DashBoard/Dashboard.css";
 import EventApis from "../Apis/EventApis/EventApis";
 import {useLocation} from 'react-router-dom';
 import {useNavigate} from "react-router-dom";
 import Button from "@mui/material/Button";
 import {RoutePathNames} from "../Routes/RoutePathNames";
 import EventBodyAttribute from "./event-body-attribute";
-import BasicModal from "../dashboard/EventModal/event-modal";
+import BasicModal from "../EventModal/event-modal";
 import {useMyContext} from "../Authentication/LogInContext";
 
 

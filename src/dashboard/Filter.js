@@ -3,23 +3,22 @@ import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import {ImEqualizer} from "react-icons/im";
-import {CountryCityStreet} from "./EventModal/CountryCityStreet";
-import {Category} from "./EventModal/Category";
+import {CountryCityStreet} from "../EventModal/CountryCityStreet";
+import {Category} from "../EventModal/Category";
 import TextField from "@mui/material/TextField";
 
-export default function BasicPopover({name, setName,
-                                         eventCategory, setEventCategory,
-                                         eventSubCategory, setEventSubCategory,
-                                         country, setCountry,
-                                         state, setState,
-                                         address, setAddress,
-                                         statesInCountry, setStatesInCountry,
-                                         organizerName, setOrganizerName,
-                                            modifyPages
-                                     })
+export default function Filter({ getDtoListFromBackEnd })
    {
     const [anchorEl, setAnchorEl] = React.useState(null);
 
+    const [name, setName] = React.useState("");
+    const [eventCategory, setEventCategory] = React.useState("");
+    const [eventSubCategory, setEventSubCategory] = React.useState("");
+    const [country, setCountry] = React.useState("");
+    const [state, setState] = React.useState("");
+    const [address, setAddress] = React.useState("");
+    const [statesInCountry, setStatesInCountry] = React.useState([]);
+    const [organizerName, setOrganizerName] = React.useState("");
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -37,10 +36,44 @@ export default function BasicPopover({name, setName,
         setOrganizerName("");
     };
 
-    const handleFilter = (e) => {
+    const handleFilter = async(e) => {
         e.preventDefault();
-        console.log(name, eventCategory, eventSubCategory, country, state, address, organizerName);
-        modifyPages();
+        const filterDto = {
+            filters: [
+                {
+                    "first": "NAME",
+                    "second": "AND",
+                    "third": name
+                },
+                {
+                    "first": "ADDRESS",
+                    "second": "AND",
+                    "third": address
+                },
+                {
+                    "first": "COUNTRY",
+                    "second": "AND",
+                    "third": country
+                },
+                {
+                    "first": "CITY",
+                    "second": "AND",
+                    "third": state
+                },
+                {
+                    "first": "CATEGORY",
+                    "second": "AND",
+                    "third": eventCategory + "-" + eventSubCategory
+                },
+                {
+                    "first": "ORGANIZER",
+                    "second": "AND",
+                    "third": organizerName
+                }
+            ]
+        }
+
+        await getDtoListFromBackEnd(filterDto);
         handleClose();
     };
 
