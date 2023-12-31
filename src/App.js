@@ -12,7 +12,7 @@ import {RoutePathNames} from "./Routes/RoutePathNames";
 import Ticket from "./tickets/tickets";
 import Header from "./Header/Header";
 import {LoginContextProvider} from "./Authentication/LogInContext";
-import Dashboard from "./DashBoard/DashBoard";
+import Dashboard from "./DashBoard/Dashboard";
 
 
 function App(){
