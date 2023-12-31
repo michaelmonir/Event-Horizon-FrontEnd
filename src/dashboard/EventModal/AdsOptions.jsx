@@ -6,7 +6,6 @@ import FormControl from "@mui/material/FormControl";
 import * as React from "react";
 
 export const AdsPlan = ({setAdsPlan}) => {
-
     const adsPlansOptions = ["Free Plan", "Regular Plan", "Premium Plan"]
     const planIndexMap = new Map(adsPlansOptions.map((plan, index) => [plan, index]));
     const [viewedAdsPlan, setViewedAdsPlan] = React.useState("");
@@ -18,15 +17,12 @@ export const AdsPlan = ({setAdsPlan}) => {
             <Select
                 labelId="demo-simple-select-helper-label"
                 id="demo-simple-select-helper"
-                label="ads Plans"
+                label="Ads Plans"
                 required={true}
                 value={viewedAdsPlan}
 
                 onChange={(event) => {
-                    setAdsPlan({
-                        "id" : planIndexMap.get(event.target.value)+1,
-                        "name" : event.target.value
-                    })
+                    setAdsPlan(planIndexMap.get(event.target.value)+1)
                     setViewedAdsPlan(event.target.value)
                 }
                 }
