@@ -26,7 +26,10 @@ export const Category
                 disablePortal
                 id="combo-box-demo"
                 options={[...eventCategoriesMap.keys()]}
-                sx={{width: 265}}
+                sx={{
+                    minWidth: 265, maxWidth: 280, border: "none", borderRadius: 2,
+                    backgroundColor: '#f1f1f1',
+                }}
                 renderInput={(params) => <TextField {...params}
                                                     required={req}
                                                     label="Event category"/>}
@@ -44,7 +47,10 @@ export const Category
                 required={true}
                 id="combo-box-demo"
                 options={eventCategory ? eventCategoriesMap.get(eventCategory) : []}
-                sx={{width: 275}}
+                sx={{
+                    minWidth: 265, maxWidth: 280, border: "none", borderRadius: 2,
+                    backgroundColor: '#f1f1f1',
+                }}
                 value={eventSubCategory}
                 renderInput={(params) => <TextField {...params} required={req}
                                                     label="Event sub-category"/>}

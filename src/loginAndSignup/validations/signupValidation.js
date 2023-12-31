@@ -1,6 +1,7 @@
 import * as Yup from "yup";
 
 export const signupValidation = Yup.object().shape({
+    userName: Yup.string().required("Required").min(2,"User name must be at least 2 characters"),
     firstName: Yup.string()
         .required("Required").min(2, "First name must be at least 2 characters"),
     lastName: Yup.string()

@@ -20,7 +20,10 @@ export const CountryCityStreet
                 value={country}
                 id="combo-box-demo"
                 options={countryNames}
-                sx={{width: 289}}
+                sx={{
+                    minWidth: 265, maxWidth: 280, border: "none", borderRadius: 2,
+                    backgroundColor: '#f1f1f1',
+                }}
                 renderInput={(params) => <TextField required={req}{...params} label="Country"/>}
                 onChange={(event, value) => {
                     if (!value) {
@@ -43,7 +46,10 @@ export const CountryCityStreet
                 value={state}
                 id="combo-box-demo"
                 options={statesInCountry}
-                sx={{width: 300}}
+                sx={{
+                    minWidth: 265, maxWidth: 280, border: "none", borderRadius: 2,
+                    backgroundColor: '#f1f1f1',
+                }}
                 renderInput={(params) => <TextField {...params} required={req} label="State"/>}
                 onChange={(event, value) => {
                     if (!value) {

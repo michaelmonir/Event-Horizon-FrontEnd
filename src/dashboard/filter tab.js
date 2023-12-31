@@ -63,17 +63,17 @@ export default function BasicPopover({name, setName,
                 onClose={handleClose}
                 anchorOrigin={{
                     vertical: 'bottom',
-                    horizontal: 'left',
+                    horizontal: 'right',
                 }}
                 transformOrigin={{
                     vertical: 'top',
-                    horizontal: 'right',
+                    horizontal: 'left',
                 }}
             >
                 <Typography sx={{p: 2, height: 500}}>
                     <form className="filter-tab" onSubmit={handleFilter}>
                         <div className="filter-tab-header">
-                            <h3>Filter</h3>
+                            <h3>Event Filter</h3>
                         </div>
                         <div className="filter-tab-body">
                             <TextField

@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import "./dashboard.css";
-import {FaUnlock, FaLock} from "react-icons/fa";
+import {FaLock, FaUnlock} from "react-icons/fa";
 import {GiRamProfile} from "react-icons/gi";
 import BasicModal from "./EventModal/event-modal";
 import EventApis from "../Apis/EventApis/EventApis";
@@ -13,50 +13,16 @@ import FilterApis from "../Apis/EventApis/FilterApis";
 function Dashboard() {
 
 
-    const responseFunction = (event) => {
-       return  EventApis.post("createEvent/" + getUserId(), event)
-    }
-
-
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [name, setName] = React.useState("");
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [eventCategory, setEventCategory] = React.useState("");
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [eventSubCategory, setEventSubCategory] = React.useState("");
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [country, setCountry] = React.useState("");
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [state, setState] = React.useState("");
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [address, setAddress] = React.useState("");
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [statesInCountry, setStatesInCountry] = React.useState([]);
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [organizerName, setOrganizerName] = React.useState("");
-
     const [sidebarClass, setSidebarClass] = useState("sidebar hover closed");
     const [sidebarLocked, setSidebarLocked] = useState(false);
-
-    function SidebarOpen() {
-        if (sidebarLocked) return;
-        setSidebarClass("sidebar opened hover");
-    }
-
-    function SidebarClose() {
-        if (sidebarLocked) return;
-        setSidebarClass("sidebar closed hover");
-    }
-
-    function toggleLockButton() {
-        setSidebarLocked(!sidebarLocked)
-        if (!sidebarLocked) {
-            setSidebarClass("sidebar locked");
-        } else {
-            setSidebarClass("sidebar hover closed");
-        }
-    }
-
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
     const [events, setEvents] = React.useState([]);
@@ -78,56 +44,78 @@ function Dashboard() {
     }, [tabIndex]);
 
     useEffect(() => {
-       setTabIndex('1');
+        setTabIndex('1');
     }, []);
 
+    function SidebarOpen() {
+        if (sidebarLocked) return;
+        setSidebarClass("sidebar opened hover");
+    }
+
+    function SidebarClose() {
+        if (sidebarLocked) return;
+        setSidebarClass("sidebar closed hover");
+    }
+
+    function toggleLockButton() {
+        setSidebarLocked(!sidebarLocked)
+        if (!sidebarLocked) {
+            setSidebarClass("sidebar locked");
+        } else {
+            setSidebarClass("sidebar hover closed");
+        }
+    }
+
+    const responseFunction = (event) => {
+        return EventApis.post("createEvent/" + getUserId(), event)
+    }
     const modifyPages = async () => {
-        const filterDto = {
-            filters: [
-                {
-                    "first": "NAME",
-                    "second": "AND",
-                    "third": name
-                },
-                {
-                    "first": "ADDRESS",
-                    "second": "AND",
-                    "third": address
-                },
-                {
-                    "first": "COUNTRY",
-                    "second": "AND",
-                    "third": country
-                },
-                {
-                    "first": "CITY",
-                    "second": "AND",
-                    "third": state
-                },
-                {
-                    "first": "CATEGORY",
-                    "second": "AND",
-                    "third": eventCategory + "-" + eventSubCategory
-                },
-                {
-                    "first": "ORGANIZER",
-                    "second": "AND",
-                    "third": organizerName
-                }
-            ]
-        }
-        console.log(filterDto);
-        try {
-            let response;
-            if (tabIndex !== '1') {
-                response = await FilterApis.post("draftedForOrganizer/" + page + "/" + rowsPerPage + "/" + getUserId(), filterDto);
-            } else {
-                response = await FilterApis.post("dashboard/" + page + "/" + rowsPerPage, filterDto);
-            }
-            setEvents(response.data);
-        } catch (error) {
-            alert(error.response.data.message)
-        }
+        // const filterDto = {
+        //     filters: [
+        //         {
+        //             "first": "NAME",
+        //             "second": "AND",
+        //             "third": name
+        //         },
+        //         {
+        //             "first": "ADDRESS",
+        //             "second": "AND",
+        //             "third": address
+        //         },
+        //         {
+        //             "first": "COUNTRY",
+        //             "second": "AND",
+        //             "third": country
+        //         },
+        //         {
+        //             "first": "CITY",
+        //             "second": "AND",
+        //             "third": state
+        //         },
+        //         {
+        //             "first": "CATEGORY",
+        //             "second": "AND",
+        //             "third": eventCategory + "-" + eventSubCategory
+        //         },
+        //         {
+        //             "first": "ORGANIZER",
+        //             "second": "AND",
+        //             "third": organizerName
+        //         }
+        //     ]
+        // }
+        // console.log(filterDto);
+        // try {
+        //     let response;
+        //     if (tabIndex !== '1') {
+        //         response = await FilterApis.post("draftedForOrganizer/" + page + "/" + rowsPerPage + "/" + getUserId(), filterDto);
+        //     } else {
+        //         response = await FilterApis.post("dashboard/" + page + "/" + rowsPerPage, filterDto);
+        //     }
+        //     setEvents(response.data);
+        // } catch (error) {
+        //     alert(error.response.data.message)
+        // }
     }
     const handleChangePage = async (event, newPage) => {
         setPage(newPage);
@@ -165,7 +153,6 @@ function Dashboard() {
                             </a>
                         </li>
                         <li className="sidebar-menu-item">
-
                             <a href="#" className="sidebar-menu-link flex ">
                                 <i className="sidebar-menu-icon center">X</i>
                                 <span className="sidebar-menu-text">Dashboard</span>
