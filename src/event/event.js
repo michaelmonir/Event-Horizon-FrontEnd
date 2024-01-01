@@ -45,11 +45,6 @@ function Event() {
     const handleLaunchEvent = async() => {
         try {
             const response = await EventApis.put("launchEvent/" + getUserId() + "/" + id);
-            const params = {
-                id: response.data.id,
-            };
-            // const newId = response.data.id;
-            // setId(newId);
             navigate(RoutePathNames.dashboard)
         } catch (error) {
             alert(error.response.data.message)

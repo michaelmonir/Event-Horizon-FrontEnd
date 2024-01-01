@@ -9,7 +9,7 @@ import { useMyContext } from '../Authentication/LogInContext';
 export default function Header() {
     const [isNavVisible, setNavVisibility] = useState(false);
     const [isSmallScreen, setIsSmallScreen] = useState(false);
-    const { isUserLoggedIn, removeUserLocalStorageData, ff } = useMyContext();
+    const { isUserLoggedIn, removeUserLocalStorageData } = useMyContext();
 
     useEffect(() => {
         const mediaQuery = window.matchMedia("(max-width: 700px)");

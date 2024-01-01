@@ -27,7 +27,7 @@ const style = {
     borderRadius: "24px",
 };
 
-export default function BasicModal({responseFunction, eventId,buttonName}) {
+export default function BasicModal({handleSubmitFunction, eventId,buttonName}) {
     const [open, setOpen] = React.useState(false);
     const navigate = useNavigate();
     const handleOpen = () => {
@@ -71,8 +71,8 @@ export default function BasicModal({responseFunction, eventId,buttonName}) {
             seatTypes:seatTypes
         }
         try {
-            const response =
-                await responseFunction(event)
+            alert("mic")
+            const response = await handleSubmitFunction(event)
             alert(JSON.stringify(response.data))
             const myId = response.data.id;
             const params = {

@@ -44,6 +44,9 @@ export default function Dashboard({viewComponentIndex}) {
         setRowsPerPage(parseInt(event.target.value));
         setPage(0);
     };
+    const responseFunctionForEventCreationUpdation = (event) => {
+        return EventApis.post("createEvent/" + getUserId(), event)
+    }
 
     return <div className="dashboard">
         <div className="main center">
@@ -82,9 +85,7 @@ export default function Dashboard({viewComponentIndex}) {
                             </div>)
                     }
                 </div>
-                <BasicModal  buttonName="Create Event" handleSubmitFunction={async(event)=>{
-                    EventApis.post("createEvent/" + getUserId(), event)
-                }}/>
+                <BasicModal  buttonName="Create Event" handleSubmitFunction={ responseFunctionForEventCreationUpdation}/>
             </div>
         </div>
     </div>
