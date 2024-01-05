@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import "./dashboard.css";
-import {FaLock, FaUnlock} from "react-icons/fa";
+
 import {GiRamProfile} from "react-icons/gi";
 import BasicModal from "./EventModal/event-modal";
 import EventApis from "../Apis/EventApis/EventApis";
 import {Link} from "react-router-dom";
 import {getUserId, isTheUserAnOrganizer} from "../Authentication/UserAuthentication";
 import EventDashboard from "./EventsDashboard";
-import FilterApis from "../Apis/EventApis/FilterApis";
+import NavBar from "./navBar";
 
 
 function Dashboard() {
@@ -22,6 +22,7 @@ function Dashboard() {
     const [statesInCountry, setStatesInCountry] = React.useState([]);
     const [organizerName, setOrganizerName] = React.useState("");
     const [sidebarClass, setSidebarClass] = useState("sidebar hover closed");
+    const [sidebarToggle, setSidebarToggle] = useState("sidebar-toggle closed");
     const [sidebarLocked, setSidebarLocked] = useState(false);
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -47,10 +48,6 @@ function Dashboard() {
         setTabIndex('1');
     }, []);
 
-    function SidebarOpen() {
-        if (sidebarLocked) return;
-        setSidebarClass("sidebar opened hover");
-    }
 
     function SidebarClose() {
         if (sidebarLocked) return;
@@ -61,8 +58,10 @@ function Dashboard() {
         setSidebarLocked(!sidebarLocked)
         if (!sidebarLocked) {
             setSidebarClass("sidebar locked");
+            setSidebarToggle("sidebar-toggle");
         } else {
             setSidebarClass("sidebar hover closed");
+            setSidebarToggle("sidebar-toggle closed");
         }
     }
 
@@ -130,15 +129,18 @@ function Dashboard() {
 
 
     return <div className="dashboard">
-        <nav className={sidebarClass} onMouseEnter={SidebarOpen} onMouseLeave={SidebarClose}>
-            <div className="sidebar-header flex ">
-                <div className="sidebar-logo"></div>
-                <span className="sidebar-title">EventHorizon</span>
-                <i className="sidebar-open" title="Lock the sidebar" onClick={toggleLockButton}>
-                    {sidebarLocked ? <FaLock/> : <FaUnlock/>}
-                </i>
+        <NavBar events={events} page={page} name={name} address={address} country={country} state={state}
+                eventCategory={eventCategory} eventSubCategory={eventSubCategory} organizerName={organizerName}
+                rowsPerPage={rowsPerPage} handleChangePage={handleChangePage}
+                handleChangeRowsPerPage={handleChangeRowsPerPage} toggleLockButton={toggleLockButton}
+                setName={setName} setAddress={setAddress} setCountry={setCountry} setState={setState}
+                setEventCategory={setEventCategory} setEventSubCategory={setEventSubCategory}
+                setOrganizerName={setOrganizerName} statesInCountry={statesInCountry}
+                setStatesInCountry={setStatesInCountry} modifyPages={modifyPages}/>
 
-            </div>
+        <div className={"main-body"}>
+            <nav className={sidebarClass}>
+
             {Array(3).fill(0).map(() => {
                 return <div className="sidebar-body">
                     <ul className="sidebar-menu">
@@ -169,7 +171,7 @@ function Dashboard() {
                     </div>
                 </div>
             </div>
-        </nav>
+            </nav>
         <EventDashboard events={events} page={page}
                         rowsPerPage={rowsPerPage} handleChangePage={handleChangePage}
                         handleChangeRowsPerPage={handleChangeRowsPerPage}
@@ -180,7 +182,7 @@ function Dashboard() {
                         modifyPages={modifyPages}
                         setTabIndex={setTabIndex}
         />
-
+        </div>
         { isTheUserAnOrganizer() ? <BasicModal responseFunction={responseFunction} buttonName="Create Event"/> : null }
     </div>
 }

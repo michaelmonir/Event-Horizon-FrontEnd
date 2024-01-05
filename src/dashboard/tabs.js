@@ -16,7 +16,7 @@ export default function LabTabs({setTabIndex}) {
     };
 
     return (
-        <Box sx={{width: '100%', typography: 'body1'}}>
+        <Box sx={{width: '100%', typography: 'body1',background:'transparent'}}>
             <TabContext value={value}>
                 <Box sx={{borderBottom: 1, borderColor: 'divider', width: '100%'}}>
                     <TabList onChange={handleChange} aria-label="lab API tabs example">

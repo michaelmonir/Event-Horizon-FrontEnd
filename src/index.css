@@ -2,6 +2,11 @@
   font-family: 'cfour';
   src: local('cfour'), url("./fonts/cfour/Cfour.otf") format('truetype');
 }
+@font-face {
+  font-family: 'RobotoBold';
+  src: local('RobotoBold'), url('./fonts/Roberto/Roboto-Bold.ttf') format('truetype');
+  font-weight: bold;
+}
 
 @font-face {
   font-family: 'against';
@@ -15,6 +20,26 @@ body {
   height: 100%;
   font-weight: 900;
 
+}
+h1,h2,h3,h4,h5,h6 {
+  font-family: 'Robot', sans-serif;
+  font-weight: 900;
+}
+button {
+  font-family: 'RobotoBold', sans-serif;
+  font-weight: 900;
+}
+a {
+  text-decoration: none;
+  color: #000;
+}
+span {
+  font-family: 'RobotoBold', sans-serif;
+  font-weight: 600;
+}
+p {
+  font-family: 'RobotoBold', sans-serif;
+  font-weight: 600;
 }
 
 code {
